@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  description: MyString
+  documentable: one
+  documentable_type: Documentable
+
+two:
+  title: MyText
+  description: MyString
+  documentable: two
+  documentable_type: Documentable
