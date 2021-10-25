@@ -4,8 +4,10 @@ one:
   body: MyString
   commentable: one
   commentable_type: Commentable
+  administrator: one
 
 two:
   body: MyString
   commentable: two
   commentable_type: Commentable
+  administrator: two

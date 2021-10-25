@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :administrators
   resources :comments
+  devise_for :administrators
   resources :documents
   resources :events
   resources :contacts

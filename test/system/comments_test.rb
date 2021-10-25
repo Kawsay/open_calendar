@@ -14,6 +14,7 @@ class CommentsTest < ApplicationSystemTestCase
     visit comments_url
     click_on "New Comment"
 
+    fill_in "Administrator", with: @comment.administrator_id
     fill_in "Body", with: @comment.body
     fill_in "Commentable", with: @comment.commentable_id
     fill_in "Commentable type", with: @comment.commentable_type
@@ -27,6 +28,7 @@ class CommentsTest < ApplicationSystemTestCase
     visit comments_url
     click_on "Edit", match: :first
 
+    fill_in "Administrator", with: @comment.administrator_id
     fill_in "Body", with: @comment.body
     fill_in "Commentable", with: @comment.commentable_id
     fill_in "Commentable type", with: @comment.commentable_type
