@@ -17,6 +17,10 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 # Flexible authentication library
 gem 'devise'
+# Calendar generation
+gem 'simple_calendar', '~> 2.4'
+
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
