@@ -1,5 +1,5 @@
 class CalendarsController < ApplicationController
   def index
-    @events = Event.all
+    @events = Event.all.includes(:user)
   end
 end

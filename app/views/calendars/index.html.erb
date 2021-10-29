@@ -1,1 +1,5 @@
-<%= @events.size %>
+<%= javascript_pack_tag 'customs/enable_tooltips' %>
+
+<%= month_calendar(events: @events, attribute: :start_date, end_attribute: :end_date) do |date, events| %>
+    <%= render partial: 'calendars/calendar_event', collection: events, as: :event %>
+<% end %>

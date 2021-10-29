@@ -28,10 +28,11 @@ Administrator.create!(
 end
 
 100.times do
-  start_date = Date.today - rand(300)
+  start_date = Date.today + rand(300)
 
   Event.create!(
     user:       User.all.sample,
+    title:      Faker::Lorem.paragraph(sentence_count: 1),
     start_date: start_date,
     end_date:   start_date + rand(5),
     location:   Faker::Address.street_address
