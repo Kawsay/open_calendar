@@ -1,0 +1,2 @@
+var calendar = document.getElementById('calendar');
+calendar.innerHTML = "<%= escape_javascript render(partial: 'calendars/calendar', locals: { events: @events }) %>";

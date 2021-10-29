@@ -1,0 +1,5 @@
+<%= month_calendar(events: @events, attribute: :start_date, end_attribute: :end_date) do |date, events| %>
+  <%= date %>
+
+  <%= render partial: 'calendars/calendar_event', collection: events, as: :event %>
+<% end %>
