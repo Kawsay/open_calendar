@@ -33,6 +33,7 @@ end
   Event.create!(
     user:       User.all.sample,
     title:      Faker::Lorem.paragraph(sentence_count: 1),
+    description: Faker::Lorem.paragraph(sentence_count: 3..6),
     start_date: start_date,
     end_date:   start_date + rand(5),
     location:   Faker::Address.street_address
