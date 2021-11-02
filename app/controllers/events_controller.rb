@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :set_event, only: %i[ show edit update destroy _show_modal]
 
   # GET /events or /events.json
   def index
@@ -54,6 +54,10 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  # GET /events_modal/1
+  def _show_modal
   end
 
   private

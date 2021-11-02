@@ -1,0 +1,43 @@
+<div class='modal fade' id='event_modal-<%= event.id %>' tabindex='-1' role='dialog' aria-labelledby='aze' aria-hidden='true'>
+  <div class='modal-dialog right' role='document'>
+    <div class='modal-content right'>
+
+      <div class='modal-header'>
+        <div class='d-block'>
+          <h5 class='modal-title' id='aze'>
+            <%= event.title %>
+          </h5>
+          <h6 class='mb-3 mt-2 text-muted'>
+            <%= event.user.fullname %>
+          </h6>
+        </div>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+          <span aria-hidden='true'></span>
+        </button>
+      </div>
+
+      <div class='modal-body'>
+        <div class='mb-5'>
+          <%= event.description %>
+        </div>
+        <% if event.documents.any? %>
+          <div class='mb-5'>
+            Attachments:
+            <ul>
+              <% event.documents.each do |document| %>
+                <li>
+                  <%= document.file.record.title %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-outline-secondary col-12' data-dismiss='modal'>Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
