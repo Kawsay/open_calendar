@@ -1,0 +1,14 @@
+<% if user.events.any? %>
+  <h4>Événements:</h4>
+  <ul>
+    <% user.events.each do |event| %>
+      <li>
+        <h6><%= event.date %></h6>
+        <p>
+          <b><%= event.description %></b>:
+          <%= event.location %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

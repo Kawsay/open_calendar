@@ -1,0 +1,16 @@
+<div class='card mb-3 shadow-sm'>
+  <div class='card-body'>
+    <div class='card-title'>
+      <h3><%= link_to user.fullname, user_path(user), class: 'link-dark' %></h3>
+    </div>
+    <div class='card-text'>
+      <p><%= user.description %></p>
+      <p class='text-muted m-0'><%= user.documents.size %> documents</p>
+      <p class='text-muted m-0'><%= user.events.size %> événements</p>
+
+      <div class='d-md-flex justify-content-md-end'>
+        <%= button_to 'Plus d\'info', user_path(user), method: :get, class: 'btn btn-outline-primary btn-sm' %>
+      </div>
+    </div>
+  </div>
+</div>
