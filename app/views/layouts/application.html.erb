@@ -10,7 +10,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/navbar' %>
+
+    <div class='container'>
+      <%= yield %>
+    </div>
 
     <%# javascript_pack_tag mooved to this section in order to bypass a Bootstrap issue %>
     <%# See: https://github.com/twbs/bootstrap/issues/33840 %>

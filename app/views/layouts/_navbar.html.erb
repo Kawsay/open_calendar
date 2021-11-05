@@ -1,0 +1,22 @@
+<nav class='navbar navbar-expand-lg navbar-dark bg-dark mb-5'>
+	<div class='container-fluid'>
+    <%= active_link_to 'Caisse de Solidarité', root_path, class: 'navbar-brand me-5', endpoint: ['', '/', '/#', '/calendars'] %>
+
+		<button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbar-links' aria-controls='navbar-links' aria-expanded='false' aria-label='Toggle navigation'>
+			<span class='navbar-toggler-icon'></span>
+		</button>
+
+		<div class='collapse navbar-collapse' id='navbar-links'>
+			<div class='navbar-nav'>
+        <%= active_link_to 'Calendrier',   calendars_path, class: 'nav-link', endpoint: ['', '/', '/#', '/calendars'] %>
+        <%= active_link_to 'Événements',   events_path,    class: 'nav-link', endpoint: '/events' %>
+        <%= active_link_to 'Utilisateurs', users_path,     class: 'nav-link', endpoint: '/users' %>
+      </div>
+      <div class='navbar-nav ms-auto'>
+        <%= active_link_to 'Administration', root_path, class: 'nav-link me-5', endpoint: '/admin' %>
+        <span class='navbar-text'>-</span>
+        <%= login_or_disconnect_link class: 'nav-link mx-5' %>
+      </div>
+		</div>
+	</div>
+</nav>
