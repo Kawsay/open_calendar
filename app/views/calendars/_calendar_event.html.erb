@@ -2,7 +2,6 @@
   <div class='card-body'>
     <h5 class='card-title'><%= event.title %></h5>
     <h6 class='card-subtitle mb-3 text-muted'><%= event.user.fullname %></h6>
-    <p class='card-text truncated-text'><%= event.truncated_description %></p>
     <div class='d-md-flex justify-content-md-end'>
       <%= button_to 'Plus d\'info', events_modal_path(event), remote: true, method: :get, data: { 'bs-togle': 'modal', 'bs-target': "#event_modal-#{event.id}" }, class: 'btn btn-outline-primary btn-sm' %>
     </div>

@@ -1,7 +1,7 @@
-<div class='card mb-3 shadow-sm'>
+<div class='card mb-3 shadow'>
   <div class='card-body'>
     <div class='card-title'>
-      <h3><%= link_to user.fullname, user_path(user), class: 'link-dark' %></h3>
+      <h3><%= link_to user.fullname, user_path(user) %></h3>
     </div>
     <div class='card-text'>
       <p><%= user.description %></p>

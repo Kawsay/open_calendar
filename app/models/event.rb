@@ -3,7 +3,7 @@ class Event < ApplicationRecord
   has_many :documents, as: :documentable
   has_many :comments, as: :commentable
 
-  def truncated_description(word_count: 8)
+  def truncated_description(word_count: 5)
     description.split(/\s+/, word_count + 1)[0...word_count].append('...').join(' ')
   end
 
