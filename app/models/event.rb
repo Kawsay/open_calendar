@@ -14,7 +14,7 @@ class Event < ApplicationRecord
       "Du #{format_date(start_date)} au #{format_date(end_date)}"
     end
   end
-
+  
   private
 
   def format_date(date)
