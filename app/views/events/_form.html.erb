@@ -36,6 +36,10 @@
     <%= form.text_field :user_id %>
   </div>
 
+  <%= form.fields_for :documents do |document_form| %>
+    <%= render partial: 'documents/fields', locals: { form: document_form } %>
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

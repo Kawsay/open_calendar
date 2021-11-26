@@ -13,6 +13,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @event.documents.build
   end
 
   # GET /events/1/edit
@@ -63,11 +64,13 @@ class EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.includes(:documents).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:start_date, :end_date, :location, :description, :user_id)
+      params.require(:event)
+            .permit(:start_date, :end_date, :location, :description, :user_id, :file,
+                    documents_attributes: [:id, :title, :description, :file, :documentable_type, :documentable_id])
     end
 end
