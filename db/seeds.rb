@@ -54,6 +54,19 @@ end
                        identify:     false)
 end
 
+70.times do
+  document = Document.create!(
+    title:             Faker::Lorem.paragraph(sentence_count: 1),
+    documentable_type: 'User',
+    documentable_id:   User.all.sample.id
+  )
+
+  document.file.attach(io:           File.open(Rails.root.join('storage', 'seed.txt')),
+                       filename:     'seed.txt',
+                       content_type: 'text/plain',
+                       identify:     false)
+end
+
 100.times do
   Comment.create!(
     administrator:    Administrator.all.sample,
