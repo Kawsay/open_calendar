@@ -1,0 +1,10 @@
+trix-toolbar .trix-button-group button {
+  background: #ffffffbf;
+  background-color: #ffffffbf;
+}
+
+trix-editor {
+  &.customized_min_height {
+    min-height: 15em;
+  }
+}

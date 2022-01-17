@@ -1,7 +1,11 @@
-.simple-calendar .next-month {
-  background: #353535;
-}
+.simple-calendar .next-month { background: #353535; }
 
-.simple-calendar .today {
-  background: #7F7C82;
+.simple-calendar .today { background: #7F7C82; }
+
+.simple-calendar .day { position: relative; }
+
+.simple-calendar .add-event {
+  position: absolute;
+  bottom: 7px;
+  right: 3%;
 }

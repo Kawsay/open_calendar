@@ -1,0 +1,40 @@
+<% timestamp = Time.now.to_f.to_s %>
+
+var body = document.querySelector('body');
+
+var modalDiv = document.createElement('div');
+modalDiv.innerHTML = '<%= j render partial: "add_event_modal", locals:  { timestamp: timestamp } %>'
+
+body.append(modalDiv)
+
+var modal = new bootstrap.Modal(
+  document.getElementById('add-event-<%= timestamp %>')
+);
+modal.show();
+
+function toggleUserField() {
+  var userField = modalDiv.querySelector('#event_user_id');
+  var userFieldDiv = userField.parentNode.parentNode
+
+  if (isRelatedToAUser.checked) {
+    userField.setAttribute('name', 'event[user_id]');
+    userFieldDiv.style.display = 'flex';
+  } else {
+    userField.removeAttribute('name');
+    userFieldDiv.style.display = 'none';
+  }
+}
+
+var isRelatedToAUser = modalDiv.querySelector('#event_is_related_to_a_user');
+isRelatedToAUser.addEventListener('click', () => {
+  toggleUserField();
+})
+
+flatpickr("[data-behavior='flatpickr']", {
+  altInput:      true,
+  altFormat:     'd F Y',
+  altInputClass: 'form-control input text-dark',
+  dateFormat:    'd/m/Y H:i',
+  defaultDate:   '<%= @event.start_date.strftime('%d/%m/%Y %H:%M') %>',
+  mode:          'range',
+})

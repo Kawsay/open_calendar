@@ -16,13 +16,17 @@
       </div>
 
     </div>
-    <div class='col-9'>
-      <div class='card-body'>
-        <div class='card-title'>
-          <h5><%= link_to event.description, event_path(event) %></h5>
-          <p class='mb-0'><%= link_to event.user.fullname, user_path(event.user), class: 'link-secondary' %></p>
+
+    <% if event.user %>
+      <div class='col-9'>
+        <div class='card-body'>
+          <div class='card-title'>
+            <h5><%= link_to event.description, event_path(event) %></h5>
+            <p class='mb-0'><%= link_to event.user.fullname, user_path(event.user), class: 'link-secondary' %></p>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
+
   </div>
 </div>

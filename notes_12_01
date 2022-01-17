@@ -1,0 +1,16 @@
+- Collectif / Référent
+- Plusieurs coll/ref
+- grisé les jorus précédents
+-tab flatpickr
+- heure fin flatpickr
+- trix-toolbar already defined
+
+ROADMAP
+  - card
+  - couleur selon type event
+  - comments
+  - auth (url + mdp)
+  - page Event (histo / à venir)
+  - responsive
+  - admin (model framadate 2URL+mdp ?)
+  - plusieurs calendriers 
