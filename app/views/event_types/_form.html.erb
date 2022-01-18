@@ -1,0 +1,40 @@
+<div class="container text-light">
+  <%= form_with(model: event_type) do |form| %>
+    <% if event_type.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(event_type.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+        <ul>
+          <% event_type.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group row mb-3">
+      <%= form.label :name, class: 'col-2 col-form-label' %>
+      <div class="col-10">
+        <%= form.text_field :name, class: 'form-control text-dark' %>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <%= form.label :background_color, class: 'col-2 col-form-label' %>
+      <div class="col-2">
+        <%= form.color_field :background_color, class: 'form-control text-dark' %>
+      </div>
+
+      <div class="col-2"></div>
+
+      <%= form.label :text_color, class: 'col-2 col-form-label' %>
+      <div class="col-2">
+        <%= form.collection_select :text_color, EventType.text_colors, :last, :first, {}, class: 'form-control text-dark' %>
+      </div>
+    </div>
+
+    <div class="actions modal-footer">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
