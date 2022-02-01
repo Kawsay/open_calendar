@@ -1,8 +1,12 @@
 const { environment } = require('@rails/webpacker')
 
-const CSSLoader = environment.loaders
-  .get('moduleSass')
-  .use
-  .find((el) => el.loader === 'css-loader')
+environment.loaders.insert('sass', {
+    test: /\.scss$/,
+    use: [
+        "to-string-loader", // creates style nodes from JS strings
+        "css-loader", // translates CSS into CommonJS
+        "sass-loader" // compiles Sass to CSS
+    ]
+});
 
 module.exports = environment
