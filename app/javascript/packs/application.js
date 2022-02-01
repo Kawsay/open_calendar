@@ -23,6 +23,7 @@ require("flatpickr/dist/flatpickr.css");
 import "trix"
 import "@rails/actiontext"
 
-
 require("trix")
 require("@rails/actiontext")
+
+import './customs/enable_tooltips'
