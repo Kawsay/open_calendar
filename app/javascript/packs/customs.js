@@ -1,4 +1,3 @@
-export default const loadCustoms = function() {
-  require('disable_user_field');
-  require('enable_tooltips.js');
+export default function importCustoms {
+  import './customs/enable_tooltips.js';
 }

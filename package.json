@@ -2,6 +2,8 @@
   "name": "caisse-so",
   "private": true,
   "dependencies": {
+    "@hotwired/turbo": "^7.1.0",
+    "@hotwired/turbo-rails": "^7.1.1",
     "@popperjs/core": "^2.9.2",
     "@rails/actioncable": "^6.0.0",
     "@rails/actiontext": "^6.1.4-1",
@@ -11,7 +13,6 @@
     "bootstrap": "5.0.0",
     "flatpickr": "^4.6.9",
     "trix": "^1.2.0",
-    "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
