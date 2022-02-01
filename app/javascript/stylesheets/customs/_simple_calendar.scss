@@ -1,11 +1,28 @@
-.simple-calendar .next-month { background: #353535; }
+.simple-calendar {
+  $other-months-bg: #1e1e1e;
 
-.simple-calendar .today { background: #7F7C82; }
+  .prev-month { background: $other-months-bg }
+  .today      { background: #7F7C82; }
+  .next-month { background: $other-months-bg }
 
-.simple-calendar .day { position: relative; }
+  th {
+    border-color: white;
+    border-width: 1px;
+  }
 
-.simple-calendar .add-event {
-  position: absolute;
-  bottom: 7px;
-  right: 3%;
+  .day {
+    border-color: white;
+    border-width: 1px;
+    position: relative;
+  }
+
+  .add-event {
+    position: absolute;
+    bottom: 7px;
+    right: 3%;
+  }
+
+  .table > :not(:last-child) > :last-child > * {
+    border-bottom-color: white
+  }
 }

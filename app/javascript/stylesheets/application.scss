@@ -1,3 +1,5 @@
-// Customs includes Bootstrap overrides. Must be imported after Bootstrap.
-@import './customs';
-@import './bootstrap';
+// Customs includes Bootstrap overrides. Must be imported before Bootstrap.
+@import 'customs';
+
+@import '~bootstrap/scss/bootstrap';
+@import '~trix/dist/trix';
