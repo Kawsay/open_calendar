@@ -27,11 +27,18 @@ Administrator.create!(
   )
 end
 
+event_type = EventType.create!(
+  name: 'default',
+  background_color: '#123',
+  text_color: EventType.text_colors[:dark]
+)
+
 100.times do
   start_date = Date.today + rand(300)
 
   Event.create!(
     user:       User.all.sample,
+    event_type: event_type,
     title:      Faker::Lorem.paragraph(sentence_count: 1),
     description: Faker::Lorem.paragraph(sentence_count: 3..6),
     start_date: start_date,
