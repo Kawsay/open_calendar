@@ -1,12 +1,12 @@
 var addEventModalDiv;
 var addEventButtons;
-var userField;
-var userFieldDiv;
 var isRelatedToAUserButton;
 var titleField;
 var typeField;
 var locationField;
 var descriptionField;
+var userField;
+var userFieldDiv;
 
 var init = function(payload) {
   _cacheDom();
@@ -16,13 +16,13 @@ var init = function(payload) {
 var _cacheDom = function() {
   addEventButtons        = document.getElementsByClassName('add-event-btn');
   addEventModalDiv       = document.getElementById('add-event-modal');
-  userField              = addEventModalDiv.querySelector('#event_user_id');
-  userFieldDiv           = userField.parentNode.parentNode;
   isRelatedToAUserButton = addEventModalDiv.querySelector('#event_is_related_to_a_user');
   titleField             = addEventModalDiv.querySelector('#event_title');
   typeField              = addEventModalDiv.querySelector('#event_event_type_id');
   locationField          = addEventModalDiv.querySelector('#event_location');
   descriptionField       = addEventModalDiv.querySelector('#event_description');
+  userField              = addEventModalDiv.querySelector('#event_user_id');
+  userFieldDiv           = userField.parentNode.parentNode;
 };
 
 var _bindEvents = function () {
@@ -48,9 +48,11 @@ var _bindEvents = function () {
 
 // Clear out potential previous form inputs
 var _resetForm = function() {
-  [titleField, typeField, locationField, descriptionField].forEach((field) => {
+  [titleField, locationField, descriptionField, userField].forEach((field) => {
     field.value = '';
   });
+
+  typeField.value = '1';
 
   isRelatedToAUserButton.checked = false;
   _toggleUserField();
