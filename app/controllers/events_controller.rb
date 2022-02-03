@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy _show_modal ]
-  before_action :set_users, only: %i[ new create edit update _add_modal ]
+  before_action :set_users, only: %i[ new create edit update ]
   before_action :check_for_range_date!, only: %i[ create update ]
 
   # GET /events or /events.json
@@ -61,11 +61,6 @@ class EventsController < ApplicationController
 
   # GET /events_modal/1
   def _show_modal
-  end
-
-  # GET /add_event_modal
-  def _add_modal
-    @event = Event.new(event_params)
   end
 
   private

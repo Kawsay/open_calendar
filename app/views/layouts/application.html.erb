@@ -3,6 +3,7 @@
   <head>
     <title>CaisseSo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="parameters" content="<%= { route: "#{controller_name}/#{action_name}", payload: (@payload || {}) }.to_json %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 

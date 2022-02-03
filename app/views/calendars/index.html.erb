@@ -1,3 +1,13 @@
 <div id='calendar'>
-  <%= render partial: 'calendar', locals: { events: @events } %>
+  <%= month_calendar(events: @events, attribute: :start_date, end_attribute: :end_date) do |date, events| %>
+    <div class='d-flex justify-content-end'><%= date.day %></div>
+
+    <div class='mb-5'>
+      <%= render partial: 'events/calendar_event', collection: events, as: :event %>
+    </div>
+  <% end %>
+</div>
+
+<div id='add-event-modal-placeholder'>
+  <%= render partial: 'events/add_event_modal' %>
 </div>

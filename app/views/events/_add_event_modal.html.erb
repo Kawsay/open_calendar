@@ -1,4 +1,4 @@
-<div class="modal fade" id="add-event-<%= timestamp %>" tabindex="-1" aria-labelledby="add-event-label" aria-hidden="true">
+<div class="modal fade" id="add-event-modal" tabindex="-1" aria-labelledby="add-event-label" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <div class="modal-body">
-        <%= render 'form', event: @event %>
+        <%= render 'events/form', event: @event %>
       </div>
     </div>
   </div>

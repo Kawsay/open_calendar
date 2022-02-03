@@ -25,7 +25,7 @@
                 <% passed_block.call day, sorted_events.fetch(day, []) %>
               <% end %>
               <div class='add-event'>
-                <%= link_to add_event_modal_path(event: { start_date: day }), remote: true, method: :get, data: { 'bs-togle': 'modal', 'bs-target': '#add_event' } do %>
+                <%= link_to '#', data: { 'bs-togle': 'modal', 'bs-target': '#add_event', 'start-date': day.strftime('%d/%m/%Y'), 'turbo': 'false' }, class: 'add-event-btn' do %>
                   <%= image_tag 'add.svg', size: '20x20', alt: '+' %>
                 <% end %>
               </div>
