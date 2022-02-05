@@ -7,6 +7,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
   </head>
 
@@ -16,9 +17,5 @@
     <div class='container'>
       <%= yield %>
     </div>
-
-    <%# javascript_pack_tag mooved to this section in order to bypass a Bootstrap issue %>
-    <%# See: https://github.com/twbs/bootstrap/issues/33840 %>
-    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
   </body>
 </html>
