@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_140524) do
+ActiveRecord::Schema.define(version: 2022_02_05_155337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,15 @@ ActiveRecord::Schema.define(version: 2022_02_02_140524) do
     t.index ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true
   end
 
+  create_table "calendars", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "background_color", limit: 7
+    t.string "text_color"
+    t.index ["name"], name: "index_calendars_on_name"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string "body"
     t.string "commentable_type", null: false
@@ -114,6 +123,8 @@ ActiveRecord::Schema.define(version: 2022_02_02_140524) do
     t.string "title"
     t.boolean "is_related_to_a_user", default: false
     t.bigint "event_type_id", null: false
+    t.bigint "calendar_id", null: false
+    t.index ["calendar_id"], name: "index_events_on_calendar_id"
     t.index ["event_type_id"], name: "index_events_on_event_type_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
@@ -129,6 +140,7 @@ ActiveRecord::Schema.define(version: 2022_02_02_140524) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "administrators"
   add_foreign_key "contacts", "users"
+  add_foreign_key "events", "calendars"
   add_foreign_key "events", "event_types"
   add_foreign_key "events", "users"
 end

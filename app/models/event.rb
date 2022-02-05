@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+  belongs_to :calendar
   belongs_to :user, optional: true
   belongs_to :event_type
   has_many :documents, as: :documentable
