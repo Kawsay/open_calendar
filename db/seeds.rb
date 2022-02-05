@@ -9,7 +9,7 @@ Administrator.create!(
   password: 'foobar'
 )
 
-20.times do
+5.times do
   user = User.create!(
     fullname:    Faker::Name.name,
     description: Faker::Lorem.paragraph(sentence_count: 12)
@@ -29,21 +29,28 @@ end
 
 event_type = EventType.create!(
   name: 'default',
-  background_color: '#123',
+  background_color: '#FFF',
   text_color: EventType.text_colors[:dark]
 )
 
-100.times do
+5.times do
+  Calendar.create!(
+    name: Faker::Lorem.words.sample
+  )
+end
+
+30.times do
   start_date = Date.today + rand(300)
 
   Event.create!(
-    user:       User.all.sample,
-    event_type: event_type,
-    title:      Faker::Lorem.paragraph(sentence_count: 1),
+    user:        User.all.sample,
+    calendar:    Calendar.all.sample,
+    event_type:  event_type,
+    title:       Faker::Lorem.paragraph(sentence_count: 1),
     description: Faker::Lorem.paragraph(sentence_count: 3..6),
-    start_date: start_date,
-    end_date:   start_date + rand(5),
-    location:   Faker::Address.street_address
+    start_date:  start_date,
+    end_date:    start_date + rand(3),
+    location:    Faker::Address.street_address
   )
 
 end
