@@ -6,4 +6,4 @@ development:
   before_script:
     - gem install dpl --pre
   script:
-    - dpl heroku api --app=$HEROKU_DEV_URL --api_key=HEROKU_API_KEY
+    - dpl heroku api --app=$HEROKU_DEV_URL --api_key=$HEROKU_API_KEY
