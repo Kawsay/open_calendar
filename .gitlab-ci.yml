@@ -1,3 +1,6 @@
+variables:
+  HEROKU_LOGIN: $HEROKU_LOGIN
+
 stages:
   - development
 
