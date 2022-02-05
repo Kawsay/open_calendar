@@ -1,13 +1,23 @@
-<div id='calendar'>
-  <%= month_calendar(events: @events, attribute: :start_date, end_attribute: :end_date) do |date, events| %>
-    <div class='d-flex justify-content-end'><%= date.day %></div>
+<div class='row'>
+  <div class='col-3'>
+    <div id='calendars'>
+      <%= render partial: 'calendars/calendars_sidebar', collection: @calendars, as: :calendar %>
+    </div>
+  </div>
+
+  <div class='col-9'>
+    <div id='calendar'>
+      <%= month_calendar(events: @events, attribute: :start_date, end_attribute: :end_date) do |date, events| %>
+        <div class='d-flex justify-content-end'><%= date.day %></div>
+    </div>
 
     <div class='mb-5'>
       <%= render partial: 'events/calendar_event', collection: events, as: :event %>
     </div>
   <% end %>
-</div>
+  </div>
 
-<div id='add-event-modal-placeholder'>
-  <%= render partial: 'events/add_event_modal' %>
+  <div id='add-event-modal-placeholder'>
+    <%= render partial: 'events/add_event_modal' %>
+  </div>
 </div>
