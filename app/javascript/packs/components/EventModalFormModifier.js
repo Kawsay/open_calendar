@@ -2,7 +2,6 @@ var addEventModalDiv;
 var addEventButtons;
 var isRelatedToAUserButton;
 var titleField;
-var typeField;
 var locationField;
 var descriptionField;
 var userField;
@@ -18,7 +17,6 @@ var _cacheDom = function() {
   addEventModalDiv       = document.getElementById('add-event-modal');
   isRelatedToAUserButton = addEventModalDiv.querySelector('#event_is_related_to_a_user');
   titleField             = addEventModalDiv.querySelector('#event_title');
-  typeField              = addEventModalDiv.querySelector('#event_event_type_id');
   locationField          = addEventModalDiv.querySelector('#event_location');
   descriptionField       = addEventModalDiv.querySelector('#event_description');
   userField              = addEventModalDiv.querySelector('#event_user_id');
@@ -51,8 +49,6 @@ var _resetForm = function() {
   [titleField, locationField, descriptionField, userField].forEach((field) => {
     field.value = '';
   });
-
-  typeField.value = '1';
 
   isRelatedToAUserButton.checked = false;
   _toggleUserField();

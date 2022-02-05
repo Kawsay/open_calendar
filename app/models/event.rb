@@ -1,11 +1,10 @@
 class Event < ApplicationRecord
   belongs_to :calendar
   belongs_to :user, optional: true
-  belongs_to :event_type
   has_many :documents, as: :documentable
   has_many :comments, as: :commentable
 
-  accepts_nested_attributes_for :event_type, :documents, :user
+  accepts_nested_attributes_for :documents, :user
 
   has_rich_text :description
 

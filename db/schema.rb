@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_155337) do
+ActiveRecord::Schema.define(version: 2022_02_05_191556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,14 +104,6 @@ ActiveRecord::Schema.define(version: 2022_02_05_155337) do
     t.index ["documentable_type", "documentable_id"], name: "index_documents_on_documentable"
   end
 
-  create_table "event_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "background_color", limit: 7, null: false
-    t.integer "text_color", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "events", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
@@ -122,10 +114,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_155337) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.boolean "is_related_to_a_user", default: false
-    t.bigint "event_type_id", null: false
     t.bigint "calendar_id", null: false
     t.index ["calendar_id"], name: "index_events_on_calendar_id"
-    t.index ["event_type_id"], name: "index_events_on_event_type_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -141,6 +131,5 @@ ActiveRecord::Schema.define(version: 2022_02_05_155337) do
   add_foreign_key "comments", "administrators"
   add_foreign_key "contacts", "users"
   add_foreign_key "events", "calendars"
-  add_foreign_key "events", "event_types"
   add_foreign_key "events", "users"
 end
