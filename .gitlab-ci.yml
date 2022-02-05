@@ -3,6 +3,7 @@ stages:
 
 development:
   stage: development
+  before_script:
+    - gem install dpl --pre
   script:
-    - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_DEV_URL --api-key=HEROKU_API_KEY
+    - dpl heroku api --app=$HEROKU_DEV_URL --api_key=HEROKU_API_KEY
