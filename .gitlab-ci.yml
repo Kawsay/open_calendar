@@ -8,6 +8,7 @@ development:
   stage: development
   script:
     - echo "$HEROKU_LOGIN"
+    - echo "$CI_JOB_STAGE"
     # - git remote add heroku https://$HEROKU_LOGIN:$HEROKU_API_KEY@git.heroku.com/$HEROKU_DEV_URL.git
     # - git remote -v
     # - git push -f heroku master
