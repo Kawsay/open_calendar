@@ -1,0 +1,16 @@
+  <div class='row'>
+    <div class='col-10'>
+      <span class='calendar-color-circle' style='background-color: <%= calendar.background_color %>;'>
+        <div class='ps-4'><%= calendar.name %></div>
+    </div>
+    <div class='col-1'>
+      <%= link_to '#' do %>
+        <%= image_tag 'eye', size: '15x15' %>
+      <% end %>
+    </div>
+    <div class='col-1'>
+      <%= link_to '#' do %>
+        <%= image_tag 'share', size: '15x15' %>
+      <% end %>
+    </div>
+  </div>
