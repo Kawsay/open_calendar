@@ -27,26 +27,20 @@ Administrator.create!(
   )
 end
 
-event_type = EventType.create!(
-  name: 'default',
-  background_color: '#FFF',
-  text_color: EventType.text_colors[:dark]
-)
-
 5.times do
   Calendar.create!(
     name:             Faker::Lorem.words.sample,
-    background_color: Faker::Color.hex_color
+    background_color: Faker::Color.hex_color,
+    text_color:       'dark'
   )
 end
 
-30.times do
-  start_date = Date.today + rand(300)
+10.times do
+  start_date = Date.today + rand(60)
 
   Event.create!(
     user:        User.all.sample,
     calendar:    Calendar.all.sample,
-    event_type:  event_type,
     title:       Faker::Lorem.paragraph(sentence_count: 1),
     description: Faker::Lorem.paragraph(sentence_count: 3..6),
     start_date:  start_date,
@@ -55,7 +49,7 @@ end
   )
 end
 
-70.times do
+20.times do
   document = Document.create!(
     title:             Faker::Lorem.paragraph(sentence_count: 1),
     documentable_type: 'Event',
@@ -68,7 +62,7 @@ end
                        identify:     false)
 end
 
-70.times do
+20.times do
   document = Document.create!(
     title:             Faker::Lorem.paragraph(sentence_count: 1),
     documentable_type: 'User',
@@ -81,7 +75,7 @@ end
                        identify:     false)
 end
 
-100.times do
+50.times do
   Comment.create!(
     administrator:    Administrator.all.sample,
     body:             Faker::Lorem.paragraph(sentence_count: 1..20),
