@@ -35,5 +35,3 @@
 yarn-debug.log*
 .yarn-integrity
 
-# Gitlab CI/CD script file
-.gitlab-ci.yml
