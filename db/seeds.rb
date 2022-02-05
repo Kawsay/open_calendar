@@ -1,7 +1,7 @@
 require 'faker'
 
 [
-  Document, Comment, Event, Contact, Administrator, User
+  Document, Comment, Event, Contact, Administrator, User, Calendar
 ].map(&:destroy_all)
 
 Administrator.create!(
@@ -35,7 +35,8 @@ event_type = EventType.create!(
 
 5.times do
   Calendar.create!(
-    name: Faker::Lorem.words.sample
+    name:             Faker::Lorem.words.sample,
+    background_color: Faker::Color.hex_color
   )
 end
 
@@ -52,7 +53,6 @@ end
     end_date:    start_date + rand(3),
     location:    Faker::Address.street_address
   )
-
 end
 
 70.times do
