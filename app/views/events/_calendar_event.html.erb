@@ -1,4 +1,4 @@
-<%= link_to events_modal_path(event), remote: true, method: :get, data: { 'bs-togle': 'modal', 'bs-target': "#event_modal-#{event.id}" }, class: 'd-grid text-decoration-none' do %>
+<%= link_to events_modal_path(event), remote: true, method: :get, data: { 'bs-togle': 'modal', 'bs-target': "#event_modal-#{event.id}", 'calendar-name': event.calendar.name }, class: 'd-grid text-decoration-none calendar-event-link' do %>
   <span class='badge bg-info text-<%= event.calendar.text_color %> d-inline-block  w-100 text-truncate' style='background-color: <%= event.calendar.background_color %> !important'>
     <%= event.title %>
   </span>
