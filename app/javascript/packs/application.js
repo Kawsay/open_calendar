@@ -29,9 +29,10 @@ require("@rails/actiontext")
 import './customs/enable_tooltips'
 
 import EventModalFormModifier from './components/EventModalFormModifier'
+import CalendarDisplayToggler from './components/CalendarDisplayToggler'
 
 const components = {
-  'calendars/index': [EventModalFormModifier]
+  'calendars/index': [EventModalFormModifier, CalendarDisplayToggler]
 };
 
 
