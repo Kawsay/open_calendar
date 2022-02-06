@@ -1,16 +1,23 @@
-  <div class='row'>
-    <div class='col-10'>
-      <span class='calendar-color-circle' style='background-color: <%= calendar.background_color %>;'>
-        <div class='ps-4'><%= calendar.name %></div>
-    </div>
-    <div class='col-1'>
-      <%= link_to '#' do %>
-        <%= image_tag 'eye', size: '15x15' %>
-      <% end %>
-    </div>
-    <div class='col-1'>
-      <%= link_to '#' do %>
-        <%= image_tag 'share', size: '15x15' %>
-      <% end %>
+<div class='d-flex align-items-center'>
+  <div class='d-flex me-1'>
+    <span class='calendar-color-circle' style='background-color: <%= calendar.background_color %>;'></span>
+  </div>
+
+  <div class='mr-auto flex-grow-1'>
+    <div class='text-white'>
+      <%= calendar.name %>
     </div>
   </div>
+
+  <div class='ms-auto'>
+    <%= link_to '#' do %>
+      <%= image_tag 'eye', size: '15x15' %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to '#' do %>
+      <%= image_tag 'share', size: '15x15' %>
+    <% end %>
+  </div>
+</div>

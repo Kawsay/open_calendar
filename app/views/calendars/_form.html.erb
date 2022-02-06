@@ -1,34 +1,27 @@
-<div class="container text-light">
-  <%= form_with(model: calendar) do |form| %>
-    <% if calendar.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(calendar.errors.count, "error") %> prohibited this event from being saved:</h2>
+<%= form_with(model: calendar) do |form| %>
+  <% if calendar.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(calendar.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-        <ul>
-          <% calendar.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="form-group row mb-3">
-      <%= form.label :name, class: 'col-2 col-form-label' %>
-      <div class="col-10">
-        <%= form.text_field :name, class: 'form-control text-dark' %>
-      </div>
-    </div>
-
-    <div class="row mb-3">
-      <%= form.label :background_color, class: 'col-2 col-form-label' %>
-      <div class="col-2">
-        <%= form.color_field :background_color, class: 'form-control text-dark' %>
-      </div>
-    </div>
-
-    <div class="actions modal-footer">
-      <%= form.submit class: 'btn btn-primary' %>
+      <ul>
+        <% calendar.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
-</div>
 
+  <div class='d-flex align-items-center'>
+    <div class="pe-1"> 
+      <%= form.text_field :name, placeholder: 'Calendar name...', class: 'form-control form-control-sm text-white' %>
+    </div>
+
+    <div class="ms-auto px-0">
+      <%= form.color_field :background_color, class: 'form-control-color form-control-sm p-0' %>
+    </div>
+  </div>
+
+  <div class="actions mt-1 d-grid">
+    <%= form.submit class: 'btn btn-outline-primary btn-sm' %>
+  </div>
+<% end %>

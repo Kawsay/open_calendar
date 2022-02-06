@@ -1,11 +1,11 @@
 <div class='row'>
-  <div class='col-3'>
-    <div id='calendars'>
-      <%= render partial: 'calendars/calendars_sidebar', collection: @calendars, as: :calendar %>
-    </div>
+  <div class='col-2'>
+    <%= render partial: 'calendars_sidebar', collection: @calendars, as: :calendar %>
+    <hr class='text-white'>
+    <%= render partial: 'form', locals: { calendar: @calendar} %>
   </div>
 
-  <div class='col-9'>
+  <div class='col-10'>
     <div id='calendar'>
       <%= month_calendar(events: @events, attribute: :start_date, end_attribute: :end_date) do |date, events| %>
         <div class='d-flex justify-content-end'><%= date.day %></div>

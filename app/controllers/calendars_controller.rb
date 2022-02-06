@@ -1,6 +1,7 @@
 class CalendarsController < ApplicationController
   def index
     @calendars = Calendar.all.includes(:events)
+    @calendar  = Calendar.new
     @events    = Event.all
     @event     = Event.new
     @users     = User.select(:id, :fullname)
@@ -9,10 +10,6 @@ class CalendarsController < ApplicationController
       format.html
       format.js
     end
-  end
-
-  def new
-    @calendar = Calendar.new
   end
 
   def create
