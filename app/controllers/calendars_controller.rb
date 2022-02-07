@@ -2,11 +2,12 @@ class CalendarsController < ApplicationController
   def index
     @calendars = Calendar.all.includes(:events)
     @calendar  = Calendar.new
-    @events    = Event.all
+    @events    = Event.all.includes(:calendar)
     @event     = Event.new
     @users     = User.select(:id, :fullname)
 
     respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('calendar', partial: 'calendar') }
       format.html
       format.js
     end
