@@ -7,7 +7,8 @@
     'calendar-name':  event.calendar.name,
     'calendar-state': 'displayed'
   },
-  class: 'd-grid text-decoration-none calendar-event-link' do %>
+  class: 'text-decoration-none calendar-event-link',
+  style: 'display: none;' do %>
   <span class='badge bg-info text-<%= event.calendar.text_color %> d-inline-block  w-100 text-truncate' style='background-color: <%= event.calendar.background_color %> !important'>
     <%= event.title %>
   </span>

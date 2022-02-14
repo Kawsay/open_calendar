@@ -7,9 +7,8 @@ class CalendarsController < ApplicationController
     @users     = User.select(:id, :fullname)
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace('calendar', partial: 'calendar') }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('calendar', partial: 'calendars/calendar') }
       format.html
-      format.js
     end
   end
 

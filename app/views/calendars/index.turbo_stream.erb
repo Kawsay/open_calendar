@@ -1,0 +1,10 @@
+<%= turbo_frame_tag 'calendar' do %>
+  <%= month_calendar(events: @events, attribute: :start_date, end_attribute: :end_date) do |date, events| %>
+    <div class='d-flex justify-content-end'><%= date.day %></div>
+
+    <div class='mb-5'>
+      <%= render partial: 'events/calendar_event', collection: events, as: :event %>
+    </div>
+  <% end %>
+<% end %>
+
