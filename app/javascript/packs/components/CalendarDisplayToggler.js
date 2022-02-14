@@ -36,6 +36,7 @@ var _cacheDom = function() {
 var _bindEvents = function() {
   _bindToggleEvent();
 
+  // Bind events after a turbo-frame is rendered
   document.addEventListener('turbo:frame-render', (event) => {
     _cacheDom();
     _initializeEvents();

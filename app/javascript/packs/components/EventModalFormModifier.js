@@ -24,6 +24,18 @@ var _cacheDom = function() {
 };
 
 var _bindEvents = function () {
+  _bindAddEventModalEvent();
+  _toggleUserFieldEvent();
+
+  // Bind events after a turbo-frame is rendered
+  document.addEventListener('turbo:frame-render', (event) => {
+    _cacheDom();
+    _bindAddEventModalEvent();
+    _toggleUserFieldEvent();
+  });
+};
+
+var _bindAddEventModalEvent = function() {
   // Display a form inside a modal to create new Event binded to the selected date
   for (let addEventButton of addEventButtons) {
     addEventButton.addEventListener('click', (event) => {
@@ -37,7 +49,9 @@ var _bindEvents = function () {
       addEventModalObj.show();
     });
   };
+};
 
+var _toggleUserFieldEvent = function() {
   // Display / hide User field on switch click
   isRelatedToAUserButton.addEventListener('click', () => {
     _toggleUserField();
