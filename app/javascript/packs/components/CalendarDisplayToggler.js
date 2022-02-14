@@ -39,7 +39,6 @@ var _bindEvents = function() {
   document.addEventListener('turbo:frame-render', (event) => {
     _cacheDom();
     _initializeEvents();
-    _bindToggleEvent();
   });
 };
 
