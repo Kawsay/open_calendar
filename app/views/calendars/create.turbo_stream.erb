@@ -1,0 +1,7 @@
+<%= turbo_stream.append 'calendar-sidebar' do %>
+  <%= render partial: 'calendar_sidebar', locals: { calendar: @calendar } %>
+<% end %>
+
+<%= turbo_stream.replace 'calendar-form' do %>
+  <%= render partial: 'form', locals: { calendar: Calendar.new } %>
+<% end %>

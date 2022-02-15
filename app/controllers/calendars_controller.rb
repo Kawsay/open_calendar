@@ -20,9 +20,13 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       if @calendar.save
+        format.turbo_stream
         format.html { redirect_to root_path, notice: "calendar was successfully created." }
         format.json { render :show, status: :created, location: @calendar }
       else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace('calendar-form', partial: 'form', locals:  { calendar: @calendar })
+        end
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @calendar.errors, status: :unprocessable_entity }
       end

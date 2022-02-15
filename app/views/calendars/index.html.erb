@@ -1,7 +1,11 @@
 <div class='row'>
   <div class='col-2'>
-    <%= render partial: 'calendars_sidebar', collection: @calendars, as: :calendar %>
+    <%= turbo_frame_tag 'calendar-sidebar' do %>
+      <%= render partial: 'calendar_sidebar', collection: @calendars, as: :calendar %>
+    <% end %>
+
     <hr class='text-white'>
+
     <%= render partial: 'form', locals: { calendar: @calendar} %>
   </div>
 
