@@ -1,18 +1,8 @@
-// WIP
-// Still pretty buggy & non optimal. Don't even know if the approch correct.
-//
-// Idea is: badges (= event representation) HTML templates includes CSS to hide them
-// at 1st load. If they've the data-attribute "calendar-state" set to "displayed", 
-// they're displayed via JS.
-// 
-// This prevents badges to initialy appear and quickly disapear.
-// It also allow all events to be loaded, which is to me a tradeoff between usability
-// and complexity (would be lot more complexe to request only displayed calendars'
-// events and request additionnal ones when eyes icons are clicked.)
-//
-// IDEA: Could a calendar frame be a TurboFrame with an id related to the position of
-// the day in the month, and have Turbo replacing frames when needed ?? 
+import EyeIcon      from '../../../assets/images/eye.svg'
+import EyeIconSlash from '../../../assets/images/eye-slash.svg'
 
+var calendarNameDiv;
+var calendarNameDivArr;
 var calendarEyeIcons;
 var calendarEyeIconsArr;
 var calendarEventBadges;
@@ -27,6 +17,8 @@ var init = function(payload) {
 };
 
 var _cacheDom = function() {
+  calendarNameDiv        = document.getElementsByClassName('calendar-name');
+  calendarNameDivArr     = Array.from(calendarNameDiv);
   calendarEyeIcons       = document.getElementsByClassName('eye-icon');
   calendarEyeIconsArr    = Array.from(calendarEyeIcons);
   calendarEventBadges    = document.querySelectorAll('table .calendar-event-link');
@@ -34,6 +26,7 @@ var _cacheDom = function() {
 };
 
 var _bindEvents = function() {
+  // Adds an event on each eye icon to hide / display related calendar's events
   _bindToggleEvent();
 
   // Bind events after a turbo-frame is rendered
@@ -50,12 +43,42 @@ var _bindToggleEvent = function() {
     calendarEyeIcon.addEventListener('click', (event) => {
       event.preventDefault();
 
-      var calendarState = calendarEyeIcon.getAttribute('data-calendar-state');
-      var calendarName  = calendarEyeIcon.getAttribute('data-calendar-name');
+      var calendarState   = calendarEyeIcon.getAttribute('data-calendar-state');
+      var calendarNameStr = calendarEyeIcon.getAttribute('data-calendar-name');
+      var calendarNameDiv = _getCalendarNameDiv(calendarNameStr);
 
-      _toggleEventBadges(calendarState, calendarName, calendarEyeIcon);
+      _toggleEventBadges(calendarState, calendarNameStr, calendarEyeIcon);
+      _toggleGreyCalendarNameOut(calendarNameDiv, calendarState);
+      _toggleEyeIcon(calendarEyeIcon, calendarState);
     });
   };
+};
+
+// Hide or show event badges related to a calendar
+// Update their 'calendar-state' data-attribute
+var _toggleEventBadges = function(calendarState, calendarNameStr, calendarEyeIcon) {
+  var relatedEventBadges = _getEventBadgesRelatedToThisCalendar(calendarNameStr);
+
+  relatedEventBadges.map((eventBadge) => {
+    if (calendarState === 'displayed') {
+      _hideEvent(eventBadge);
+      calendarEyeIcon.setAttribute('data-calendar-state', 'hidden');
+    } else if (calendarState === 'hidden') {
+      _showEvent(eventBadge);
+      calendarEyeIcon.setAttribute('data-calendar-state', 'displayed');
+    };
+    // _toggleEventBadge(eventBadge, calendarState, calendarEyeIcon);
+  });
+};
+
+//  Grey a calendar name out or reset its style
+var _toggleGreyCalendarNameOut = function(calendarNameDiv, calendarState) {
+  calendarState === 'displayed' ? _muteCalendarName(calendarNameDiv) :  _unmuteCalendarName(calendarNameDiv)
+};
+
+// Replace eye icon by slash-eye icon, and the other way around
+var _toggleEyeIcon = function(calendarEyeIcon, calendarState) {
+  calendarState === 'displayed' ? calendarEyeIcon.src = EyeIconSlash : calendarEyeIcon.src = EyeIcon
 };
 
 // Loads on 'turbo:frame-render
@@ -65,7 +88,6 @@ var _initializeEvents = function() {
   var displayedCalendars = calendarEyeIconsArr.filter((calendarEyeIcon) => {
     return calendarEyeIcon.getAttribute('data-calendar-state') === 'displayed'
   });
-
 
   displayedCalendars.map((displayedCalendar) => {
     var calendarName = displayedCalendar.getAttribute('data-calendar-name');
@@ -77,51 +99,21 @@ var _initializeEvents = function() {
   });
 };
 
-// Parameters:
-//  - calendarName     <String>           = set by users (/[a-zA-Z0-9/)
-//
 // Select the event badges related to a calendar
-var _getEventBadgesRelatedToThisCalendar = function(calendarName) {
+var _getEventBadgesRelatedToThisCalendar = function(calendarNameStr) {
   return calendarEventBadgesArr.filter((eventBadge) => {
-    return eventBadge.getAttribute('data-calendar-name') === calendarName
+    return eventBadge.getAttribute('data-calendar-name') === calendarNameStr
   });
 };
 
-// Parameters:
-//  - calendarState    <String>           = 'hidden' or 'displayed'
-//  - calendarName     <String>           = set by users (/[a-zA-Z0-9/)
-//  - calendarEyeIcon  <HTMLImageElement> = an <img> tag to illustrate the calendar state
-//
-// Hide or show event badges related to a calendar
-// Update their 'calendar-state' data-attribute
-var _toggleEventBadges = function(calendarState, calendarName, calendarEyeIcon) {
-  var relatedEventBadges = _getEventBadgesRelatedToThisCalendar(calendarName);
-
-  relatedEventBadges.map((eventBadge) => {
-    _toggleEventBadge(eventBadge, calendarState, calendarEyeIcon);
+// Find a calendar <div> by name
+var _getCalendarNameDiv = function(calendarNameStr) {
+  return calendarNameDivArr.find((calendarNameDiv) => {
+    return calendarNameDiv.getAttribute('data-calendar-name') === calendarNameStr
   });
 };
 
-// Parameters:
-//  - calendarState    <String>           = 'hidden' or 'displayed'
-//  - calendarName     <String>           = set by User (/[a-zA-Z0-9/)
-//  - calendarEyeIcon  <HTMLImageElement> = an <img> tag to illustrate the calendar state
-//
-// Hide or show an event badge
-// Update its 'calendar-state' data-attribute
-var _toggleEventBadge = function(eventBadge, calendarState, calendarEyeIcon) {
-  if (calendarState === 'displayed') {
-    _hideEvent(eventBadge);
-    calendarEyeIcon.setAttribute('data-calendar-state', 'hidden');
-  } else if (calendarState === 'hidden') {
-    _showEvent(eventBadge);
-    calendarEyeIcon.setAttribute('data-calendar-state', 'displayed');
-  };
-};
 
-// Parameters:
-//  - eventBadge      <HTMLElement>       = a <a> tag containing a <span> representing an event
-//
 // Takes an eventBadge as input, set its display to 'none' and removes
 // its 'd-grid' class
 var _hideEvent = function(eventBadge) {
@@ -129,14 +121,21 @@ var _hideEvent = function(eventBadge) {
   eventBadge.classList.remove('d-grid');
 };
 
-// Parameters:
-//  - eventBadge      <HTMLElement>       = a <a> tag containing a <span> representing an event
-//
 // Takes an eventBadge as input, set its display to 'grid' and adds
 // a 'd-grid' class
 var _showEvent = function(eventBadge) {
   eventBadge.style.display = 'grid'
   eventBadge.classList.add('d-grid');
 };
+
+//  Greyed out a calendar name by adding a "text-muted" CSS class
+var _muteCalendarName = function(calendarNameDiv) {
+  calendarNameDiv.classList.add('text-muted');
+}
+
+//  Reset a calendar name color by removing its "text-muted" CSS class
+var _unmuteCalendarName = function(calendarNameDiv) {
+  calendarNameDiv.classList.remove('text-muted');
+}
 
 export default { init: init }
