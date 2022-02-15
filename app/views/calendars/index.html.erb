@@ -14,6 +14,12 @@
   </div>
 
   <div id='add-event-modal-placeholder'>
-    <%= render partial: 'events/add_event_modal' %>
+    <%= render partial: 'events/add_event_modal',
+      locals: {
+        event:     @event,
+        calendars: @calendars,
+        users:     @users
+      }
+    %>
   </div>
 </div>

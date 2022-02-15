@@ -20,6 +20,10 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       if @calendar.save
+        @calendars = Calendar.all.includes(:events)
+        @event = Event.new
+        @users = User.select(:id, :fullname)
+
         format.turbo_stream
         format.html { redirect_to root_path, notice: "calendar was successfully created." }
         format.json { render :show, status: :created, location: @calendar }

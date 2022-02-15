@@ -5,3 +5,13 @@
 <%= turbo_stream.replace 'calendar-form' do %>
   <%= render partial: 'form', locals: { calendar: Calendar.new } %>
 <% end %>
+
+<%= turbo_stream.replace 'add-event-modal-placeholder' do %>
+  <%= render partial: 'events/add_event_modal',
+    locals: {
+      event:     @event,
+      calendars: @calendars,
+      users:     @users
+    }
+  %>
+<% end %>

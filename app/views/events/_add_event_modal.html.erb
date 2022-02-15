@@ -6,7 +6,13 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
       <div class="modal-body">
-        <%= render 'events/form', event: @event %>
+        <%= render partial: 'events/form',
+          locals: {
+            event:     event,
+            calendars: calendars,
+            users:     users
+          }
+        %>
       </div>
     </div>
   </div>
