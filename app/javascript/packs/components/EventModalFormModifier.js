@@ -1,4 +1,5 @@
 var addEventModalDiv;
+var addEventModalObj;
 var addEventButtons;
 var isRelatedToAUserButton;
 var titleField;
@@ -15,6 +16,7 @@ var init = function(payload) {
 var _cacheDom = function() {
   addEventButtons        = document.getElementsByClassName('add-event-btn');
   addEventModalDiv       = document.getElementById('add-event-modal');
+  addEventModalObj       = new bootstrap.Modal(addEventModalDiv);
   isRelatedToAUserButton = addEventModalDiv.querySelector('#event_is_related_to_a_user');
   titleField             = addEventModalDiv.querySelector('#event_title');
   locationField          = addEventModalDiv.querySelector('#event_location');
@@ -38,18 +40,22 @@ var _bindEvents = function () {
 var _bindAddEventModalEvent = function() {
   // Display a form inside a modal to create new Event binded to the selected date
   for (let addEventButton of addEventButtons) {
-    addEventButton.addEventListener('click', (event) => {
-      event.preventDefault();
-
-      var startDate = addEventButton.getAttribute('data-start-date');
-      var addEventModalObj = new bootstrap.Modal(addEventModalDiv);
-
-      _resetForm();
-      _configureFlatpickr(startDate);
-      addEventModalObj.show();
-    });
+    addEventButton.addEventListener('click', _displayAddEventModal(addEventButton));
   };
 };
+
+var _displayAddEventModal = function(addEventButton) {
+  return function(event) {
+    event.preventDefault();
+
+    var startDate = addEventButton.getAttribute('data-start-date');
+
+    _resetForm();
+    _configureFlatpickr(startDate);
+
+    addEventModalObj.show();
+  }
+}
 
 var _toggleUserFieldEvent = function() {
   // Display / hide User field on switch click
