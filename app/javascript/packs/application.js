@@ -38,7 +38,7 @@ import EventModalFormModifier from './components/EventModalFormModifier'
 import CalendarDisplayToggler from './components/CalendarDisplayToggler'
 
 const components = {
-  'calendars/index': [EventModalFormModifier, CalendarDisplayToggler]
+  'calendars/index': [CalendarDisplayToggler]
 };
 
 
