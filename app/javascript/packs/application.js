@@ -5,12 +5,18 @@
 
 import Rails from "@rails/ujs"
 import Turbo from "@hotwired/turbo"
+import { Application } from "@hotwired/stimulus"
+import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "../stylesheets/application";
 
 Rails.start()
 ActiveStorage.start()
+
+window.Stimulus = Application.start()
+const context = require.context("./controllers", true, /\.js$/)
+Stimulus.load(definitionsFromContext(context))
 
 import "bootstrap";
 window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js')
