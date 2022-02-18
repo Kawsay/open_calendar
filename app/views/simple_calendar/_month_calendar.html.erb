@@ -24,9 +24,16 @@
               <% else %>
                 <% passed_block.call day, sorted_events.fetch(day, []) %>
               <% end %>
-              <div class='add-event'>
-                <%= link_to '#', data: { 'bs-togle': 'modal', 'bs-target': '#add_event', 'start-date': day.strftime('%d/%m/%Y'), 'turbo': 'false' }, class: 'add-event-btn' do %>
-                  <%= image_tag 'add.svg', size: '20x20', alt: '+' %>
+              <div class="add-event">
+                <%= link_to '#', class: 'add-event-btn' do %>
+                  <%= image_tag 'add.svg',
+                    size: '20x20',
+                    alt:  '+',
+                    data: {
+                      'action': 'click->events--form#configure_and_show_modal',
+                      'date':   day.strftime('%d/%m/%Y')
+                    }
+                  %>
                 <% end %>
               </div>
             <% end %>

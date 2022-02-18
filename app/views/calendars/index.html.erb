@@ -10,11 +10,13 @@
   </div>
 
   <div class='col-10'>
-    <%= render partial: 'calendars/calendar' %>
-  </div>
+    <div data-controller="events--form">
+      <%= render partial: 'calendars/calendar' %>
 
-  <%= render partial: 'events/add_event_modal',
-             locals: { event:     @event,
-                       calendars: @calendars,
-                       users:     @users } %>
+      <%= render partial: 'events/add_event_modal',
+                 locals: { event:     @event,
+                           calendars: @calendars,
+                           users:     @users } %>
+    </div>
+  </div>
 </div>

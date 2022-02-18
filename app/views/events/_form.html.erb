@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(event) do %>
   <div class="container text-light">
-    <%= form_with(model: event) do |form| %>
+    <%= form_with(model: event || Event.new) do |form| %>
       <% if event.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -16,47 +16,78 @@
       <div class="form-group row mb-3">
         <%= form.label :title, class: 'col-2 col-form-label' %>
         <div class="col-10">
-          <%= form.text_field :title, class: 'form-control text-dark' %>
+          <%= form.text_field :title,
+            class: 'form-control text-dark',
+            data:  { 'events--form-target': 'titleField' }
+          %>
         </div>
       </div>
 
       <div class="form-group row mb-3">
         <%= form.label :date, class: 'col-2 col-form-label' %>
         <div class="col-10">
-          <%= form.text_field :start_date, class: 'form-control', data: { behavior: 'flatpickr' } %>
+          <%= form.text_field :start_date,
+            class: 'form-control',
+            data:  { behavior: 'flatpickr' }
+          %>
         </div>
       </div>
 
       <div class="form-group row mb-3">
         <%= form.label :calendar_id, class: 'col-2 col-form-label' %>
         <div class="col-10">
-          <%= form.collection_select :calendar_id, calendars, :id, :name, { }, class: 'form-select' %>
+          <%= form.collection_select :calendar_id,
+            calendars, 
+            :id,
+            :name,
+            { },
+            class: 'form-select',
+            data:  { 'events--form-target': 'calendarIdField' }
+          %>
         </div>
       </div>
 
       <div class="form-group row mb-3">
         <%= form.label :location, class: 'col-2 col-form-label' %>
         <div class="col-10">
-          <%= form.text_field :location, class: 'form-control text-dark' %>
+          <%= form.text_field :location,
+            class: 'form-control text-dark',
+            data:  { 'events--form-target': 'locationField' }
+          %>
         </div>
       </div>
 
       <div>
         <div class="form-check form-switch">
           <%= form.label :is_related_to_a_user, class: 'col-form-label' %>
-          <%= form.check_box :is_related_to_a_user, class: 'form-check-input' %>
+          <%= form.check_box :is_related_to_a_user,
+            class: 'form-check-input',
+            data: {
+              'action': 'click->events--form#toggle_users_field',
+              'events--form-target': 'usersSwitch'
+            }
+          %>
         </div>
-        <div class="form-group row mb-3 user_field" style="display:none">
+        <div class="form-group row mb-3" style="display:none" data-events--form-target="usersDiv">
           <%= form.label :user_id, class: 'col-2 col-form-label' %>
           <div class="col-10">
-            <%= form.collection_select :user_id, users, :id, :fullname, { include_blank: true }, class: 'form-select' %>
+            <%= form.collection_select :user_id,
+              users,
+              :id,
+              :fullname,
+              { include_blank: true },
+              class: 'form-select',
+              data:  { 'events--form-target': 'userIdField' }%>
           </div>
         </div>
       </div>
 
       <div class="form-group row mb-3">
         <%= form.label :description, class: 'mb-3' %>
-        <%= form.rich_text_area :description, class: 'form-control text-dark customized_min_height' %>
+        <%= form.rich_text_area :description,
+          class: 'form-control text-dark customized_min_height',
+          data:  { 'events--form-target': 'descriptionField' }
+        %>
       </div>
 
       <div class="form-group row">
