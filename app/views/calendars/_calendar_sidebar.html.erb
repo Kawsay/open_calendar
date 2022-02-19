@@ -6,20 +6,29 @@
   </div>
 
   <div class='mr-auto flex-grow-1'>
-    <div class='text-white calendar-name'>
+    <div class='text-white'
+       data-calendars--visibility-target="calendar"
+       data-calendar-name="<%= calendar.name %>"
+       data-calendar-visible="true">
       <%= calendar.name %>
     </div>
   </div>
 
   <div class='ms-auto'>
-    <%= link_to '#' do %>
-      <%= image_tag 'eye.svg', size: '15x15', class: 'eye-icon' %>
+    <%= link_to '#', data: { turbo: false } do %>
+      <%= image_tag 'eye.svg',
+        size: '15x15',
+        data: {
+          action: 'click->calendars--visibility#toggle',
+          calendar_name: calendar.name
+        },
+        class: 'eye-icon' %>
     <% end %>
   </div>
 
   <div>
-    <%= link_to '#' do %>
+    <%# link_to '#' do %>
       <%= image_tag 'share.svg', size: '15x15' %>
-    <% end %>
+    <%# end %>
   </div>
 </div>
