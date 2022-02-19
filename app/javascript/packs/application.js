@@ -33,21 +33,3 @@ require("trix")
 require("@rails/actiontext")
 
 import './customs/enable_tooltips'
-
-import CalendarDisplayToggler from './components/CalendarDisplayToggler'
-
-const components = {
-  'calendars/index': [CalendarDisplayToggler]
-};
-
-
-document.addEventListener('turbo:load', () => {
-  const { route, payload } = JSON.parse(document.querySelector('meta[name="parameters"]').content)
-  const componentsObj = components[route]
-
-  if (componentsObj) {
-    componentsObj.forEach((component) => {
-      component.init(payload);
-    });
-  };
-});
