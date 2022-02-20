@@ -1,18 +1,16 @@
-<%= turbo_frame_tag 'new_event_modal' do %>
-  <div class="modal fade" id="new-event-modal" tabindex="-1" aria-labelledby="new-event-label" aria-hidden="true" data-events--form-target="modal">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-light" id="new-event-label">Ajouter un évennement</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-        <div class="modal-body">
-          <%= render partial: 'events/form',
-                     locals: { event:     event,
-                               calendars: calendars,
-                               users:     users } %>
-        </div>
+<div class="modal fade" id="new-event-modal" tabindex="-1" aria-labelledby="new-event-label" aria-hidden="true" data-events--form-target="modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-light" id="new-event-label">Ajouter un évennement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        <%= render partial: 'events/form',
+                   locals: { event:     event,
+                             calendars: calendars,
+                             users:     users } %>
       </div>
     </div>
   </div>
-<% end %>
+</div>

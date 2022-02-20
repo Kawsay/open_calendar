@@ -6,6 +6,14 @@ export default class extends Controller {
     "usersSwitch", "usersDiv", "userIdField", "descriptionField"
   ]
 
+  connect() {
+    this.element.addEventListener('turbo:submit-end', (event) => {
+      if (event.detail.success) {
+        this.hide_modal();
+      }
+    });
+  }
+
   toggle_users_field(event) {
     this.usersSwitchTarget.checked ?
       this.show_users_field() :
@@ -54,14 +62,21 @@ export default class extends Controller {
       dateFormat:    'd/m/Y H:i',
       defaultDate:   date,
       mode:          'range',
-    })
+    });
   }
 
   show_modal() {
     this.modal.show();
   }
 
+ hide_modal() {
+   this.modal.hide();
+ }
+
   get modal() {
-    return new bootstrap.Modal(this.modalTarget);
+    if (this._modal == undefined) {
+      this._modal = new bootstrap.Modal(this.modalTarget);
+    }
+    return this._modal;
   }
 }

@@ -8,6 +8,8 @@ class Event < ApplicationRecord
 
   has_rich_text :description
 
+  validates :title, presence: true
+
   def truncated_description(word_count: 5)
     description.split(/\s+/, word_count + 1)[0...word_count].append('...').join(' ')
   end

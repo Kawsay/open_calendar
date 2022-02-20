@@ -25,12 +25,15 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
+    @calendars = Calendar.all.includes(:events)
+    @users = User.select(:id, :fullname)
 
     respond_to do |format|
       if @event.save
         format.html { redirect_to root_path, notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
+        format.turbo_stream { render :create, status: :bad_request }
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
