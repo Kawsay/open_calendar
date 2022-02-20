@@ -15,6 +15,7 @@ class Event < ApplicationRecord
     description.split(/\s+/, word_count + 1)[0...word_count].append('...').join(' ')
   end
 
+  # TODO: I18n
   def date
     if end_date.nil?
       "Le #{format_date(start_date)}"
