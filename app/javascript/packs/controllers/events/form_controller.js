@@ -12,6 +12,10 @@ export default class extends Controller {
         this.hide_modal();
       }
     });
+
+    this.element.addEventListener('hide.bs.modal', (event) => {
+      this.reset_form_errors();
+    }); 
   }
 
   toggle_users_field(event) {
@@ -23,25 +27,20 @@ export default class extends Controller {
   configure_and_show_modal(event) {
     const date = event.target.dataset.date;
 
-    this.reset_form();
+    this.reset_form_values();
     this.configure_flatpickr(date);
     this.show_modal();
   }
 
-  reset_form() {
-    const fields = [
-      this.titleFieldTarget,
-      this.calendarIdFieldTarget,
-      this.locationFieldTarget,
-      this.userIdFieldTarget,
-      this.descriptionFieldTarget
-    ];
-
-    fields.forEach( (field) => { field.value = '' } );
-
+  reset_form_values() {
+    this.fields.forEach((field) => { field.value = '' } );
     this.usersSwitchTarget.checked = false;
-
     this.hide_users_field();
+  }
+
+  reset_form_errors() {
+    this.fields.forEach((field) => { field.classList.remove('is-invalid') });
+    document.querySelector('#error_explanation').remove();
   }
 
   show_users_field() {
@@ -78,5 +77,17 @@ export default class extends Controller {
       this._modal = new bootstrap.Modal(this.modalTarget);
     }
     return this._modal;
+  }
+
+  get fields() {
+    const fields = [
+      this.titleFieldTarget,
+      this.calendarIdFieldTarget,
+      this.locationFieldTarget,
+      this.userIdFieldTarget,
+      this.descriptionFieldTarget
+    ];
+
+    return fields;
   }
 }
