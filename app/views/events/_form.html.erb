@@ -28,7 +28,10 @@
         <div class="col-10">
           <%= form.text_field :start_date,
             class: 'form-control',
-            data:  { behavior: 'flatpickr' }
+            data:  {
+              behavior: 'flatpickr',
+              'events--form-target': 'dateField'
+            }
           %>
         </div>
       </div>

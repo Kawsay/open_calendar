@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = [
-    "modal", "titleField", "calendarIdField", "locationField",
+    "modal", "titleField", "dateField", "calendarIdField", "locationField",
     "usersSwitch", "usersDiv", "userIdField", "descriptionField"
   ]
 
@@ -10,12 +10,17 @@ export default class extends Controller {
     this.element.addEventListener('turbo:submit-end', (event) => {
       if (event.detail.success) {
         this.hide_modal();
-      }
+      } 
     });
 
     this.element.addEventListener('hide.bs.modal', (event) => {
       this.reset_form_errors();
     }); 
+
+    this.element.addEventListener('turbo:before-render', (event) => {
+      console.log('framerender')
+      this.reconfigure_flatpickr();
+    });
   }
 
   toggle_users_field(event) {
@@ -64,6 +69,11 @@ export default class extends Controller {
       defaultDate:   date,
       mode:          'range',
     });
+  }
+
+  reconfigure_flatpickr() {
+    console.log('date')
+    console.log(this.dateTarget)
   }
 
   show_modal() {
