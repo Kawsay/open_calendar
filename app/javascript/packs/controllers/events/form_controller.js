@@ -39,8 +39,10 @@ export default class extends Controller {
   }
 
   reset_form_errors() {
+    let error_explanation = document.querySelector('#error_explanation');
+    if (document.contains(error_explanation)) error_explanation.remove();
+
     this.fields.forEach((field) => { field.classList.remove('is-invalid') });
-    document.querySelector('#error_explanation').remove();
   }
 
   show_users_field() {
