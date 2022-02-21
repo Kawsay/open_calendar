@@ -8,6 +8,9 @@ class Event < ApplicationRecord
 
   has_rich_text :description
 
+  scope :future, -> { where('start_date > ?', DateTime.now) }
+  scope :past, -> { where('start_date < ?', DateTime.now) }
+
   validates_presence_of :title
   validates_presence_of :calendar_id
 
