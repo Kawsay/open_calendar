@@ -1,7 +1,7 @@
 class Calendar < ApplicationRecord
   include Colorable
 
-  NAME_VALIDATOR_REGEX     = /\A[\w\s\d,.:?!']+\z/
+  NAME_VALIDATOR_REGEX     = /\A[\w\s\,\.\:\?\!\'\-\_]+\z/
   BG_COLOR_VALIDATOR_REGEX = /\A#[0-9a-fA-F]{6}\z/
 
   has_many :events, dependent: :destroy
