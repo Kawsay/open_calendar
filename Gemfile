@@ -34,6 +34,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
+  gem 'fabrication', '~> 2.27'
   gem 'pry'
   gem 'faker'
 end
