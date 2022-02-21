@@ -4,7 +4,8 @@ module Colorable
   end
 
   def color_is_too_dark?(hex_color)
-    return false if hex_color.length != 7
+    return nil if hex_color.nil?
+    return nil if hex_color.length != 7
 
     r, g, b = hex_to_rgb(hex_color)
 
