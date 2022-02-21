@@ -31,6 +31,10 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  # Add shoulda-matchers (initialy for uniqueness assertions)
+  config.include(Shoulda::Matchers::ActiveModel,  type: :model)
+  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
