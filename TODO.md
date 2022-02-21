@@ -10,3 +10,4 @@
 - Bug:
   - When Event#new form fails validations, Flatpickr's field is broken
   - When Administrator#sign_in, redirection fails (should be because of Turbo)
+  - Persist hidden calendars after page refresh
