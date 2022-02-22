@@ -87,6 +87,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    doorkeeper (5.5.4)
+      railties (>= 5)
     erubi (1.10.0)
     fabrication (2.27.0)
     faker (2.19.0)
@@ -251,9 +253,10 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   capybara (>= 3.26)
-  devise
+  devise (~> 4.8.0)
+  doorkeeper (~> 5.5, >= 5.5.4)
   fabrication (~> 2.27)
-  faker
+  faker (~> 2.19.0)
   image_processing (~> 1.2)
   listen (~> 3.3)
   pg (~> 1.1)
@@ -267,7 +270,7 @@ DEPENDENCIES
   shoulda-matchers
   simple_calendar (~> 2.4)
   spring
-  turbo-rails
+  turbo-rails (~> 1.0.1)
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
