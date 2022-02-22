@@ -4,9 +4,9 @@
     <%= form.check_box :is_related_to_a_user, class: 'form-check-input' %>
   </div>
   <div class="form-group row mb-3 user_field" style="display:none">
-    <%= form.label :user_id, class: 'col-2 col-form-label' %>
+    <%= form.label :organization_id, class: 'col-2 col-form-label' %>
     <div class="col-10">
-      <%= form.collection_select :user_id, users, :id, :fullname, { include_blank: true }, class: 'form-select' %>
+      <%= form.collection_select :organization_id, organizations, :id, :fullname, { include_blank: true }, class: 'form-select' %>
     </div>
   </div>
 <% end %>

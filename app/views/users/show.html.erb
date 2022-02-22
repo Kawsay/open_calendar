@@ -1,9 +1,0 @@
-<h1><%= @user.fullname %></h1>
-
-<p><%= @user.description %></p>
-
-<%= render partial: 'user_events',    locals: { user: @user } %>
-<%= render partial: 'user_documents', locals: { user: @user } %>
-
-<%= link_to 'Éditer', edit_user_path(@user) %> |
-<%= link_to 'Retour', users_path %>

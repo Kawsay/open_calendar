@@ -1,10 +1,10 @@
 class CalendarsController < ApplicationController
   def index
-    @calendars = Calendar.all.includes(:events)
-    @calendar  = Calendar.new
-    @events    = Event.all.includes(:calendar)
-    @event     = Event.new
-    @users     = User.select(:id, :fullname)
+    @calendars     = Calendar.all.includes(:events)
+    @calendar      = Calendar.new
+    @events        = Event.all.includes(:calendar)
+    @event         = Event.new
+    @organizations = Organization.select(:id, :fullname)
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace('calendar', partial: 'calendars/calendar') }
@@ -20,9 +20,9 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       if @calendar.save
-        @calendars = Calendar.all.includes(:events)
-        @event = Event.new
-        @users = User.select(:id, :fullname)
+        @calendars     = Calendar.all.includes(:events)
+        @event         = Event.new
+        @organizations = Organization.select(:id, :fullname)
 
         format.turbo_stream
         format.html { redirect_to root_path, notice: "calendar was successfully created." }

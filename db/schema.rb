@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_191556) do
+ActiveRecord::Schema.define(version: 2022_02_22_101157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,17 +109,17 @@ ActiveRecord::Schema.define(version: 2022_02_05_191556) do
     t.datetime "end_date"
     t.text "location"
     t.text "description"
-    t.bigint "user_id"
+    t.bigint "organization_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.boolean "is_related_to_a_user", default: false
     t.bigint "calendar_id", null: false
     t.index ["calendar_id"], name: "index_events_on_calendar_id"
-    t.index ["user_id"], name: "index_events_on_user_id"
+    t.index ["organization_id"], name: "index_events_on_organization_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "organizations", force: :cascade do |t|
     t.text "fullname"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2022_02_05_191556) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "administrators"
-  add_foreign_key "contacts", "users"
+  add_foreign_key "contacts", "organizations", column: "user_id"
   add_foreign_key "events", "calendars"
-  add_foreign_key "events", "users"
+  add_foreign_key "events", "organizations"
 end

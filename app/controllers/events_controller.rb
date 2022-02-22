@@ -1,11 +1,11 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy _show_modal ]
-  before_action :set_users, only: %i[ new create edit update ]
+  before_action :set_organizations, only: %i[ new create edit update ]
   before_action :check_for_range_date!, only: %i[ create update ]
 
   # GET /events or /events.json
   def index
-    @events = Event.includes(:user)
+    @events = Event.includes(:organization)
   end
 
   # GET /events/1 or /events/1.json
@@ -24,9 +24,9 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
-    @event = Event.new(event_params)
-    @calendars = Calendar.all.includes(:events)
-    @users = User.select(:id, :fullname)
+    @event         = Event.new(event_params)
+    @calendars     = Calendar.all.includes(:events)
+    @organizations = Organization.select(:id, :fullname)
 
     respond_to do |format|
       if @event.save
@@ -72,8 +72,8 @@ class EventsController < ApplicationController
       @event = Event.includes(:documents).find(params[:id])
     end
 
-    def set_users
-      @users = User.select(:id, :fullname)
+    def set_organizations
+      @organizations = Organization.select(:id, :fullname)
     end
 
     # In case user selects a range date, Flatpickr will send a String like
@@ -91,8 +91,8 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event)
-            .permit(:title, :start_date, :end_date, :location, :description, :user_id, :file, :is_related_to_a_user, :calendar_id,
+            .permit(:title, :start_date, :end_date, :location, :description, :organization_id, :file, :is_related_to_a_user, :calendar_id,
                     documents_attributes: [:id, :title, :description, :file, :documentable_type, :documentable_id],
-                    user_attributes: [:id])
+                    organizations_attributes: [:id])
     end
 end
