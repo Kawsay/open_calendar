@@ -1,23 +1,30 @@
 <nav class='navbar navbar-expand-lg navbar-dark bg-dark mb-5 shadow'>
-	<div class='container-fluid'>
+  <div class='container-fluid'>
     <%= active_link_to 'Caisse de Solidarité', root_path, class: 'navbar-brand me-5', endpoint: ['', '/', '/#', '/calendars'] %>
 
-		<button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbar-links' aria-controls='navbar-links' aria-expanded='false' aria-label='Toggle navigation'>
-			<span class='navbar-toggler-icon'></span>
-		</button>
+    <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbar-links' aria-controls='navbar-links' aria-expanded='false' aria-label='Toggle navigation'>
+      <span class='navbar-toggler-icon'></span>
+    </button>
 
-		<div class='collapse navbar-collapse' id='navbar-links'>
-			<div class='navbar-nav'>
-        <% if @teams %>
-          <%= active_link_to 'Calendrier',    calendars_path,     class: 'nav-link', endpoint: ['', '/', '/#', '/calendars'] %>
+    <div class='collapse navbar-collapse' id='navbar-links'>
+      <ul class='navbar-nav'>
+        <% if @teams.any? %>
+          <li class='nav-item dropdown'>
+            <%= active_link_to @teams.first.name, '#', class: 'nav-link dropdown-toggle', id: 'navbarDropdown', role: 'button', data: { bs_toggle: 'dropdown' }, aria: { expanded: false },  endpoint: ['', '/', '/#', '/teams/'] %>
+            <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+              <% @teams.each do |team| %>
+                <li><%= link_to team.name, team_path(team), class: 'dropdown-item' %></li>
+              <% end %>
+            </ul>
+          </li>
         <% end %>
-      </div>
+      </ul>
       <div class='navbar-nav ms-auto'>
         <% if current_user.admin? %>
           <%= active_link_to 'Administration', root_path, class: 'nav-link me-2', endpoint: '/admin' %>
         <% end %>
         <%= login_or_disconnect_link class: 'nav-link mx-2' %>
       </div>
-		</div>
-	</div>
+    </div>
+  </div>
 </nav>
