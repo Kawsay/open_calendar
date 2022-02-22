@@ -15,10 +15,10 @@ module ApplicationHelper
   end
 
   def login_or_disconnect_link(**opts)
-    if current_administrator
-      link_to 'Déconnection', destroy_administrator_session_path, class: opts[:class], method: :delete
+    if current_user
+      link_to 'Déconnection', destroy_user_session_path, class: opts[:class], method: :delete
     else
-      link_to 'Connection', new_administrator_session_path, class: opts[:class]
+      link_to 'Connection', new_user_session_path, class: opts[:class]
     end
   end
 end

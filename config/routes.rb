@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :administrators
+  devise_for :users
 
   root to: 'calendars#index'
 
