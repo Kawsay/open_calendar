@@ -1,11 +1,12 @@
 const { environment } = require('@rails/webpacker')
+const webpack = require('webpack')
 
-// environment.loaders.insert('sass', {
-//   test: /\.scss$/,
-//   use: [
-//     "css-loader", // translates CSS into CommonJS
-//     "sass-loader" // compiles Sass to CSS
-//   ]
-// });
+environment.plugins.append('Provide',
+  new webpack.ProvidePlugin({
+    $:      'jquery',
+    jQuery: 'jquery',
+    Popper: ['popper.js', 'default']
+  })
+)
 
 module.exports = environment
