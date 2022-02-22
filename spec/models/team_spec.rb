@@ -2,6 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Team, type: :model do
   describe 'validations' do
+    describe 'is invalid' do
+      it 'without a name' do
+        team = Fabricate.build(:team, name: nil)
+        team.valid?
+        expect(team).to model_have_error_on_field(:name)
+      end
+    end
   end
 
   describe 'scopes' do
