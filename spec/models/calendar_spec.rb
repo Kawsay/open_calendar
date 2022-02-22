@@ -56,10 +56,10 @@ RSpec.describe Calendar, type: :model do
 
     describe '#of_user(user)' do
       it 'returns a collection of calendars belonging to a user' do
-        calendar    = Fabricate(:calendar)
-        team        = Fabricate(:team, calendars: [calendar])
-        user        = Fabricate(:user)
-        team_member = Fabricate(:team_member, team: team, user: user)
+        calendar = Fabricate(:calendar)
+        team     = Fabricate(:team, calendars: [calendar])
+        user     = Fabricate(:user)
+        team.memberships.create(user: user)
         expect(Calendar.of_user(user)).to eq [calendar]
       end
     end
