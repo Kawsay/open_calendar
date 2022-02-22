@@ -1,5 +1,5 @@
 class Team < ApplicationRecord
-  has_many :memberships, dependent: :destroy, class_name: 'TeamMember', foreign_key: :team_id
+  has_many :memberships, dependent: :destroy, class_name: 'TeamMember'
   has_many :members, through: :memberships, class_name: 'User', source: :user
   has_many :calendars, dependent: :destroy
 

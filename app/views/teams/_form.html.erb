@@ -1,0 +1,20 @@
+<%= form_with(model: team, id: dom_id(team)) do |form| %>
+  <% if team.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% team.errors.each do |error| %>
+          <li class="text-white"><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='d-flex align-items-center'>
+    <%= form.text_field :name, placeholder: 'Team name...', class: 'form-control form-control-lg text-white' %>
+  </div>
+
+  <div class='actions mt-1 d-grid'>
+    <%= form.submit class: 'btn btn-outline-primary' %>
+  </div>
+
+<% end %>

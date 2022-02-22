@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
+  root to: 'teams#show'
+
   use_doorkeeper do
     skip_controllers :authorizations, :applications, :authorized_applications
   end
+
   devise_for :users
 
-  root to: 'calendars#index'
+  resources :calendars do
+    resources :events
+  end
 
-  resources :calendars, :comments, :documents, :events, :organizations, :event_types
+  resources :teams, :organizations
 
   get 'events_modal/:id', to: 'events#_show_modal', as: 'events_modal'
 

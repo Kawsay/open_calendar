@@ -8,10 +8,14 @@
 
 		<div class='collapse navbar-collapse' id='navbar-links'>
 			<div class='navbar-nav'>
-        <%= active_link_to 'Calendrier',    calendars_path,     class: 'nav-link', endpoint: ['', '/', '/#', '/calendars'] %>
+        <% if @teams %>
+          <%= active_link_to 'Calendrier',    calendars_path,     class: 'nav-link', endpoint: ['', '/', '/#', '/calendars'] %>
+        <% end %>
       </div>
       <div class='navbar-nav ms-auto'>
-        <%= active_link_to 'Administration', root_path, class: 'nav-link me-2', endpoint: '/admin' %>
+        <% if current_user.admin? %>
+          <%= active_link_to 'Administration', root_path, class: 'nav-link me-2', endpoint: '/admin' %>
+        <% end %>
         <%= login_or_disconnect_link class: 'nav-link mx-2' %>
       </div>
 		</div>

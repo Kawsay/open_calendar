@@ -1,0 +1,7 @@
+<% if @teams.any? %>
+  <% @teams.each do |team| %>
+    <%= team.inspect %>
+  <% end %>
+<% end %>
+
+<%= render partial: 'form', locals: { team: @team } %>
