@@ -7,6 +7,7 @@
 - Implement ActivityPub C2S
 - Implement Comment
 - I18n
+- Remove uneeded views & controller actions
 - UI, responsive-design
 
 - Bug:
