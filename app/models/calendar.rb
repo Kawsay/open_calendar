@@ -5,6 +5,7 @@ class Calendar < ApplicationRecord
   BG_COLOR_VALIDATOR_REGEX = /\A#[0-9a-fA-F]{6}\z/
 
   has_many :events, dependent: :destroy
+  belongs_to :team
 
   validates :name, presence: true
   validates :name, uniqueness: { case_sensitive: false }

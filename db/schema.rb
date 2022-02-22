@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_22_135512) do
+ActiveRecord::Schema.define(version: 2022_02_22_154048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -60,7 +60,9 @@ ActiveRecord::Schema.define(version: 2022_02_22_135512) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "background_color", limit: 7
     t.string "text_color"
+    t.bigint "team_id", null: false
     t.index ["name"], name: "index_calendars_on_name"
+    t.index ["team_id"], name: "index_calendars_on_team_id"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -137,6 +139,23 @@ ActiveRecord::Schema.define(version: 2022_02_22_135512) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "team_members", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "user_id"
+    t.bigint "team_id"
+    t.index ["team_id"], name: "index_team_members_on_team_id"
+    t.index ["user_id", "team_id"], name: "index_team_members_on_user_id_and_team_id"
+    t.index ["user_id"], name: "index_team_members_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "team_member_id"
+    t.index ["team_member_id"], name: "index_teams_on_team_member_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -145,12 +164,15 @@ ActiveRecord::Schema.define(version: 2022_02_22_135512) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "team_member_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["team_member_id"], name: "index_users_on_team_member_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "calendars", "teams"
   add_foreign_key "events", "calendars"
   add_foreign_key "events", "organizations"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
