@@ -8,7 +8,7 @@
 
 <%= turbo_stream.replace 'new_event' do %>
   <%= render partial: 'events/form',
-             locals: { event:     @event,
-                       calendars: @calendars,
-                       users:     @users } %>
+             locals: { event:         @event,
+                       calendars:     @calendars,
+                       organizations: @organizations } %>
 <% end %>
