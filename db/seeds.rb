@@ -1,9 +1,21 @@
 require 'faker'
 
+
+puts 'Destroying all records...'
 [
   Document, Comment, Event, User, Organization, Calendar
 ].map(&:destroy_all)
 
+puts 'Creating a Doorkeeper::Application'
+if Doorkeeper::Application.count.zero?
+  Doorkeeper::Application.create!(
+    name:         'OpenCalendar',
+    redirect_uri: '',
+    scopes:       ''
+  )
+end
+
+puts 'Creating a User'
 User.create!(
   email:    'foo@bar.com',
   password: 'foobar'
