@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: 'calendars#index'
 
-  resources :calendars, :contacts, :comments, :documents, :events, :users, :event_types
+  resources :calendars, :comments, :documents, :events, :organizations, :event_types
 
   get 'events_modal/:id', to: 'events#_show_modal', as: 'events_modal'
 

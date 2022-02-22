@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_22_101157) do
+ActiveRecord::Schema.define(version: 2022_02_22_113536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,15 +85,6 @@ ActiveRecord::Schema.define(version: 2022_02_22_101157) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
   end
 
-  create_table "contacts", force: :cascade do |t|
-    t.text "mobile"
-    t.text "email"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_contacts_on_user_id"
-  end
-
   create_table "documents", force: :cascade do |t|
     t.text "title"
     t.string "description"
@@ -129,7 +120,6 @@ ActiveRecord::Schema.define(version: 2022_02_22_101157) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "administrators"
-  add_foreign_key "contacts", "organizations", column: "user_id"
   add_foreign_key "events", "calendars"
   add_foreign_key "events", "organizations"
 end
