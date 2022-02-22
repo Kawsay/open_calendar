@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :teams, through: :team_memberships
   has_many :calendars, through: :teams
 
+  validates_presence_of :email
+
   self.implicit_order_column = 'created_at'
 
   def self.authenticate(email, password)
