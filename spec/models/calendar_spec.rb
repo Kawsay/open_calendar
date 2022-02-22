@@ -45,6 +45,26 @@ RSpec.describe Calendar, type: :model do
     end
   end
 
+  describe 'scopes' do
+    describe '#of_team(team)' do
+      it 'returns a collection of calendars belonging to a team' do
+        calendar = Fabricate(:calendar)
+        team     = Fabricate(:team, calendars: [calendar])
+        expect(Calendar.of_team(team)).to eq [calendar]
+      end
+    end
+
+    describe '#of_user(user)' do
+      it 'returns a collection of calendars belonging to a user' do
+        calendar    = Fabricate(:calendar)
+        team        = Fabricate(:team, calendars: [calendar])
+        user        = Fabricate(:user)
+        team_member = Fabricate(:team_member, team: team, user: user)
+        expect(Calendar.of_user(user)).to eq [calendar]
+      end
+    end
+  end
+
   describe '#create' do
     it 'set dark text_color for light background_color' do
       calendar = Fabricate(:calendar, background_color: '#FFFFFF')
