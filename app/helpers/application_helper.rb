@@ -3,14 +3,14 @@ module ApplicationHelper
     css_class = opts[:class]
 
     case opts[:endpoint]
-      when String then css_class.concat(' active') if current_page? opts[:endpoint]
-      when Array  then css_class.concat(' active') if opts[:endpoint].include? request.path
+      when String then css_class.concat(' active') if current_page.match(opts[:endpoint])
+      when Array  then css_class.concat(' active') if opts[:endpoint].any? { |e| request.path.match(e) }
     end
 
     if block_given?
-      link_to path, class: css_class, &block
+      link_to path, class: css_class, **opts, &block
     else
-      link_to text, path, class: css_class, &block
+      link_to text, path, class: css_class, **opts,  &block
     end
   end
 
