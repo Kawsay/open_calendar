@@ -1,7 +1,7 @@
 class Team < ApplicationRecord
-  has_many :team_members, dependent: :destroy
-  has_many :users, through: :team_members
+  has_many :memberships, dependent: :destroy, class_name: 'TeamMember', foreign_key: :team_id
+  has_many :members, through: :memberships, class_name: 'User', source: :user
   has_many :calendars, dependent: :destroy
 
-  alias_attribute :users, :members
+  scope :of_user, ->(user) { where(memberships: user.team_memberships) }
 end

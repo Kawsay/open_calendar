@@ -6,6 +6,7 @@ class Calendar < ApplicationRecord
 
   has_many :events, dependent: :destroy
   belongs_to :team
+  has_many :users, through: :team
 
   validates :name, presence: true
   validates :name, uniqueness: { case_sensitive: false }
@@ -15,6 +16,9 @@ class Calendar < ApplicationRecord
   validates :text_color, inclusion: { in: ['dark', 'white'] }
 
   before_validation :set_text_color
+
+  scope :of_team, ->(team) { where(team: team) }
+  scope :of_user, ->(user) { where(team: user.teams) }
 
   private
 
