@@ -9,13 +9,10 @@
 		<div class='collapse navbar-collapse' id='navbar-links'>
 			<div class='navbar-nav'>
         <%= active_link_to 'Calendrier',    calendars_path,     class: 'nav-link', endpoint: ['', '/', '/#', '/calendars'] %>
-        <%= active_link_to 'Événements',    events_path,        class: 'nav-link', endpoint: '/events' %>
-        <%= active_link_to 'Organisations', organizations_path, class: 'nav-link', endpoint: '/organizations' %>
       </div>
       <div class='navbar-nav ms-auto'>
-        <%= active_link_to 'Administration', root_path, class: 'nav-link me-5', endpoint: '/admin' %>
-        <span class='navbar-text'>-</span>
-        <%= login_or_disconnect_link class: 'nav-link mx-5' %>
+        <%= active_link_to 'Administration', root_path, class: 'nav-link me-2', endpoint: '/admin' %>
+        <%= login_or_disconnect_link class: 'nav-link mx-2' %>
       </div>
 		</div>
 	</div>
