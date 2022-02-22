@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :comments
 
+  self.implicit_order_column = 'created_at'
+
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)
     user&.valid_password?(password) ? user : nil
