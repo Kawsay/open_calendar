@@ -1,11 +1,13 @@
 - Tests !
+- Replace Administrator by User
 - Replace User by Collective
 - Remove Contact
 - Remove Document
+- Implement OAuth2
+- Implement ActivityPub C2S
 - Implement Comment
 - I18n
 - UI, responsive-design
-- Auth: Multitenancy, possibly ActivityPub
 
 - Bug:
   - When Event#new form fails validations, Flatpickr's field is broken
