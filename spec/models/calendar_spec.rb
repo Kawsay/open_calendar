@@ -59,7 +59,7 @@ RSpec.describe Calendar, type: :model do
         calendar = Fabricate(:calendar)
         team     = Fabricate(:team, calendars: [calendar])
         user     = Fabricate(:user)
-        team.memberships.create(user: user)
+        team.adhesions.create(user: user)
         expect(Calendar.of_user(user)).to eq [calendar]
       end
     end

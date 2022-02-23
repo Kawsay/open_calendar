@@ -16,7 +16,7 @@ RSpec.describe Team, type: :model do
       it 'returns a collection of teams of a user' do
         team = Fabricate(:team)
         user = Fabricate(:user)
-        user.team_memberships.create(team: team)
+        user.adhesions.create(team: team)
         expect(Team.of_user(user)).to eq [team]
       end
     end

@@ -30,16 +30,16 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    it 'has_many :team_memberships' do
-      user            = Fabricate(:user)
-      team_membership = Fabricate(:team_member, user: user)
-      expect(user.team_memberships).to eq [team_membership]
+    it 'has_many :adhesions' do
+      user     = Fabricate(:user)
+      adhesion = Fabricate(:adhesion, user: user)
+      expect(user.adhesions).to eq [adhesion]
     end
 
     it 'has_many :teams' do
       team = Fabricate(:team)
       user = Fabricate(:user)
-      user.team_memberships.create!(team: team)
+      user.adhesions.create!(team: team)
       expect(user.teams).to eq [team]
     end
 
@@ -47,7 +47,7 @@ RSpec.describe User, type: :model do
       user     = Fabricate(:user)
       team     = Fabricate(:team)
       calendar = Fabricate(:calendar, team: team)
-      user.team_memberships.create!(team: team)
+      user.adhesions.create!(team: team)
       expect(user.calendars).to eq [calendar]
     end
 

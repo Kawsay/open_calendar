@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :team_memberships, class_name: 'TeamMember', foreign_key: :user_id
-  has_many :teams, through: :team_memberships
+  has_many :adhesions, dependent: :destroy
+  has_many :teams, through: :adhesions
   has_many :calendars, through: :teams
 
   validates_presence_of :email
