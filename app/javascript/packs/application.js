@@ -18,8 +18,7 @@ window.Stimulus = Application.start()
 const context = require.context("./controllers", true, /\.js$/)
 Stimulus.load(definitionsFromContext(context))
 
-import "bootstrap";
-// window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js')
+window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js')
 
 import flatpickr from "flatpickr";
 import { French } from "flatpickr/dist/l10n/fr.js"
