@@ -25,11 +25,16 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event         = Event.new(event_params)
-    @calendars     = Calendar.all.includes(:events)
     @organizations = Organization.select(:id, :fullname)
 
     respond_to do |format|
       if @event.save
+        team       = Calendar.find_by(id: event_params[:calendar_id]).team
+        @calendars = Calendar.of_team(team).includes(:events)
+        @events    = Event.of_calendars(@calendars)
+        @event     = Event.new
+
+        format.turbo_stream { render :create, status: :see_other }
         format.html { redirect_to root_path, notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
@@ -77,7 +82,7 @@ class EventsController < ApplicationController
     end
 
     # In case user selects a range date, Flatpickr will send a String like
-    # "07/01/2022 00:00 to 11/01/2022 00:00". 
+    # "07/01/2022 00:00 to 11/01/2022 00:00".
     # This method split both date on "to", parses each date, and assigns both
     # date to the corresponding parameter.
     # In case a single date is picked, `:end_date` will stay equals to `nil`
@@ -92,7 +97,6 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event)
             .permit(:title, :start_date, :end_date, :location, :description, :organization_id, :file, :is_related_to_a_user, :calendar_id,
-                    documents_attributes: [:id, :title, :description, :file, :documentable_type, :documentable_id],
                     organizations_attributes: [:id])
     end
 end

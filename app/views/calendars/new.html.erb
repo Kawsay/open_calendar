@@ -1,1 +1,9 @@
-<%= render partial: 'form', locals: { calendar: @calendar } %>
+<h2 class='text-white text-center mb-5'>Start by adding a calendar !</h2>
+<div class='mx-auto w-50 d-block'>
+  <div class='d-flex justify-content-evenly align-items-center'>
+    <%= image_tag 'calendar.svg', width: '50%', class: 'img-fluid mx-5' %>
+      <%= render partial: 'calendars/form',
+                 locals: { calendar:     @new_calendar,
+                           current_team: @current_team } %>
+  </div>
+</div>

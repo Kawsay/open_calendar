@@ -3,7 +3,9 @@
 <% end %>
 
 <%= turbo_stream.replace 'calendar-form' do %>
-  <%= render partial: 'form', locals: { calendar: Calendar.new } %>
+  <%= render partial: 'form',
+             locals: { calendar:      Calendar.new,
+                       current_team:  @current_team } %>
 <% end %>
 
 <%= turbo_stream.replace 'new_event' do %>

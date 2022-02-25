@@ -1,0 +1,35 @@
+<div class='row' data-controller="calendars--visibility">
+    <%= turbo_frame_tag 'calendar-sidebar' do %>
+      <% if calendars.present? %>
+        <div class='col-2'>
+          <%= render partial: 'calendars/calendar_sidebar',
+                     collection: calendars,
+                     as:         :calendar %>
+
+          <%= render partial: 'calendars/form',
+                     locals: { calendar:     new_calendar,
+                               current_team: current_team } %>
+          <hr class='text-white'>
+        </div>
+      <% end %>
+    <% end %>
+
+
+    <div data-controller="events--form">
+      <% if calendars.present? %>
+        <div class='col-10'>
+        <%= render partial: 'calendars/calendar',
+                   locals: { events: events } %>
+
+        <%= render partial: 'events/add_event_modal',
+                   locals: { event:         Event.new,
+                             calendars:     calendars,
+                             organizations: organizations } %>
+        </div>
+      <% else %>
+        <%= turbo_frame_tag 'calendar' do %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

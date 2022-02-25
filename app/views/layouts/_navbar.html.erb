@@ -8,21 +8,27 @@
 
     <div class='collapse navbar-collapse' id='navbar-links'>
       <ul class='navbar-nav'>
-        <% if @teams.any? %>
+        <% if user_signed_in? && !@teams.blank? %>
           <li class='nav-item dropdown'>
-            <%= active_link_to @teams.first.name, '#', class: 'nav-link dropdown-toggle', id: 'navbarDropdown', role: 'button', data: { bs_toggle: 'dropdown' }, aria: { expanded: false },  endpoint: ['', '/', '/#', '/teams/'] %>
-            <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+            <%= active_link_to @current_team.name, '#', class: 'nav-link dropdown-toggle', id: 'navbarDropdown', role: 'button', data: { bs_toggle: 'dropdown' }, aria: { expanded: false },  endpoint: ['', '/', '/#', '/teams/'] %>
+            <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='navbarDropdown'>
               <% @teams.each do |team| %>
                 <li><%= link_to team.name, team_path(team), class: 'dropdown-item' %></li>
               <% end %>
+              <li><hr class='dropdown-divider text-white'></li>
+              <li><%= link_to 'Create a team', new_team_path, class: 'dropdown-item' %></li>
             </ul>
           </li>
+        <% elsif user_signed_in? %>
+          <%= active_link_to 'Create a team', new_team_path, class: 'nav-link' %>
         <% end %>
       </ul>
+
       <div class='navbar-nav ms-auto'>
-        <% if current_user.admin? %>
+        <% if current_user&.admin? %>
           <%= active_link_to 'Administration', root_path, class: 'nav-link me-2', endpoint: '/admin' %>
         <% end %>
+
         <%= login_or_disconnect_link class: 'nav-link mx-2' %>
       </div>
     </div>

@@ -6,12 +6,13 @@
 
     <hr class='text-white'>
 
-    <%= render partial: 'form', locals: { calendar: @calendar} %>
+    <%# render partial: 'form', locals: { calendar: @new_calendar} %>
   </div>
 
   <div class='col-10'>
     <div data-controller="events--form">
-      <%= render partial: 'calendars/calendar' %>
+      <%= render partial: 'calendars/calendar',
+                 locals: { events: @events } %>
 
       <%= render partial: 'events/add_event_modal',
                  locals: { event:         @event,

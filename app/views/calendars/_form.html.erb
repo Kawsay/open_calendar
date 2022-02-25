@@ -1,4 +1,4 @@
-<%= form_with(model: calendar, id: 'calendar-form') do |form| %>
+<%= form_with(model: [current_team, calendar], id: 'calendar-form') do |form| %>
   <% if calendar.errors.any? %>
     <div id="error_explanation">
       <ul>
@@ -10,14 +10,16 @@
   <% end %>
 
   <div class='d-flex align-items-center'>
-    <div class="pe-1"> 
+    <div class="pe-1">
       <%= form.text_field :name, placeholder: 'Calendar name...', class: 'form-control form-control-sm text-white' %>
     </div>
 
     <div class="ms-auto px-0">
-      <%= form.color_field :background_color, class: 'form-control-color form-control-sm p-0' %>
+      <%= form.color_field :background_color, class: 'form-control-color p-0' %>
     </div>
   </div>
+
+  <%= form.hidden_field :team_id, value: current_team.id %>
 
   <div class="actions mt-1 d-grid">
     <%= form.submit class: 'btn btn-outline-primary btn-sm' %>

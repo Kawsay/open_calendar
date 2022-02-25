@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(event) do %>
   <div class="container text-light">
-    <%= form_with(model: event || Event.new) do |form| %>
+    <%= form_with(model: event) do |form| %>
       <% if event.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -40,7 +40,7 @@
         <%= form.label :calendar_id, class: 'col-2 col-form-label' %>
         <div class="col-10">
           <%= form.collection_select :calendar_id,
-            calendars, 
+            calendars,
             :id,
             :name,
             { include_blank: true },
@@ -91,12 +91,6 @@
           class: 'form-control text-dark customized_min_height',
           data:  { 'events--form-target': 'descriptionField' }
         %>
-      </div>
-
-      <div class="form-group row">
-        <%= form.fields_for :documents do |document_form| %>
-          <%= render partial: 'documents/fields', locals: { form: document_form } %>
-        <% end %>
       </div>
 
       <div class="actions modal-footer">

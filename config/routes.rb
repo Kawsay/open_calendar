@@ -7,11 +7,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :calendars do
-    resources :events
+  resources :teams do
+    resources :calendars
   end
-
-  resources :teams, :organizations
+  resources  :organizations, :events
 
   get 'events_modal/:id', to: 'events#_show_modal', as: 'events_modal'
 

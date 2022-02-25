@@ -1,15 +1,15 @@
 class Event < ApplicationRecord
   belongs_to :calendar, optional: true
+  has_one :team, through: :calendar, source: :team
   belongs_to :organization, optional: true
-  has_many :documents, as: :documentable
-  has_many :comments, as: :commentable
 
-  accepts_nested_attributes_for :documents, :organization
+  accepts_nested_attributes_for :organization
 
   has_rich_text :description
 
   scope :future, -> { where('start_date > ?', DateTime.now) }
   scope :past, -> { where('start_date < ?', DateTime.now) }
+  scope :of_calendars, ->(calendars) { where(calendar: calendars) }
 
   validates_presence_of :title
   validates_presence_of :calendar_id

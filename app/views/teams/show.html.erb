@@ -1,7 +1,6 @@
-<% if @teams.any? %>
-  <% @teams.each do |team| %>
-    <%= team.inspect %>
-  <% end %>
-<% end %>
-
-<%= render partial: 'form', locals: { team: @team } %>
+<%= render partial: 'calendars/calendar_frame',
+           locals: { current_team:  @current_team,
+                     calendars:     @calendars,
+                     new_calendar:  @new_calendar,
+                     events:        @events,
+                     organizations: @organizations } %>

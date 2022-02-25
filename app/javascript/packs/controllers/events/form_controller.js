@@ -8,17 +8,16 @@ export default class extends Controller {
 
   connect() {
     this.element.addEventListener('turbo:submit-end', (event) => {
-      if (event.detail.success) {
+      if (event.detail.fetchResponse.response.status === 303 ) {
         this.hide_modal();
-      } 
+      }
     });
 
     this.element.addEventListener('hide.bs.modal', (event) => {
       this.reset_form_errors();
-    }); 
+    });
 
     this.element.addEventListener('turbo:before-render', (event) => {
-      console.log('framerender')
       this.reconfigure_flatpickr();
     });
   }
@@ -27,7 +26,7 @@ export default class extends Controller {
     this.usersSwitchTarget.checked ?
       this.show_users_field() :
       this.hide_users_field();
-  } 
+  }
 
   configure_and_show_modal(event) {
     const date = event.target.dataset.date;
