@@ -16,9 +16,9 @@ module ApplicationHelper
 
   def login_or_disconnect_link(**opts)
     if current_user
-      link_to 'Déconnection', destroy_user_session_path, class: opts[:class], method: :delete
+      link_to 'Déconnection', destroy_user_session_path, class: "#{opts.delete(:class)} btn btn-info btn-sm text-dark", method: :delete, **opts
     else
-      link_to 'Connection', new_user_session_path, class: opts[:class]
+      link_to 'Connection', new_user_session_path, class: "#{opts.delete(:class)} btn btn-info btn-sm text-dark", **opts
     end
   end
 end

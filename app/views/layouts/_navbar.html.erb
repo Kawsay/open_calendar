@@ -29,7 +29,7 @@
           <%= active_link_to 'Administration', root_path, class: 'nav-link me-2', endpoint: '/admin' %>
         <% end %>
 
-        <%= login_or_disconnect_link class: 'nav-link mx-2' %>
+        <%= login_or_disconnect_link class: 'nav-link mx-2', data: { turbo: false } %>
       </div>
     </div>
   </div>
