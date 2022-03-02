@@ -17,6 +17,10 @@ class User < ApplicationRecord
     user&.valid_password?(password) ? user : nil
   end
 
+  def favorite_team
+    teams.favorite
+  end
+
   def admin?
     false
   end

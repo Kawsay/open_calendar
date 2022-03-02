@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event         = Event.new(event_params)
-    @organizations = Organization.select(:id, :fullname)
+    @organizations = Organization.select(:id, :name)
 
     respond_to do |format|
       if @event.save
@@ -78,7 +78,7 @@ class EventsController < ApplicationController
     end
 
     def set_organizations
-      @organizations = Organization.select(:id, :fullname)
+      @organizations = Organization.select(:id, :name)
     end
 
     # In case user selects a range date, Flatpickr will send a String like

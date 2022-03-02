@@ -77,7 +77,7 @@
             <%= form.collection_select :organization_id,
               organizations,
               :id,
-              :fullname,
+              :name,
               { include_blank: true },
               class: 'form-select',
               data:  { 'events--form-target': 'userIdField' }%>

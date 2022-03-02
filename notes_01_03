@@ -1,0 +1,8 @@
+Abstractions:
+  - Appointment
+  - Schedule
+
+Replace 'Event.location' with 'Event.venue' ?
+
+Bug:
+  - SimpleCalendar Previous/Next merges path/params
