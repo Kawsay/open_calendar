@@ -22,6 +22,10 @@ class TeamsController < ApplicationController
     end
   end
 
+  def new
+    @team = current_user.teams.build
+  end
+
   def create
     @team = current_user.teams.build(team_params)
     @team.adhesions.new(user_id: current_user.id)
