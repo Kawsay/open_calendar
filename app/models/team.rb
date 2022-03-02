@@ -1,6 +1,6 @@
 class Team < ApplicationRecord
   has_many :adhesions, dependent: :destroy
-  has_many :members, through: :adhesions
+  has_many :users, through: :adhesions
   has_many :calendars, dependent: :destroy
 
   validates_presence_of :name
