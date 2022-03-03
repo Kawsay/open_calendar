@@ -8,7 +8,7 @@ RSpec.describe SecretLink, type: :model do
       it { expect(valid_secret_link).to validate_persence_of(:slug) }
       it { expect(valid_secret_link).to validate_uniqueness_of(:slug) }
       it { expect(valid_secret_link).to validate_length_of(:slug).is_equal_to(16) }
-      it { expect(valid_secret_link.slug).to match(/[a-zA-Z0-9/) }
+      it { expect(valid_secret_link.slug).to match(/\A[a-zA-Z0-9]{16}\z/) }
       it { expect(valid_secret_link).to validate_presence_of(:validity_period) }
       it { expect(valid_secret_link).to validate_numericality_of(:validity_period) }
       it { expect(valid_secret_link).to validate_presence_of(:visit_count) }
