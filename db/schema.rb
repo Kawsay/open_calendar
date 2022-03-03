@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_121320) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "background_color", limit: 7
     t.string "text_color"
-    t.bigint "team_id", null: false
+    t.bigint "team_id", default: 75, null: false
     t.index ["name"], name: "index_calendars_on_name"
     t.index ["team_id"], name: "index_calendars_on_team_id"
   end
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_121320) do
   create_table "teams", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name", null: false
+    t.string "name", default: "", null: false
     t.integer "visit_count"
   end
 
