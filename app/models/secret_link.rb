@@ -6,7 +6,7 @@ class SecretLink < ApplicationRecord
 
   validates_presence_of :slug, on: :create
   validates_uniqueness_of :slug, on: :create
-  validates_length_of :slug, equal: 16, on: :create
+  validates_length_of :slug, is: 16, on: :create
   validates_format_of :slug, with: SLUG_VALIDATOR_REGEX
 
   validates_presence_of :visit_count
