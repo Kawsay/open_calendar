@@ -10,11 +10,12 @@
   <% end %>
 
   <div class='d-flex align-items-center'>
-    <div class="pe-1">
+    <div class="pe-1 d-block">
+      <%= form.label 'Choose your calendar\'s name', class: 'form-label text-white' %>
       <%= form.text_field :name, placeholder: 'Calendar name...', class: 'form-control text-white' %>
     </div>
 
-    <div class="ms-auto px-0">
+    <div class="ms-auto px-0 align-self-end">
       <%= form.color_field :background_color, class: 'form-control-color p-0' %>
     </div>
   </div>
