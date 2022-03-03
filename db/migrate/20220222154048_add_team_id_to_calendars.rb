@@ -1,5 +1,9 @@
 class AddTeamIdToCalendars < ActiveRecord::Migration[6.1]
   def change
-    add_reference :calendars, :team, null: false, foreign_key: true
+    if Calendar.any? && Team.any?
+      add_reference :calendars, :team, foreign_key: true, null: false, default: Team.first.id
+    elsif Calendar.blank?
+      add_reference :calendars, :team, foreign_key: true, null: false
+    end
   end
 end
