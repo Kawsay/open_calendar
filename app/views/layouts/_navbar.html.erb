@@ -25,6 +25,8 @@
       </ul>
 
       <div class='navbar-nav ms-auto'>
+        <%= link_to 'Reset', reset_team_path, data: { turbo: false }, type: 'button', method: :post, class: 'nav-link mx-2 btn btn-danger btn-sm text-dark' %>
+
         <% if current_user&.admin? %>
           <%= active_link_to 'Administration', root_path, class: 'nav-link me-2', endpoint: '/admin' %>
         <% end %>

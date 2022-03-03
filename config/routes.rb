@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
   resources  :organizations, :events
 
+  post 'reset_teams', to: 'teams#destroy_all', as: 'reset_team'
   get 'events_modal/:id', to: 'events#_show_modal', as: 'events_modal'
 
   # Errors

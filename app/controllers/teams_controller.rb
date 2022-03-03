@@ -40,6 +40,12 @@ class TeamsController < ApplicationController
     end
   end
 
+  # For development
+  def destroy_all
+    Team.all.destroy_all
+    redirect_to root_path
+  end
+
   private
 
   def set_teams
