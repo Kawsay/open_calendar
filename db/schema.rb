@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_02_121320) do
+ActiveRecord::Schema.define(version: 2022_03_03_115439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -149,6 +149,18 @@ ActiveRecord::Schema.define(version: 2022_03_02_121320) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "secret_links_tables", force: :cascade do |t|
+    t.string "slug", limit: 16, default: "dmDuUTPTyU1oLEhy", null: false
+    t.integer "validity_period", default: 1, null: false
+    t.integer "visit_count", default: 0, null: false
+    t.bigint "calendar_id", null: false
+    t.uuid "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["calendar_id"], name: "index_secret_links_tables_on_calendar_id"
+    t.index ["user_id"], name: "index_secret_links_tables_on_user_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -177,4 +189,6 @@ ActiveRecord::Schema.define(version: 2022_03_02_121320) do
   add_foreign_key "events", "organizations"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "secret_links_tables", "calendars"
+  add_foreign_key "secret_links_tables", "users"
 end
