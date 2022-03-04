@@ -3,11 +3,11 @@ class CalendarsController < ApplicationController
   before_action :set_current_or_favorite_team, only: %i[ index create ]
 
   def index
-    @new_calendar  = Calendar.new(team: @current_team)
     @calendars     = Calendar.of_team(@current_team)
     @events        = Event.of_calendars(@calendars)
-    @event         = Event.new(team: @current_team)
     @organizations = Organization.select(:id, :name)
+    @new_event     = Event.new
+    @new_calendar  = Calendar.new(team: @current_team)
   end
 
   def create

@@ -32,7 +32,7 @@ class EventsController < ApplicationController
         team       = Calendar.find_by(id: event_params[:calendar_id]).team
         @calendars = Calendar.of_team(team).includes(:events)
         @events    = Event.of_calendars(@calendars)
-        @event     = Event.new
+        @new_event = Event.new
 
         format.turbo_stream { render :create, status: :see_other }
         format.html { redirect_to root_path, notice: "Event was successfully created." }

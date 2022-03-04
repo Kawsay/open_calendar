@@ -1,35 +1,31 @@
 <div class='row' data-controller="calendars--visibility">
-    <%= turbo_frame_tag 'calendar-sidebar' do %>
-      <% if calendars.present? %>
-        <div class='col-2'>
-          <%= render partial: 'calendars/calendar_sidebar',
-                     collection: calendars,
-                     as:         :calendar %>
-
-          <%= render partial: 'calendars/form',
-                     locals: { calendar:     new_calendar,
-                               current_team: current_team } %>
-          <hr class='text-white'>
-        </div>
+    <div class='col-2' data-controller='popover'>
+      <%= turbo_frame_tag 'calendar-sidebar' do %>
+        <%= render partial: 'calendars/calendar_sidebar',
+                   collection: calendars,
+                   as:         :calendar %>
       <% end %>
-    <% end %>
+
+        <hr class='text-white'>
+
+        <%= render partial: 'calendars/form_sm',
+                   locals: { calendar:     new_calendar,
+                             current_team: current_team } %>
+      </div>
 
 
-    <div data-controller="events--form">
-      <% if calendars.present? %>
-        <div class='col-10'>
-        <%= render partial: 'calendars/calendar',
-                   locals: { events: events } %>
 
-        <%= render partial: 'events/add_event_modal',
-                   locals: { event:         Event.new,
-                             calendars:     calendars,
-                             organizations: organizations } %>
+      <div class='col-10'>
+        <div data-controller="events--form">
+          <%= render partial: 'calendars/calendar',
+                     locals: { events: events } %>
+
+          <%= render partial: 'events/add_event_modal',
+                     locals: { new_event:     new_event,
+                               calendars:     calendars,
+                               organizations: organizations } %>
         </div>
-      <% else %>
-        <%= turbo_frame_tag 'calendar' do %>
-        <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

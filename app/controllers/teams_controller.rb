@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
       else
         @calendars = @current_team.calendars
         @events    = Event.includes(:calendar).of_calendars(@calendars)
-        @event     = Event.new
+        @new_event = Event.new
         format.html { render 'calendars/index' }
       end
     end

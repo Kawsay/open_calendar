@@ -1,8 +1,8 @@
-<%= form_with(model: [current_team, calendar], id: dom_id(calendar)) do |form| %>
-  <% if calendar.errors.any? %>
+<%= form_with(model: [current_team, new_calendar], id: dom_id(new_calendar)) do |form| %>
+  <% if new_calendar.errors.any? %>
     <div id="error_explanation">
       <ul>
-        <% calendar.errors.each do |error| %>
+        <% new_calendar.errors.each do |error| %>
           <li class="text-white"><%= error.full_message %></li>
         <% end %>
       </ul>
