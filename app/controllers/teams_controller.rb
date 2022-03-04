@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_teams, only: %i[show]
   before_action :set_current_or_favorite_team, only: %i[show], if: :teams?
   before_action :set_organizations, only: %i[show], if: :teams?
