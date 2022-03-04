@@ -27,8 +27,13 @@
   </div>
 
   <div>
-    <%# link_to '#' do %>
-      <%= image_tag 'share.svg', size: '15x15' %>
-    <%# end %>
+    <%= image_tag 'share.svg',
+      size: '15x15',
+      data: {
+        bs_toggle: "calendar_#{calendar.id}_popover",
+        bs_content: render(partial: 'calendars/calendar_share_popover_content', locals: { calendar_id: calendar.id, user_id: current_user.id }).html_safe,
+        popover_target: 'htmlPopover'
+     }
+    %>
   </div>
 </div>

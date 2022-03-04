@@ -1,10 +1,21 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "popover" ]
+  static targets = [ "popover", "htmlPopover" ]
 
-  popoverTargetConnected() {
-    var popovers = this.popoverTargets;
-    popovers.map((popover) => { new bootstrap.Popover(popover) })
+  connect() {
+    this.popoverTargets.map((popover) => {
+      new bootstrap.Popover(popover)
+    })
+
+    this.htmlPopoverTargets.map((popover) => {
+      new bootstrap.Popover(
+        popover,
+        {
+          html: true,
+          sanitize: false
+        }
+      )
+    });
   }
 }

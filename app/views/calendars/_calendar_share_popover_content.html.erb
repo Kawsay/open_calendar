@@ -1,0 +1,21 @@
+<div class='input-group'>
+  <%= link_to(
+    'Generate a secret link',
+     secret_links_path(
+       params: {
+         secret_link: {
+           calendar_id: calendar_id,
+           user_id:     user_id
+         }
+       }
+     ),
+     method: :post,
+     class:  'btn btn-primary btn-sm input-group-btn'
+    ).html_safe
+  %>
+
+  <span data-secret-link-target='popover' class='border rounded-end form-control-sm bg-secondary'>
+    <%= turbo_frame_tag "calendar_#{calendar_id}_popover_content" do %>
+    <% end %>
+  </span>
+</div>

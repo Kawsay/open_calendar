@@ -1,0 +1,5 @@
+<%= turbo_stream.replace("calendar_#{@secret_link.calendar.id}_popover_content") do %>
+  <div class='d-flex justify-content-between'>
+  <div><%= @secret_link.url %></div>
+  <div><%= image_tag 'copy.svg', size: '15x15' %></div>
+<% end %>

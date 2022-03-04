@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :calendars
   end
   resources  :organizations, :events
+  resources :secret_links, only: :create
 
   post 'reset_teams', to: 'teams#destroy_all', as: 'reset_team'
   get 'events_modal/:id', to: 'events#_show_modal', as: 'events_modal'

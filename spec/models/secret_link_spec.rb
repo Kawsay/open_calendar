@@ -46,5 +46,9 @@ RSpec.describe SecretLink, type: :model do
       link = secret_link.dup.increase_visit_count
       expect(link.visit_count).to eq(secret_link.visit_count + 1)
     end
+
+    it '#url' do
+      expect(secret_link.url).to match(/\Ahttp?:\/\/localhost:3000\/teams\/\d+\/calendars\/[a-zA-Z0-9]{16}/)
+    end
   end
 end

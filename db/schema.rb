@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 2022_03_03_115439) do
   end
 
   create_table "secret_links", force: :cascade do |t|
-    t.string "slug", limit: 16, default: "ejPsDRopYlKCO229", null: false
+    t.string "slug", limit: 16, null: false
     t.integer "validity_period", default: 1, null: false
     t.integer "visit_count", default: 0, null: false
     t.bigint "calendar_id", null: false

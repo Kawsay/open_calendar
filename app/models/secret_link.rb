@@ -1,8 +1,8 @@
 class SecretLink < ApplicationRecord
   SLUG_VALIDATOR_REGEX = /\A[a-zA-Z0-9]{16}\z/
 
-  belongs_to :user
-  belongs_to :calendar
+  belongs_to :user, dependent: :destroy
+  belongs_to :calendar, dependent: :destroy
 
   validates_presence_of :slug, on: :create
   validates_uniqueness_of :slug, on: :create
@@ -17,4 +17,19 @@ class SecretLink < ApplicationRecord
 
   validates_presence_of :user_id
   validates_presence_of :calendar_id
+
+  before_validation :set_slug
+
+  delegate :url_helpers, to: 'Rails.application.routes'
+
+  def set_slug
+    loop do
+      self.slug = SecureRandom.alphanumeric
+      break unless SecretLink.where(slug: slug).exists?
+    end
+  end
+
+  def url
+    "#{url_helpers.team_calendars_url(calendar.team)}/#{slug}"
+  end
 end
