@@ -17,8 +17,7 @@
 
       <div class='col-10'>
         <div data-controller="events--form">
-          <%= render partial: 'calendars/calendar',
-                     locals: { events: events } %>
+          <div id="calendar" data-controller="calendars--calendar">
 
           <%= render partial: 'events/add_event_modal',
                      locals: { new_event:     new_event,

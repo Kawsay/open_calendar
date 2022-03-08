@@ -30,6 +30,6 @@ class SecretLink < ApplicationRecord
   end
 
   def url
-    "#{url_helpers.team_calendars_url(calendar.team)}/#{slug}"
+    "#{url_helpers.root_url}calendars/#{slug}"
   end
 end

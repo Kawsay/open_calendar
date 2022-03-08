@@ -13,6 +13,7 @@ gem 'devise', '~> 4.8.0'
 gem 'doorkeeper', '~> 5.5', '>= 5.5.4'
 gem 'simple_calendar', '~> 2.4'
 gem 'image_processing', '~> 1.2'
+gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
