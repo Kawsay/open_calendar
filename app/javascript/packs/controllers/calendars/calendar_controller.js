@@ -33,7 +33,7 @@ export default class extends Controller {
       showNonCurrentDates: false,
       selectable: true,
       select: function(info) {
-        alert('TODO: ->configure_and_show_modal()\nselected: ' + info.startStr + ' to ' + info.endStr);
+        console.log('TODO: ->configure_and_show_modal()\nselected: ' + info.startStr + ' to ' + info.endStr);
       },
       editable: true,
 
