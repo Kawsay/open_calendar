@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   has_rich_text :description
 
   scope :of_calendars, ->(calendars) { where(calendar: calendars) }
-  scope :of_team, ->(team_name) { joins(calendar: :team).where(team: { name: team_name }) }
+  scope :of_team, ->(team_name) { where(team: { name: team_name }) }
   scope :future, -> { where('start_date >= ?', DateTime.now) }
   scope :past, -> { where('start_date < ?', DateTime.now) }
   scope :after, ->(date) { where('start_date >= ?', date) }
