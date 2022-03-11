@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 describe 'teams/show.html.erb', type: :view do
-  it 'display a form if @teams is blank' do
-    render
+  it 'display informations about the team' do
+    # assign(:user, Fabricate(:user))
 
-    expect(rendered).to match(/.*/)
+    # render
+
+    # expect(rendered).to match(/.*/)
   end
 end
