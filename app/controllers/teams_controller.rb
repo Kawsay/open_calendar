@@ -6,6 +6,7 @@ class TeamsController < ApplicationController
   before_action :build_current_user_team, only: %i[new]
 
   def show
+    authorize @current_team
     respond_to do |format|
       if not teams?
         build_current_user_team
@@ -21,6 +22,7 @@ class TeamsController < ApplicationController
   end
 
   def new
+    authorize @team
   end
 
   def create
@@ -29,6 +31,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
+        authorize @team
         format.html { redirect_to @team, notice: 'Team was successfully created' }
       else
         format.turbo_stream { render :new, status: :bad_request  }

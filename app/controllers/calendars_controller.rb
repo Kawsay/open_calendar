@@ -8,9 +8,11 @@ class CalendarsController < ApplicationController
     @events        = Event.of_calendars(@calendars)
     @organizations = Organization.select(:id, :name)
     @new_event     = Event.new
+    authorize @calendars
   end
 
   def new
+    authorize @new_calendar
     respond_to do |format|
       format.html {}
     end
@@ -18,6 +20,7 @@ class CalendarsController < ApplicationController
 
   def create
     @new_calendar = Calendar.new(calendar_params)
+    authorize @new_calendar
 
     respond_to do |format|
       if @new_calendar.save
