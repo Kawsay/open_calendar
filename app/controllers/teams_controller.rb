@@ -62,7 +62,7 @@ class TeamsController < ApplicationController
   end
 
   def set_organizations
-    @organizations = Organization.select(:fullname, :id)
+    @organizations = Organization.select(:name, :id)
   end
 
   def teams?
