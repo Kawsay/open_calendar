@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :adhesions, dependent: :destroy
   has_many :teams, through: :adhesions
   has_many :calendars, through: :teams
+  has_many :secret_links, dependent: :destroy
 
   validates_presence_of :email
 

@@ -1,8 +1,8 @@
 class SecretLink < ApplicationRecord
   SLUG_VALIDATOR_REGEX = /\A[a-zA-Z0-9]{16}\z/
 
-  belongs_to :user, dependent: :destroy
-  belongs_to :calendar, dependent: :destroy
+  belongs_to :user
+  belongs_to :calendar
 
   validates_presence_of :slug, on: :create
   validates_uniqueness_of :slug, on: :create

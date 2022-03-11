@@ -7,6 +7,7 @@ class Calendar < ApplicationRecord
   has_many :events, dependent: :destroy
   belongs_to :team
   has_many :users, through: :team
+  has_many :secret_links, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: { case_sensitive: false }
