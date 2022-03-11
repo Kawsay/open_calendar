@@ -17,8 +17,6 @@ class Calendar < ApplicationRecord
 
   before_validation :set_text_color
 
-  scope :of_team, ->(team) { where(team: team) }
-  scope :of_teams, ->(teams) { where(team: teams) }
   scope :of_user, ->(user) { where(team: user.teams) }
 
   private

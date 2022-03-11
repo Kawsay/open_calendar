@@ -3,18 +3,18 @@ class TeamsController < ApplicationController
   before_action :set_current_or_favorite_team, only: %i[show], if: :teams?
   before_action :set_organizations, only: %i[show], if: :teams?
   before_action :set_new_calendar, only: %i[show], if: :teams?
+  before_action :build_current_user_team, only: %i[new]
 
   def show
     respond_to do |format|
-      if @teams.blank?
-        @team = current_user.teams.build
+      if not teams?
+        build_current_user_team
         format.html { render :new, notice: 'It looks like you\'ve no team yet !' }
-      elsif Calendar.of_teams(@teams).blank?
-        @current_team = set_current_or_favorite_team
+      elsif not calendars?
+        set_current_or_favorite_team
         format.html { render 'calendars/new' }
       else
         @calendars = @current_team.calendars
-        @events    = Event.includes(:calendar).of_calendars(@calendars)
         @new_event = Event.new
         format.html { render 'calendars/index' }
       end
@@ -22,7 +22,6 @@ class TeamsController < ApplicationController
   end
 
   def new
-    @team = current_user.teams.build
   end
 
   def create
@@ -48,11 +47,15 @@ class TeamsController < ApplicationController
   private
 
   def set_teams
-    @teams = Team.of_user(current_user).by_favorite if current_user
+    @teams = Team.of_user(current_user).by_favorite.includes(:calendars) if current_user
+  end
+
+  def build_current_user_team
+    @team = current_user.teams.build
   end
 
   def set_current_or_favorite_team
-    @current_team = params&.has_key?(:id) ? Team.find(params[:id]) : current_user.favorite_team
+    @current_team = params&.has_key?(:id) ? Team.includes(calendars: :events).find(params[:id]) : @teams.first
   end
 
   def set_new_calendar
@@ -64,7 +67,11 @@ class TeamsController < ApplicationController
   end
 
   def teams?
-    !@teams.blank?
+    @teams.present?
+  end
+
+  def calendars?
+    @teams.any?(&:calendars)
   end
 
   def team_params
