@@ -6,7 +6,7 @@ RSpec.describe TeamsController, type: :controller do
   describe '#show' do
     let!(:user) { Fabricate(:user) }
 
-    context 'when @teams.blank?' do
+    context 'when not teams?' do
       before(:each) do
         sign_in(user)
         get :show
@@ -14,15 +14,15 @@ RSpec.describe TeamsController, type: :controller do
 
       it { expect(assigns(:team)).not_to be_nil }
       it { expect(assigns(:team)).to be_a_new Team }
-      it { expect(assigns(:teams)).to be_empty }
+      it { expect(assigns(:teams).first).to be_nil }
       it { expect(assigns(:new_calendar)).to be_nil }
       it { expect(assigns(:current_team)).to be_nil }
       it { expect(assigns(:organizations)).to be_nil }
-      it { is_expected.to render_template('new') }
-      it { expect(response).to have_http_status 200 }
+      it { is_expected.to redirect_to('/teams/new') }
+      it { expect(response).to have_http_status 302 }
     end
 
-    context 'when Calendar.of_teams(@teams).blank?' do
+    context 'when not calendars?' do
       let!(:adhesion) { Fabricate(:adhesion, user: user, team: Fabricate(:team)) }
 
       before(:each) do
@@ -38,16 +38,16 @@ RSpec.describe TeamsController, type: :controller do
       it { expect(assigns(:new_calendar)).not_to be_nil }
       it { expect(assigns(:new_calendar)).to be_a_new Calendar }
       it { expect(assigns(:organizations)).not_to be_nil }
-      it { expect(assigns(:organizations)).to eq(Organization.of_team(assigns(:current_team))) }
-      it { is_expected.to render_template('calendars/new') }
-      it { expect(response).to have_http_status 200 }
+      # TODO: think about Organization scope (per team, per instance, global ?)
+      # it { expect(assigns(:organizations)).to eq(Organization.where(teams: (assigns(:current_team)))) }
+      it { is_expected.to redirect_to("/teams/#{user.teams.first.id}/calendars/new") }
+      it { expect(response).to have_http_status 302 }
     end
 
     context 'when user has calendars' do
       let!(:team)     { Fabricate(:team) }
       let!(:adhesion) { Fabricate(:adhesion, user: user, team: team) }
       let!(:calendar) { Fabricate(:calendar, team: team) }
-      let(:event)     { Fabricate(:event, calendar: calendar) }
 
       before(:each) do
         sign_in(user)
@@ -60,8 +60,7 @@ RSpec.describe TeamsController, type: :controller do
       it { expect(assigns(:current_team)).to eq(user.favorite_team) }
       it { expect(assigns(:calendars)).not_to be_nil }
       it { expect(assigns(:calendars)).to eq([calendar]) }
-      it { expect(assigns(:events)).not_to be_nil }
-      it { expect(assigns(:events)).to eq([event]) }
+      it { expect(assigns(:events)).to be_nil }
       it { is_expected.to render_template('calendars/index') }
       it { expect(response).to have_http_status 200 }
     end
