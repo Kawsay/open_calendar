@@ -6,14 +6,17 @@ class TeamsController < ApplicationController
   before_action :build_current_user_team, only: %i[new]
 
   def show
-    authorize @current_team
+
     respond_to do |format|
       if not teams?
+        authorize Team
         build_current_user_team
         format.html { redirect_to new_team_path }
       elsif not calendars?
+        authorize @current_team
         format.html { redirect_to new_team_calendar_path(@current_team) }
       else
+        authorize @current_team
         @calendars = @current_team.calendars.includes(:events)
         @new_event = Event.new
         format.html { render 'calendars/index' }
@@ -29,6 +32,8 @@ class TeamsController < ApplicationController
     @team = current_user.teams.build(team_params)
     @team.adhesions.new(user_id: current_user.id)
 
+    authorize @team
+
     respond_to do |format|
       if @team.save
         authorize @team
@@ -42,6 +47,7 @@ class TeamsController < ApplicationController
 
   # For development
   def destroy_all
+    authorize Team
     Team.all.destroy_all
     redirect_to root_path
   end

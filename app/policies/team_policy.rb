@@ -22,11 +22,25 @@ class TeamPolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    record.is_a?(Class) ? true : user_belongs_to_this_team?
+  end
+
   def create?
     true
   end
 
   def update?
     true
+  end
+
+  def destroy_all?
+    true
+  end
+
+  private
+
+  def user_belongs_to_this_team?
+    (record.adhesion_ids & user.adhesion_ids).one?
   end
 end
