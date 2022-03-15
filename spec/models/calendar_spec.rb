@@ -5,6 +5,8 @@ RSpec.describe Calendar, type: :model do
 
   describe 'validations' do
     describe 'is invalid' do
+      let(:team) { Fabricate(:team) }
+
       it 'without a name' do
         calendar = Fabricate.build(:calendar, name: nil)
         calendar.valid?
@@ -17,9 +19,9 @@ RSpec.describe Calendar, type: :model do
         expect(calendar).to model_have_error_on_field(:background_color)
       end
 
-      it 'with a non-uniq name' do
-        calendar_1 = Fabricate(:calendar, name: 'non uniq')
-        calendar_2 = Fabricate.build(:calendar, name: 'non uniq')
+      it 'with a non-uniq name if belong to the same team' do
+        calendar_1 = Fabricate(:calendar, name: 'non uniq', team: team)
+        calendar_2 = Fabricate.build(:calendar, name: 'non uniq', team: team)
         calendar_2.valid?
         expect(calendar_2).to model_have_error_on_field(:name)
       end
@@ -30,9 +32,9 @@ RSpec.describe Calendar, type: :model do
         expect(calendar).to model_have_error_on_field(:name)
       end
 
-      it 'with a non-uniq background_color' do
-        calendar_1 = Fabricate(:calendar, background_color: '#000000')
-        calendar_2 = Fabricate.build(:calendar, background_color: '#000000')
+      it 'with a non-uniq background_color if belong to the same team' do
+        calendar_1 = Fabricate(:calendar, background_color: '#000000', team: team)
+        calendar_2 = Fabricate.build(:calendar, background_color: '#000000', team: team)
         calendar_2.valid?
         expect(calendar_2).to model_have_error_on_field(:background_color)
       end
