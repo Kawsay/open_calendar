@@ -3,6 +3,7 @@ class Api::V1::EventsController < Api::BaseController
     @events = Event.includes(calendar: :team)
                    .where(team: {name: event_params[:team_name]})
                    .between_dates(event_params[:start_date], event_params[:end_date])
+    authorize @events
   rescue ActionController::ParameterMissing
       render json: { errors: ['Invalid request: missing parameters'] }, status: :bad_request
   end
