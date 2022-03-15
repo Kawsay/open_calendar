@@ -1,4 +1,29 @@
 class CalendarPolicy < ApplicationPolicy
+  def initialize(user, calendar)
+    @user     = user
+    @calendar = calendar
+  end
+
+  def index?
+    user && owner?
+  end
+
+  def show?
+    user && owner?
+  end
+
+  def create?
+    user
+  end
+
+  def update?
+    user && owner?
+  end
+
+  def destroy?
+    user && owner?
+  end
+
   class Scope
     def initialize(user, scope)
       @user  = user
@@ -18,15 +43,9 @@ class CalendarPolicy < ApplicationPolicy
     attr_reader :user, :scope
   end
 
-  def index?
-    true
-  end
+  private
 
-  def create?
-    true
-  end
-
-  def update?
-    true
+  def owner?
+    @user.team_ids.include?(@calendar.team_id)
   end
 end
