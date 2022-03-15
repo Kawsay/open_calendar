@@ -23,7 +23,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def show?
-    record.is_a?(Class) ? true : user_belongs_to_this_team?
+    record.is_a?(Class) ? true : (user && user_belongs_to_this_team?)
   end
 
   def create?
@@ -31,11 +31,11 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def update?
-    user_belongs_to_this_team?
+    user && user_belongs_to_this_team?
   end
 
   def destroy?
-    user_belongs_to_this_team?
+    user && user_belongs_to_this_team?
   end
 
   # DEV only, will be remove in v0
@@ -46,6 +46,6 @@ class TeamPolicy < ApplicationPolicy
   private
 
   def user_belongs_to_this_team?
-    user && (record.adhesion_ids & user.adhesion_ids).one?
+    (record.adhesion_ids & user.adhesion_ids).one?
   end
 end
