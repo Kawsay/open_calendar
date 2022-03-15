@@ -1,9 +1,4 @@
 class CalendarPolicy < ApplicationPolicy
-  def initialize(user, calendar)
-    @user     = user
-    @calendar = calendar
-  end
-
   def index?
     user && owner?
   end
@@ -46,6 +41,6 @@ class CalendarPolicy < ApplicationPolicy
   private
 
   def owner?
-    @user.team_ids.include?(@calendar.team_id)
+    user.team_ids.include?(record.team_id)
   end
 end
