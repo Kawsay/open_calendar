@@ -10,9 +10,9 @@ class Calendar < ApplicationRecord
   has_many :secret_links, dependent: :destroy
 
   validates :name, presence: true
-  validates :name, uniqueness: { case_sensitive: false }
+  validates :name, uniqueness: { scope: :team_id, case_sensitive: false }
   validates :name, format: { with: NAME_VALIDATOR_REGEX }
-  validates :background_color, uniqueness: { case_sensitive: false }
+  validates :background_color, uniqueness: { scope: :team_id, case_sensitive: false }
   validates :background_color, format: { with: BG_COLOR_VALIDATOR_REGEX }
   validates :text_color, inclusion: { in: ['dark', 'white'] }
 
