@@ -19,7 +19,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
-  gem 'rspec-rails', '~> 5.0.0'
+  gem 'rspec-rails', '~> 5.0.3'
   gem 'shoulda-matchers'
   gem 'fabrication', '~> 2.27'
   gem 'pry'

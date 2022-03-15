@@ -19,7 +19,7 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def index?
-    true
+    false
   end
 
   def show?
@@ -27,20 +27,25 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    user
   end
 
   def update?
-    true
+    user_belongs_to_this_team?
   end
 
+  def destroy?
+    user_belongs_to_this_team?
+  end
+
+  # DEV only, will be remove in v0
   def destroy_all?
-    true
+    user
   end
 
   private
 
   def user_belongs_to_this_team?
-    (record.adhesion_ids & user.adhesion_ids).one?
+    user && (record.adhesion_ids & user.adhesion_ids).one?
   end
 end
