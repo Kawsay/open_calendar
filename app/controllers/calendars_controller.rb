@@ -8,7 +8,8 @@ class CalendarsController < ApplicationController
     @events        = Event.of_calendars(@calendars)
     @organizations = Organization.select(:id, :name)
     @new_event     = Event.new
-    authorize @calendars
+
+    authorize Calendar.find_by(team: @current_team)
   end
 
   def new
