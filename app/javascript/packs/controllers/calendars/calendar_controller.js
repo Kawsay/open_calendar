@@ -50,7 +50,10 @@ export default class extends Controller {
         extraParams: {
           'event[team_name]': this.getCurrentTeam()
         },
-      }
+      },
+
+      // Hooks
+      eventDidMount: (data) => { this.addDataAttributes(data) },
     });
 
     calendar.render();
@@ -58,5 +61,15 @@ export default class extends Controller {
 
   getCurrentTeam() {
     return document.getElementById('navbarDropdown').innerHTML
+  }
+
+  addDataAttributes(data) {
+    this.addCalendarNameAttribute(data);
+  }
+
+  addCalendarNameAttribute(data) {
+    data.el.setAttribute(
+      'data-calendar-name', data.event._def.extendedProps.calendarName
+    );
   }
 }
