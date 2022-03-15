@@ -1,4 +1,24 @@
 class EventPolicy < ApplicationPolicy
+  def index?
+    false
+  end
+
+  def show?
+    user && user_have_access_to_this_calendar?
+  end
+
+  def create?
+    user && user_belongs_to_a_team? && user_team_has_a_calendar?
+  end
+
+  def update?
+    user && user_have_access_to_this_calendar?
+  end
+
+  def destroy?
+    user && user_have_access_to_this_calendar?
+  end
+
   class Scope
     def initialize(user, scope)
       @user  = user
@@ -6,7 +26,7 @@ class EventPolicy < ApplicationPolicy
     end
 
     def resolve
-      scope.where(calendar: user.teams.map(&:calendars))
+      scope.where(calendar: user.teams.map(&:calendars)&.first)
     end
 
     private
@@ -14,19 +34,17 @@ class EventPolicy < ApplicationPolicy
     attr_reader :user, :scope
   end
 
-  def index?
-    true
+  private
+
+  def user_have_access_to_this_calendar?
+    user.team_ids.include? record.team.id
   end
 
-  def show?
-    true
+  def user_belongs_to_a_team?
+    user.teams.any?
   end
 
-  def create?
-    true
-  end
-
-  def update?
-    true
+  def user_team_has_a_calendar?
+    user.calendars.any?
   end
 end

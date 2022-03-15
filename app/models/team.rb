@@ -1,7 +1,7 @@
 class Team < ApplicationRecord
   has_many :adhesions, dependent: :destroy
   has_many :users, through: :adhesions
-  has_many :calendars, dependent: :destroy
+  has_many :calendars, dependent: :destroy, foreign_key: :team_id
 
   validates_presence_of :name
 
