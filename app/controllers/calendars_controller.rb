@@ -5,7 +5,7 @@ class CalendarsController < ApplicationController
 
   def index
     @calendars     = Calendar.where(team: @current_team)
-    @events        = Event.of_calendars(@calendars)
+    @events        = Event.where(calendar: @calendars)
     @organizations = Organization.select(:id, :name)
     @new_event     = Event.new
 

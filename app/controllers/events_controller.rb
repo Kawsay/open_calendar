@@ -30,8 +30,8 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         team       = Calendar.find_by(id: event_params[:calendar_id]).team
-        @calendars = Calendar.of_team(team).includes(:events)
-        @events    = Event.of_calendars(@calendars)
+        @calendars = Calendar.where(team: team).includes(:events)
+        @events    = Event.where(calendar: @calendars)
         @new_event = Event.new
 
         format.turbo_stream { render :create, status: :see_other }
