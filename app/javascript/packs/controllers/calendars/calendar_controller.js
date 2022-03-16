@@ -32,10 +32,6 @@ export default class extends Controller {
       // Calendar
       fixedWeekCount: false,
       showNonCurrentDates: false,
-      selectable: true,
-      select: function(info) {
-        console.log('TODO: ->configure_and_show_modal()\nselected: ' + info.startStr + ' to ' + info.endStr);
-      },
       editable: true,
 
       // Events
