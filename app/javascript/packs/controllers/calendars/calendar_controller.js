@@ -6,6 +6,7 @@ import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import PlusIcon from '../../../../assets/images/plus.svg'
 
 
 export default class extends Controller {
@@ -53,7 +54,8 @@ export default class extends Controller {
       },
 
       // Hooks
-      eventDidMount: (data) => { this.addDataAttributes(data) },
+      eventDidMount:   (data) => { this.addDataAttributes(data) },
+      dayCellDidMount: (data) => { this.addPlusIconToFutureDayCells(data) }
     });
 
     calendar.render();
@@ -71,5 +73,13 @@ export default class extends Controller {
     data.el.setAttribute(
       'data-calendar-name', data.event._def.extendedProps.calendarName
     );
+  }
+
+  addPlusIconToFutureDayCells(data, createEl) {
+    if(data.el.classList.contains("fc-day-future") || data.el.classList.contains("dc-day-today")) {
+      var element = data.el.querySelectorAll(".fc-daygrid-day-frame > .fc-daygrid-day-bg")[0]
+      var plusIconElement = `<div class='add-event'><a href="#"><img src=${PlusIcon} width="20" height="20"></a></div>`
+        element.innerHTML = element.innerHTML + plusIconElement
+    }
   }
 }
