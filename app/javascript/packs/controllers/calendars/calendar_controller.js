@@ -74,8 +74,21 @@ export default class extends Controller {
   addPlusIconToFutureDayCells(data, createEl) {
     if(data.el.classList.contains("fc-day-future") || data.el.classList.contains("dc-day-today")) {
       var element = data.el.querySelectorAll(".fc-daygrid-day-frame > .fc-daygrid-day-bg")[0]
-      var plusIconElement = `<div class='add-event'><a href="#"><img src=${PlusIcon} width="20" height="20"></a></div>`
-        element.innerHTML = element.innerHTML + plusIconElement
+      var plusIconElement =
+        `<div class='add-event'>
+           <a href="#">
+             <img src=${PlusIcon} width="20" height="20"
+               data-action="click->events--form#configure_and_show_modal"
+               data-date="${this.formatDate(data)}"
+             >
+           </a>
+         </div>`
+
+      element.innerHTML = element.innerHTML + plusIconElement
     }
+  }
+
+  formatDate(data) {
+    return data.date.toLocaleString('fr-FR', { dateStyle: 'short' })
   }
 }
