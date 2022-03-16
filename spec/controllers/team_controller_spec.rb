@@ -58,11 +58,10 @@ RSpec.describe TeamsController, type: :controller do
       it { expect(assigns(:teams)).not_to be_empty }
       it { expect(assigns(:teams)).to eq([team]) }
       it { expect(assigns(:current_team)).to eq(user.favorite_team) }
-      it { expect(assigns(:calendars)).not_to be_nil }
-      it { expect(assigns(:calendars)).to eq([calendar]) }
+      it { expect(assigns(:calendars)).to be_nil }
       it { expect(assigns(:events)).to be_nil }
-      it { is_expected.to render_template('calendars/index') }
-      it { expect(response).to have_http_status 200 }
+      it { is_expected.to redirect_to("/teams/#{team.id}/calendars") }
+      it { expect(response).to have_http_status 302 }
     end
 
     context 'when a team is selected' do
