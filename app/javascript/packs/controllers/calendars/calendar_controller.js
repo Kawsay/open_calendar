@@ -76,12 +76,10 @@ export default class extends Controller {
       var element = data.el.querySelectorAll(".fc-daygrid-day-frame > .fc-daygrid-day-bg")[0]
       var plusIconElement =
         `<div class='add-event'>
-           <a href="#">
-             <img src=${PlusIcon} width="20" height="20"
-               data-action="click->events--form#configure_and_show_modal"
-               data-date="${this.formatDate(data)}"
-             >
-           </a>
+           <img src=${PlusIcon} width="20" height="20"
+             data-action="click->events--form#configure_and_show_modal"
+             data-date="${this.formatDate(data)}"
+           >
          </div>`
 
       element.innerHTML = element.innerHTML + plusIconElement
