@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy _show_modal ]
   before_action :set_organizations, only: %i[ new create edit update ]
+  before_action :set_current_team, only: %i[ create ]
   before_action :check_for_range_date!, only: %i[ create update ]
 
   # GET /events or /events.json
@@ -24,22 +25,20 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
-    @event         = Event.new(event_params)
+    @event         = authorize Event.new(event_params)
     @organizations = Organization.select(:id, :name)
-
-    authorize @event
+    @calendars     = Calendar.where(team: @current_team)
 
     respond_to do |format|
       if @event.save
-        team       = Calendar.find_by(id: event_params[:calendar_id]).team
-        @calendars = Calendar.where(team: team).includes(:events)
-        @events    = Event.where(calendar: @calendars)
         @new_event = Event.new
 
         format.turbo_stream { render :create, status: :see_other }
         format.html { redirect_to root_path, notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
+        @new_event = @event
+
         format.turbo_stream { render :create, status: :bad_request }
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -83,6 +82,10 @@ class EventsController < ApplicationController
       @organizations = Organization.select(:id, :name)
     end
 
+    def set_current_team
+      @current_team = Team.find(params[:team_id])
+    end
+
     # In case user selects a range date, Flatpickr will send a String like
     # "07/01/2022 00:00 to 11/01/2022 00:00".
     # This method split both date on "to", parses each date, and assigns both
@@ -97,8 +100,17 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event)
-            .permit(:title, :start_date, :end_date, :location, :description, :organization_id, :file, :is_related_to_a_user, :calendar_id,
-                    organizations_attributes: [:id])
+      params.require(:event).permit(
+        :title,
+        :start_date,
+        :end_date,
+        :location,
+        :description,
+        :organization_id,
+        :file,
+        :is_related_to_a_user,
+        :calendar_id,
+        organizations_attributes: [:id],
+      )
     end
 end

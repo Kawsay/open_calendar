@@ -16,10 +16,12 @@ Rails.application.routes.draw do
   get '/calendars/:slug', to: 'secret_links#show', constraint: { slug: /\A[a-zA-Z0-9]{16}\z/ }
 
   resources :teams do
-    resources :calendars
+    resources :calendars do
+      resources :events, shallow: true
+    end
   end
 
-  resources  :organizations, :events
+  resources :organizations
   resources :secret_links, only: %i( create )
 
   post 'reset_teams', to: 'teams#destroy_all', as: 'reset_team'
