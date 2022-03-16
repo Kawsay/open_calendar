@@ -1,6 +1,5 @@
 <%= turbo_stream.update 'calendar' do %>
-  <%= render partial: 'calendars/calendar',
-             locals: { events: @events } %>
+  <%= render partial: 'calendars/calendar' %>
 <% end %>
 
 <%= turbo_stream.replace 'new_event' do %>
