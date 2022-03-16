@@ -6,20 +6,15 @@ class TeamsController < ApplicationController
   before_action :build_current_user_team, only: %i[new]
 
   def show
-
     respond_to do |format|
       if not teams?
         authorize Team
         build_current_user_team
         format.html { redirect_to new_team_path }
       elsif not calendars?
-        authorize @current_team
-        format.html { redirect_to new_team_calendar_path(@current_team) }
+        format.html { redirect_to new_team_calendar_path(authorize(@current_team)) }
       else
-        authorize @current_team
-        @calendars = @current_team.calendars.includes(:events)
-        @new_event = Event.new
-        format.html { render 'calendars/index' }
+        format.html { redirect_to team_calendars_path(authorize(@current_team)) }
       end
     end
   end
