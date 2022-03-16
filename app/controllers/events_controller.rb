@@ -27,6 +27,8 @@ class EventsController < ApplicationController
     @event         = Event.new(event_params)
     @organizations = Organization.select(:id, :name)
 
+    authorize @event
+
     respond_to do |format|
       if @event.save
         team       = Calendar.find_by(id: event_params[:calendar_id]).team
