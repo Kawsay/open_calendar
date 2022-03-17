@@ -50,6 +50,41 @@ RSpec.describe User, type: :model do
       user.adhesions.create!(team: team)
       expect(user.calendars).to eq [calendar]
     end
+  end
 
+  context 'class methods' do
+    describe '.authenticate' do
+      it 'finds returns a User if #valid_password?' do
+        user = Fabricate(:user, email: 'foo@bar.com', password: 'foobar')
+        expect(User.authenticate('foo@bar.com', 'foobar')).to eq user
+      end
+    end
+  end
+
+  context 'instance methods' do
+    describe '#favorite_team' do
+      it 'returns user\'s favorite team' do
+        user = Fabricate(:user)
+        team = Fabricate(:team, adhesions: [user.adhesions.build])
+        expect(user.favorite_team).to eq team
+      end
+    end
+
+    describe '#admin?' do
+      # it 'returns true if user is an admin' do
+      #   user = Fabricate(:user, admin: true)
+      #   expect(user.admin?).to be_truthy
+      # end
+
+      # it 'returns false if user is not an admin' do
+      #   user = Fabricate(:user, admin: false)
+      #   expect(user.admin?).to be_falsey
+      # end
+
+      it 'returns true/false if user is admin' do
+        user = Fabricate(:user)
+        expect(user.admin?).to be_falsey
+      end
+    end
   end
 end
