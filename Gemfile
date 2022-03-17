@@ -14,7 +14,7 @@ gem 'pundit', '~> 2.2'
 gem 'jwt', '~> 1.5'
 gem 'doorkeeper', '~> 5.5', '>= 5.5.4'
 gem 'simple_calendar', '~> 2.4'
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '>= 1.12.2'
 gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
