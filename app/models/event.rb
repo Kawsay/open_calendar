@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id                   :bigint           not null, primary key
+#  start_date           :datetime
+#  end_date             :datetime
+#  location             :text
+#  description          :text
+#  organization_id      :bigint
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  title                :string
+#  is_related_to_a_user :boolean          default(FALSE)
+#  calendar_id          :bigint           not null
+#
 class Event < ApplicationRecord
   belongs_to :calendar, optional: true
   has_one :team, through: :calendar, source: :team

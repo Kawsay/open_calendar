@@ -34,6 +34,7 @@ group :development do
   gem 'brakeman'
   gem 'reek'
   gem 'bullet'
+  gem 'annotate', '~> 3.2'
 end
 
 group :test do

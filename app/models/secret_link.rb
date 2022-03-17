@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: secret_links
+#
+#  id              :bigint           not null, primary key
+#  slug            :string(16)       not null
+#  validity_period :integer          default(1), not null
+#  visit_count     :integer          default(0), not null
+#  calendar_id     :bigint           not null
+#  user_id         :uuid             not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 class SecretLink < ApplicationRecord
   SLUG_VALIDATOR_REGEX = /\A[a-zA-Z0-9]{16}\z/
 
