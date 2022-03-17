@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe TeamPolicy do
-  subject    { described_class.new(user, team) }
+  subject { described_class.new(user, team) }
 
   context 'when user is a visitor' do
     let(:user) { nil }

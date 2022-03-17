@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -23,7 +25,7 @@ class User < ApplicationRecord
   has_many :calendars, through: :teams
   has_many :secret_links, dependent: :destroy
 
-  validates_presence_of :email
+  validates :email, presence: true
 
   self.implicit_order_column = 'created_at'
 

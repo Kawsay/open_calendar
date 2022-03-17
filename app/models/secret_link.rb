@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: secret_links
@@ -17,19 +19,19 @@ class SecretLink < ApplicationRecord
   belongs_to :user
   belongs_to :calendar
 
-  validates_presence_of :slug, on: :create
-  validates_uniqueness_of :slug, on: :create
-  validates_length_of :slug, is: 16, on: :create
-  validates_format_of :slug, with: SLUG_VALIDATOR_REGEX
+  validates :slug, presence: { on: :create }
+  validates :slug, uniqueness: { on: :create }
+  validates :slug, length: { is: 16, on: :create }
+  validates :slug, format: { with: SLUG_VALIDATOR_REGEX }
 
-  validates_presence_of :visit_count
-  validates_numericality_of :visit_count
+  validates :visit_count, presence: true
+  validates :visit_count, numericality: true
 
-  validates_presence_of :validity_period
-  validates_numericality_of :validity_period
+  validates :validity_period, presence: true
+  validates :validity_period, numericality: true
 
-  validates_presence_of :user_id
-  validates_presence_of :calendar_id
+  validates :user_id, presence: true
+  validates :calendar_id, presence: true
 
   before_validation :set_slug
 

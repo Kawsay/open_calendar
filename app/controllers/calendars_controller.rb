@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CalendarsController < ApplicationController
-  before_action :set_teams, only: %i[ index create ]
-  before_action :set_current_or_favorite_team, only: %i[ index new create ]
-  before_action :build_new_calendar, only: %i[ index new ]
+  before_action :set_teams, only: %i[index create]
+  before_action :set_current_or_favorite_team, only: %i[index new create]
+  before_action :build_new_calendar, only: %i[index new]
 
   def index
     @calendars     = Calendar.where(team: @current_team)
@@ -25,15 +27,13 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       if @new_calendar.save
-        format.html { redirect_to team_calendars_path, notice: "calendar was successfully created." }
+        format.html { redirect_to team_calendars_path, notice: 'calendar was successfully created.' }
         format.json { render :show, status: :created, location: @new_calendar }
+      elsif @current_team.calendars.blank?
+        format.turbo_stream { render :new, status: :bad_request }
       else
-        if @current_team.calendars.blank?
-          format.turbo_stream { render :new, status: :bad_request}
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @new_calendar.errors, status: :unprocessable_entity }
-        end
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @new_calendar.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,7 +45,7 @@ class CalendarsController < ApplicationController
   end
 
   def set_current_or_favorite_team
-    @current_team = params.has_key?(:team_id) ? Team.find(params[:team_id]) : current_user.favorite_team
+    @current_team = params.key?(:team_id) ? Team.find(params[:team_id]) : current_user.favorite_team
   end
 
   def build_new_calendar

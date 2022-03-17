@@ -1,6 +1,8 @@
-require_relative "boot"
+# frozen_string_literal: true
 
-require "rails/all"
+require_relative 'boot'
+
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -21,7 +23,7 @@ module CaisseSo
     config.autoload_paths << Rails.root.join('lib')
 
     # Change the default error <div>
-    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+    config.action_view.field_error_proc = proc do |html_tag, _instance|
       html_tag.gsub(/form-(control|select)/, 'form-\1 is-invalid').html_safe
     end
   end

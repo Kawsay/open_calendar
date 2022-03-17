@@ -1,23 +1,24 @@
+# frozen_string_literal: true
+
 require 'faker'
 
-
-puts 'Destroying all records...'
+Rails.logger.debug 'Destroying all records...'
 [
   Document, Comment, Event, User, Organization, Calendar
 ].map(&:destroy_all)
 
-puts 'Creating a Doorkeeper::Application'
+Rails.logger.debug 'Creating a Doorkeeper::Application'
 if Doorkeeper::Application.count.zero?
   Doorkeeper::Application.create!(
-    name:         'OpenCalendar',
+    name: 'OpenCalendar',
     redirect_uri: '',
-    scopes:       ''
+    scopes: ''
   )
 end
 
-puts 'Creating a User'
+Rails.logger.debug 'Creating a User'
 User.create!(
-  email:    'foo@bar.com',
+  email: 'foo@bar.com',
   password: 'foobar'
 )
 
@@ -26,19 +27,19 @@ User.create!(
 #     fullname:    Faker::Name.name,
 #     description: Faker::Lorem.paragraph(sentence_count: 12)
 #   )
-# 
+#
 #   Contact.create!(
 #     user:   user,
 #     mobile: Faker::PhoneNumber.cell_phone_in_e164,
 #     email:  Faker::Internet.email
 #   )
-# 
+#
 #   Administrator.create!(
 #     email:    Faker::Internet.email,
 #     password: 'foobar'
 #   )
 # end
-# 
+#
 # 5.times do
 #   Calendar.create!(
 #     name:             Faker::Lorem.words.sample,
@@ -46,10 +47,10 @@ User.create!(
 #     text_color:       'dark'
 #   )
 # end
-# 
+#
 # 10.times do
 #   start_date = Date.today + rand(60)
-# 
+#
 #   Event.create!(
 #     user:        User.all.sample,
 #     calendar:    Calendar.all.sample,
@@ -60,33 +61,33 @@ User.create!(
 #     location:    Faker::Address.street_address
 #   )
 # end
-# 
+#
 # 20.times do
 #   document = Document.create!(
 #     title:             Faker::Lorem.paragraph(sentence_count: 1),
 #     documentable_type: 'Event',
 #     documentable_id:   Event.all.sample.id
 #   )
-# 
+#
 #   document.file.attach(io:           File.open(Rails.root.join('storage', 'seed.txt')),
 #                        filename:     'seed.txt',
 #                        content_type: 'text/plain',
 #                        identify:     false)
 # end
-# 
+#
 # 20.times do
 #   document = Document.create!(
 #     title:             Faker::Lorem.paragraph(sentence_count: 1),
 #     documentable_type: 'User',
 #     documentable_id:   User.all.sample.id
 #   )
-# 
+#
 #   document.file.attach(io:           File.open(Rails.root.join('storage', 'seed.txt')),
 #                        filename:     'seed.txt',
 #                        content_type: 'text/plain',
 #                        identify:     false)
 # end
-# 
+#
 # 50.times do
 #   Comment.create!(
 #     administrator:    Administrator.all.sample,
@@ -94,7 +95,7 @@ User.create!(
 #     commentable_type: 'Event',
 #     commentable_id:   Event.all.sample.id,
 #   )
-# 
+#
 #   Comment.create!(
 #     administrator:    Administrator.all.sample,
 #     body:             Faker::Lorem.paragraph(sentence_count: 1..20),
@@ -102,7 +103,7 @@ User.create!(
 #     commentable_id:   Document.all.sample.id,
 #   )
 # end
-# 
+#
 # 20.times do
 #   Comment.create!(
 #     administrator:    Administrator.all.sample,

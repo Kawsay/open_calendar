@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe TeamsController, type: :controller do
@@ -82,7 +84,7 @@ RSpec.describe TeamsController, type: :controller do
       it { expect(assigns(:team).persisted?).to be true }
       it { expect(assigns(:team).adhesions).to eq(user.adhesions) }
       it { expect(response.status).to eq(302) }
-      it { expect(response.headers['Location']).to match(/\/teams\/\d+\z/) }
+      it { expect(response.headers['Location']).to match(%r{/teams/\d+\z}) }
 
       # TODO: Find a way to test TURBO_STREAM responses
       # it 'reponds to TURBO_STREAM format' do
@@ -100,7 +102,7 @@ RSpec.describe TeamsController, type: :controller do
       it { expect(assigns(:team)).to be_nil }
       it { expect(assigns(:team)&.persisted?).to be_nil }
       it { expect(assigns(:team)&.adhesions).to be_nil }
-      it { expect(response.headers['Location']).to match(/\/401\Z/) }
+      it { expect(response.headers['Location']).to match(%r{/401\Z}) }
     end
 
     context 'when invalid parameters' do
@@ -111,7 +113,7 @@ RSpec.describe TeamsController, type: :controller do
 
       it { expect(assigns(:team).persisted?).to be false }
       it { expect(assigns(:team).adhesions.first.persisted?).to be false }
-      it { expect(assigns(:team)&.adhesions.first).to be_a_new Adhesion}
+      it { expect(assigns(:team)&.adhesions.first).to be_a_new Adhesion }
       it { expect(response).to have_http_status 422 }
       it { expect(response).to render_template('teams/new') }
     end

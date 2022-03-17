@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require 'active_record'
+require 'bullet'
 require 'pundit/matchers'
 require 'simplecov'
 
@@ -12,7 +16,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -43,6 +47,18 @@ RSpec.configure do |config|
   # Add shoulda-matchers (initialy for uniqueness assertions)
   config.include(Shoulda::Matchers::ActiveModel,  type: :model)
   config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+
+  # Configure Bullet
+  if Bullet.enable?
+    config.before(:each) do
+      Bullet.start_request
+    end
+
+    config.after(:each) do
+      Bullet.perform_out_of_channel_notifications if Bullet.notification?
+      Bullet.end_request
+    end
+  end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

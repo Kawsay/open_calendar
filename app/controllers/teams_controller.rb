@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamsController < ApplicationController
   before_action :set_teams, only: %i[show]
   before_action :set_current_or_favorite_team, only: %i[show], if: :teams?
@@ -7,11 +9,11 @@ class TeamsController < ApplicationController
 
   def show
     respond_to do |format|
-      if not teams?
+      if !teams?
         authorize Team
         build_current_user_team
         format.html { redirect_to new_team_path }
-      elsif not calendars?
+      elsif !calendars?
         format.html { redirect_to new_team_calendar_path(authorize(@current_team)) }
       else
         format.html { redirect_to team_calendars_path(authorize(@current_team)) }
@@ -34,7 +36,7 @@ class TeamsController < ApplicationController
         authorize @team
         format.html { redirect_to @team, notice: 'Team was successfully created' }
       else
-        format.turbo_stream { render :new, status: :bad_request  }
+        format.turbo_stream { render :new, status: :bad_request }
         format.html { render :new, status: :unprocessable_entity, notice: 'Team cannot be created.' }
       end
     end
@@ -58,7 +60,7 @@ class TeamsController < ApplicationController
   end
 
   def set_current_or_favorite_team
-    @current_team = params&.has_key?(:id) ? Team.includes(calendars: :events).find(params[:id]) : @teams.first
+    @current_team = params&.key?(:id) ? Team.includes(calendars: :events).find(params[:id]) : @teams.first
   end
 
   def build_new_calendar

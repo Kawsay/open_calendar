@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: teams
@@ -11,9 +13,9 @@
 class Team < ApplicationRecord
   has_many :adhesions, dependent: :destroy
   has_many :users, through: :adhesions
-  has_many :calendars, dependent: :destroy, foreign_key: :team_id
+  has_many :calendars, dependent: :destroy
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   scope :of_user, ->(user) { where(adhesions: user.adhesions) }
   scope :by_favorite, -> { order(visit_count: :desc) }

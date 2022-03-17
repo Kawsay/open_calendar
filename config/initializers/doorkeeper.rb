@@ -7,12 +7,12 @@ Doorkeeper.configure do
 
   # This block will be called to check whether the resource owner is authenticated or not.
   # resource_owner_authenticator do
-    # raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
-    # Put your resource owner authentication logic here.
-    # Example implementation:
-    #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
+  # raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
+  # Put your resource owner authentication logic here.
+  # Example implementation:
+  #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
   # end
-  resource_owner_from_credentials do |routes|
+  resource_owner_from_credentials do |_routes|
     User.authenticate(params[:email], params[:password])
   end
 
@@ -349,7 +349,7 @@ Doorkeeper.configure do
   #   https://datatracker.ietf.org/doc/html/rfc6819#section-4.4.2
   #   https://datatracker.ietf.org/doc/html/rfc6819#section-4.4.3
   #
-  grant_flows %w[ password ]
+  grant_flows %w[password]
 
   # Allows to customize OAuth grant flows that +each+ application support.
   # You can configure a custom block (or use a class respond to `#call`) that must
@@ -433,7 +433,7 @@ Doorkeeper.configure do
   # skip_authorization do |resource_owner, client|
   #   client.superapp? or resource_owner.admin?
   # end
-  skip_authorization  { true }
+  skip_authorization { true }
 
   # Configure custom constraints for the Token Introspection request.
   # By default this configuration option allows to introspect a token by another

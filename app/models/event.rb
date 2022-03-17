@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: events
@@ -30,7 +32,7 @@ class Event < ApplicationRecord
   scope :before, ->(date) { where('start_date < ?', date) }
   scope :between_dates, ->(start_date, end_date) { after(start_date).before(end_date) }
 
-  validates_presence_of :title
-  validates_presence_of :calendar_id
-  validates_presence_of :start_date
+  validates :title, presence: true
+  validates :calendar_id, presence: true
+  validates :start_date, presence: true
 end

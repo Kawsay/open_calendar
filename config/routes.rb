@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root to: 'teams#show'
 
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :events, only: %i( index )
+      resources :events, only: %i[index]
     end
   end
 
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
   end
 
   resources :organizations
-  resources :secret_links, only: %i( create )
+  resources :secret_links, only: %i[create]
 
   post 'reset_teams', to: 'teams#destroy_all', as: 'reset_team'
   get 'events_modal/:id', to: 'events#_show_modal', as: 'events_modal'

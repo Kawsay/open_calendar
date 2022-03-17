@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSecretLinksTable < ActiveRecord::Migration[6.1]
   def change
     create_table :secret_links do |t|

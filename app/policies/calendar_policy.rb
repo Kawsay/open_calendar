@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CalendarPolicy < ApplicationPolicy
   def index?
     user && owner?
