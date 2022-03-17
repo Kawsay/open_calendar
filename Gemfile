@@ -38,6 +38,7 @@ group :development do
   gem 'better_errors', '~> 2.9', '>= 2.9.1'
   gem 'binding_of_caller', '~> 1.0'
   gem 'letter_opener', '~> 1.8'
+  gem 'rubocop-rails', '~> 2.14', '>= 2.14.1'
 end
 
 group :test do
