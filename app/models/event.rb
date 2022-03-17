@@ -17,9 +17,4 @@ class Event < ApplicationRecord
   validates_presence_of :title
   validates_presence_of :calendar_id
   validates_presence_of :start_date
-
-  # Set :end_date from Flatpickr String date if a range date is passed
-  def check_for_range_date!
-    binding.pry
-  end
 end
