@@ -38,6 +38,6 @@ describe 'calendars/new.html.erb', type: :view do
   it 'sets the team id value inside the hidden input tag' do
     render
 
-    expect(rendered).to match(/input\svalue=\"#{@team.id}\"\stype=\"hidden\"\sname=\"calendar\[team_id\].*(?=>)/)
+    expect(rendered).to match(/input\svalue=\"#{@team.id}\"\sautocomplete=\"off\"\stype=\"hidden\"\sname=\"calendar\[team_id\].*(?=>)/)
   end
 end
