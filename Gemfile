@@ -33,6 +33,7 @@ group :development do
   gem 'spring'
   gem 'brakeman'
   gem 'reek'
+  gem 'bullet'
 end
 
 group :test do
