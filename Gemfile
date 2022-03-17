@@ -32,6 +32,7 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'spring'
   gem 'brakeman'
+  gem 'reek'
 end
 
 group :test do
