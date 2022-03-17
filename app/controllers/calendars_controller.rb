@@ -45,7 +45,7 @@ class CalendarsController < ApplicationController
   end
 
   def set_current_or_favorite_team
-    @current_team = params.has_key?(:team_id) ? Team.find(params[:team_id]) : Team.user_favorite(current_user)
+    @current_team = params.has_key?(:team_id) ? Team.find(params[:team_id]) : current_user.favorite_team
   end
 
   def build_new_calendar

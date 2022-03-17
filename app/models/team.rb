@@ -8,8 +8,4 @@ class Team < ApplicationRecord
   scope :of_user, ->(user) { where(adhesions: user.adhesions) }
   scope :by_favorite, -> { order(visit_count: :desc) }
   scope :favorite, -> { order(visit_count: :desc).first }
-
-  def self.user_favorite(user)
-    of_user(user).by_favorite.first
-  end
 end

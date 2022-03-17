@@ -12,7 +12,7 @@ RSpec.describe Team, type: :model do
   end
 
   describe 'scopes' do
-    describe '#of_user(user)' do
+    describe '.of_user(user)' do
       it 'returns a collection of teams of a user' do
         user = Fabricate(:user)
         team = Fabricate(:team, adhesions: [user.adhesions.build])
@@ -20,7 +20,7 @@ RSpec.describe Team, type: :model do
       end
     end
 
-    describe '#by_favorite' do
+    describe '.by_favorite' do
       it 'returns a collection of teams ordered by :visit_count' do
         t1 = Fabricate(:team, visit_count: 1)
         t2 = Fabricate(:team, visit_count: 2)
@@ -28,7 +28,7 @@ RSpec.describe Team, type: :model do
       end
     end
 
-    describe '#favorite' do
+    describe '.favorite' do
       it 'returns the most visited team' do
         t1 = Fabricate(:team, visit_count: 1)
         t2 = Fabricate(:team, visit_count: 2)
@@ -38,13 +38,5 @@ RSpec.describe Team, type: :model do
   end
 
   context 'class methods' do
-    describe '#user_favorite' do
-      it 'return the most visited team of a specific user' do
-        user = Fabricate(:user)
-        t1   = Fabricate(:team, visit_count: 1, adhesions: [user.adhesions.build])
-        t2   = Fabricate(:team, visit_count: 2, adhesions: [user.adhesions.build])
-        expect(Team.user_favorite(user)).to eq t2
-      end
-    end
   end
 end
