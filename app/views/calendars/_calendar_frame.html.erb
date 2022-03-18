@@ -16,7 +16,7 @@
 
 
       <div class='col-10'>
-        <div data-controller="events--form">
+        <div data-controller="events--form events--show">
           <%= turbo_frame_tag 'calendar' do %>
             <%= render partial: 'calendars/calendar' %>
           <% end %>
@@ -26,6 +26,8 @@
                                current_team:  current_team,
                                calendars:     calendars,
                                organizations: organizations } %>
+
+          <%= render partial: 'events/show_modal', locals: { event: new_event } %>
         </div>
       </div>
     </div>

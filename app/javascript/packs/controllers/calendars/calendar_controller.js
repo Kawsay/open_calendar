@@ -50,7 +50,7 @@ export default class extends Controller {
       },
 
       // Hooks
-      eventDidMount:   (data) => { this.addDataAttributes(data) },
+      eventDidMount:   (data) => { this.setDataAttributes(data) },
       dayCellDidMount: (data) => { this.addPlusIconToFutureDayCells(data) }
     });
 
@@ -61,20 +61,27 @@ export default class extends Controller {
     return document.getElementById('navbarDropdown').innerHTML
   }
 
-  addDataAttributes(data) {
-    this.addCalendarNameAttribute(data);
-    this.addEventIdAttribute(data);
+  setDataAttributes(data) {
+    this.setCalendarNameAttribute(data);
+    this.setEventIdAttribute(data);
+    this.setActionAttribute(data);
   }
 
-  addCalendarNameAttribute(data) {
+  setCalendarNameAttribute(data) {
     data.el.setAttribute(
       'data-calendar-name', data.event._def.extendedProps.calendarName
     );
   }
 
-  addEventIdAttribute(data) {
+  setEventIdAttribute(data) {
     data.el.setAttribute(
       'data-event-id', data.event._def.extendedProps.eventId
+    );
+  }
+
+  setActionAttribute(data) {
+    data.el.setAttribute(
+      'data-action', 'click->events--show#displayModal'
     );
   }
 

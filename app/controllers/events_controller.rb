@@ -12,12 +12,13 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1 or /events/1.json
-  def show; end
+  def show
+    authorize @event
+  end
 
   # GET /events/new
   def new
     @event = Event.new
-    @event.documents.build
   end
 
   # GET /events/1/edit
@@ -75,7 +76,7 @@ class EventsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = Event.includes(:documents).find(params[:id])
+    @event = Event.find(params[:id])
   end
 
   def set_organizations
