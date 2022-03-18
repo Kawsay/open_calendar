@@ -8,4 +8,5 @@ json.array! @events do |event|
   json.textColor     event.calendar.text_color
   json.display       'block'
   json.calendarName  event.calendar.name
+  json.eventId       event.id
 end

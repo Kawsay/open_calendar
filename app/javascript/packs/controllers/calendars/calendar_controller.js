@@ -63,11 +63,18 @@ export default class extends Controller {
 
   addDataAttributes(data) {
     this.addCalendarNameAttribute(data);
+    this.addEventIdAttribute(data);
   }
 
   addCalendarNameAttribute(data) {
     data.el.setAttribute(
       'data-calendar-name', data.event._def.extendedProps.calendarName
+    );
+  }
+
+  addEventIdAttribute(data) {
+    data.el.setAttribute(
+      'data-event-id', data.event._def.extendedProps.eventId
     );
   }
 
