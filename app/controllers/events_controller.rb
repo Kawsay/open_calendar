@@ -16,6 +16,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/update_modal
   def update_modal
+    puts @event.inspect
     authorize @event
     respond_to do |format|
       format.js { render :update_modal }
