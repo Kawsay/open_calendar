@@ -16,7 +16,8 @@ export default class extends Controller {
     let calendar = new Calendar(calendarEl, {
       // Initialization
       plugins: [
-        dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin, bootstrap5Plugin
+        dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin,
+        bootstrap5Plugin
       ],
 
       // Style and display config
@@ -50,7 +51,7 @@ export default class extends Controller {
       },
 
       // Hooks
-      eventDidMount:   (data) => { this.setDataAttributes(data) },
+      eventDidMount:   (data) => { this.setEventModalLink(data) },
       dayCellDidMount: (data) => { this.addPlusIconToFutureDayCells(data) }
     });
 
@@ -61,28 +62,21 @@ export default class extends Controller {
     return document.getElementById('navbarDropdown').innerHTML
   }
 
-  setDataAttributes(data) {
-    this.setCalendarNameAttribute(data);
-    this.setEventIdAttribute(data);
-    this.setActionAttribute(data);
+  setEventModalLink(data) {
+    this.setEventModalHref(data)
+    this.setEventModalDataRemote(data)
   }
 
-  setCalendarNameAttribute(data) {
-    data.el.setAttribute(
-      'data-calendar-name', data.event._def.extendedProps.calendarName
-    );
+  setEventModalHref(data) {
+    data.el.href = this.getEventModalHref(data.event._def.extendedProps.eventId)
   }
 
-  setEventIdAttribute(data) {
-    data.el.setAttribute(
-      'data-event-id', data.event._def.extendedProps.eventId
-    );
+  getEventModalHref(eventId) {
+    return `${window.location.origin}/events/${eventId}/update_modal`
   }
 
-  setActionAttribute(data) {
-    data.el.setAttribute(
-      'data-action', 'click->events--show#displayModal'
-    );
+  setEventModalDataRemote(data) {
+    data.el.setAttribute('data-remote', 'true')
   }
 
   addPlusIconToFutureDayCells(data, createEl) {
@@ -103,4 +97,10 @@ export default class extends Controller {
   formatDate(data) {
     return data.date.toLocaleString('fr-FR', { dateStyle: 'short' })
   }
+
+  // setCalendarNameAttribute(data) {
+  //   data.el.setAttribute(
+  //     'data-calendar-name', data.event._def.extendedProps.calendarName
+  //   );
+  // }
 }

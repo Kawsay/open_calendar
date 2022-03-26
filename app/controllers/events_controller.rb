@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy _show_modal]
+  before_action :set_event, only: %i[show edit update destroy update_modal]
   before_action :set_organizations, only: %i[new create edit update]
   before_action :set_current_team, only: %i[create]
   before_action :check_for_range_date!, only: %i[create update]
@@ -12,8 +12,14 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1 or /events/1.json
-  def show
+  def show; end
+
+  # GET /events/1/update_modal
+  def update_modal
     authorize @event
+    respond_to do |format|
+      format.js { render :update_modal }
+    end
   end
 
   # GET /events/new
@@ -68,9 +74,6 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-  # GET /events_modal/1
-  def _show_modal; end
 
   private
 

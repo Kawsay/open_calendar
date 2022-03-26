@@ -5,6 +5,10 @@ class EventPolicy < ApplicationPolicy
     false
   end
 
+  def update_modal?
+    user && user_have_access_to_this_calendar?
+  end
+
   def show?
     user && user_have_access_to_this_calendar?
   end

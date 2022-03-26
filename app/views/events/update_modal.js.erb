@@ -1,0 +1,8 @@
+var eventModalPlaceholder = document.querySelector('#show-event-modal')
+
+eventModalPlaceholder.innerHTML =
+  '<%= j render(partial: 'events/show_modal',
+                locals: { event: @event }) %>'
+
+var modal = new bootstrap.Modal(eventModalPlaceholder.children[0])
+modal.show()

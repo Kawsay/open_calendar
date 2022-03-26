@@ -22,12 +22,12 @@ Rails.application.routes.draw do
       resources :events, shallow: true
     end
   end
+  get '/events/:id/update_modal', to: 'events#update_modal'
 
   resources :organizations
   resources :secret_links, only: %i[create]
 
   post 'reset_teams', to: 'teams#destroy_all', as: 'reset_team'
-  get 'events_modal/:id', to: 'events#_show_modal', as: 'events_modal'
 
   # Errors
   get '/401', to: 'application#page_unauthorized', as: :page_unauthorized

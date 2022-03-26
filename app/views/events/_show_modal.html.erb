@@ -1,34 +1,32 @@
-<%= turbo_frame_tag 'show_event_modal' do %>
-  <div class='modal fade' tabindex='-1' role='dialog' aria-labelledby='show-event-label' aria-hidden='true' data-events--show-target="modal">
-    <div class='modal-dialog right' role='document'>
-      <div class='modal-content right'>
+<div class='modal fade' tabindex='-1' role='dialog' aria-labelledby='show-event-label' aria-hidden='true' data-events--show-target="modal">
+  <div class='modal-dialog right' role='document'>
+    <div class='modal-content right'>
 
-        <div class='modal-header'>
-          <div class='d-block'>
-            <h5 class='modal-title' id='show-event-label'>
-              <%= event.title %>
-            </h5>
-            <% if event.organization %>
-              <h6 class='mb-3 mt-2 text-muted'>
-                <%= event.organization.name %>
-              </h6>
+      <div class='modal-header'>
+        <div class='d-block'>
+          <h5 class='modal-title' id='show-event-label'>
+            <%= event.title %>
+          </h5>
+          <% if event.organization %>
+            <h6 class='mb-3 mt-2 text-muted'>
+              <%= event.organization.name %>
+            </h6>
           <% end %>
-          </div>
-          <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-            <span aria-hidden='true'></span>
-          </button>
         </div>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+          <span aria-hidden='true'></span>
+        </button>
+      </div>
 
-        <div class='modal-body'>
-          <div class='mb-5'>
-            <%= event.description %>
-          </div>
+      <div class='modal-body'>
+        <div class='mb-5'>
+          <%= event.description %>
         </div>
+      </div>
 
-        <div class='modal-footer'>
-          <button type='button' class='btn btn-outline-secondary col-12' data-dismiss='modal'>Fermer</button>
-        </div>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-outline-secondary col-12' data-dismiss='modal'>Fermer</button>
       </div>
     </div>
   </div>
-<% end %>
+</div>
