@@ -51,7 +51,10 @@ export default class extends Controller {
       },
 
       // Hooks
-      eventDidMount:   (data) => { this.setEventModalLink(data) },
+      eventDidMount:   (data) => {
+        this.setEventModalLink(data)
+        this.setVisibilityAttributes(data)
+      },
       dayCellDidMount: (data) => { this.addPlusIconToFutureDayCells(data) }
     });
 
@@ -62,6 +65,9 @@ export default class extends Controller {
     return document.getElementById('navbarDropdown').innerHTML
   }
 
+  //
+  // Functions to display modal showing information about an event
+  //
   setEventModalLink(data) {
     this.setEventModalHref(data)
     this.setEventModalDataRemote(data)
@@ -79,6 +85,10 @@ export default class extends Controller {
     data.el.setAttribute('data-remote', 'true')
   }
 
+  //
+  // Function to add a "+" icon to future days
+  //
+  // Add a HTML fragment to inside day cells containing classes "fc-day-future" or "fc-day-today"
   addPlusIconToFutureDayCells(data, createEl) {
     if(data.el.classList.contains("fc-day-future") || data.el.classList.contains("fc-day-today")) {
       var element = data.el.querySelectorAll(".fc-daygrid-day-frame > .fc-daygrid-day-bg")[0]
@@ -94,13 +104,34 @@ export default class extends Controller {
     }
   }
 
+  //
+  // Functions to show/hide a calendar and its related events
+  //
+  // Main function
+  setVisibilityAttributes(data) {
+    this.hideEvent(data)
+    this.setDataCalendarName(data)
+    this.setDataVisibilityTarget(data)
+  }
+
+  // Hide event at first load
+  hideEvent(data) {
+    data.el.style.display = 'none'
+    data.el.classList.remove('d-grid')
+  }
+
+  // Add data-calendar-name to events
+  setDataCalendarName(data) {
+    data.el.setAttribute('data-calendar-name', data.event._def.extendedProps.calendarName)
+  }
+
+  // Add data-calendar--visibility-target attribute to events
+  setDataVisibilityTarget(data) {
+    data.el.setAttribute('data-calendars--visibility-target', 'event')
+  }
+
+
   formatDate(data) {
     return data.date.toLocaleString('fr-FR', { dateStyle: 'short' })
   }
-
-  // setCalendarNameAttribute(data) {
-  //   data.el.setAttribute(
-  //     'data-calendar-name', data.event._def.extendedProps.calendarName
-  //   );
-  // }
 }
