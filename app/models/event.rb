@@ -13,7 +13,6 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  title                :string
-#  is_related_to_a_user :boolean          default(FALSE)
 #  calendar_id          :bigint           not null
 #
 class Event < ApplicationRecord

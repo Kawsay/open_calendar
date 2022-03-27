@@ -62,8 +62,9 @@
 
       <div>
         <div class="form-check form-switch">
-          <%= form.label :is_related_to_a_user, class: 'col-form-label' %>
-          <%= form.check_box :is_related_to_a_user,
+          <%= form.label 'Is related to an organization', class: 'col-form-label' %>
+          <%= form.check_box :is_related_to_an_organization,
+            name: '',
             class: 'form-check-input',
             data: {
               'action': 'click->events--form#toggle_users_field',

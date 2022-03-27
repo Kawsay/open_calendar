@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_26_152254) do
+ActiveRecord::Schema.define(version: 2022_03_27_114614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -94,7 +94,6 @@ ActiveRecord::Schema.define(version: 2022_03_26_152254) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
-    t.boolean "is_related_to_a_user", default: false
     t.bigint "calendar_id", null: false
     t.index ["calendar_id"], name: "index_events_on_calendar_id"
     t.index ["organization_id"], name: "index_events_on_organization_id"

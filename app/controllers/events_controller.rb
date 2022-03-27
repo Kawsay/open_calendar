@@ -113,7 +113,6 @@ class EventsController < ApplicationController
       :description,
       :organization_id,
       :file,
-      :is_related_to_a_user,
       :calendar_id,
       organizations_attributes: [:id]
     )
