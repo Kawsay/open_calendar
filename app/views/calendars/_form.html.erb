@@ -3,7 +3,7 @@
     <div id="error_explanation">
       <ul>
         <% new_calendar.errors.each do |error| %>
-          <li class="text-white"><%= error.full_message %></li>
+          <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
@@ -11,8 +11,8 @@
 
   <div class='d-flex align-items-center'>
     <div class="pe-1 d-block">
-      <%= form.label 'Choose your calendar\'s name', class: 'form-label text-white' %>
-      <%= form.text_field :name, placeholder: 'Calendar name...', class: 'form-control text-white' %>
+      <%= form.label 'Choose your calendar\'s name', class: 'form-label' %>
+      <%= form.text_field :name, placeholder: 'Calendar name...', class: 'form-control' %>
     </div>
 
     <div class="ms-auto px-0 align-self-end">

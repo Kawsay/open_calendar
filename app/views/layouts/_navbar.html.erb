@@ -15,7 +15,7 @@
               <% @teams.each do |team| %>
                 <li><%= link_to team.name, team_path(team), class: 'dropdown-item' %></li>
               <% end %>
-              <li><hr class='dropdown-divider text-white'></li>
+              <li><hr class='dropdown-divider'></li>
               <li><%= link_to 'Create a team', new_team_path, class: 'dropdown-item' %></li>
             </ul>
           </li>

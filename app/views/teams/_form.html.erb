@@ -3,7 +3,7 @@
     <div id="error_explanation">
       <ul>
         <% team.errors.each do |error| %>
-          <li class="text-white"><%= error.full_message %></li>
+          <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
@@ -11,8 +11,8 @@
 
   <div class='d-flex align-items-center'>
     <div class='d-block'>
-    <%= form.label 'Choose your team\'s name:', class: 'form-label text-white' %>
-    <%= form.text_field :name, placeholder: 'Team name...', class: 'form-control form-control-lg text-white' %>
+    <%= form.label 'Choose your team\'s name:', class: 'form-label' %>
+    <%= form.text_field :name, placeholder: 'Team name...', class: 'form-control form-control-lg' %>
     </div>
   </div>
 
