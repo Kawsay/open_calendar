@@ -4,6 +4,7 @@ $gray-900: #2a3135 !default;
 $gray-800: #2a3135 !default;
 $gray-700: #404241 !default;
 $gray-600: #414a4d !default;
+$gray-200: #e9ecef !default;
 
 // color-variables
 $purple: #A395C2 !default;
@@ -23,7 +24,7 @@ $secondary: $cyan !default;
 //
 // Settings for the `<body>` element
 $body-bg:    $gray-700 !default;
-// $body-color: $light-cyan !default;
+$body-color: $gray-200 !default;
 
 // Navbar
 //
