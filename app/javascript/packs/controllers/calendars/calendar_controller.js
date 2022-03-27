@@ -37,7 +37,11 @@ export default class extends Controller {
 
       // Events
       displayEventTime: false,
-      dayMaxEvents: 3,
+      // TODO: Find a way to limit the number of events. The options commented
+      // bellow makes the whole calendar scrollable, instead of limiting the
+      // number of events.
+      //   dayMaxEvents:    true,
+      //   dayMaxEventRows: 3,
       events: {
         eventLimitText: 'more',
         url:          '/api/v1/events',
