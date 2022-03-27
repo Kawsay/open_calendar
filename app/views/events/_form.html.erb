@@ -17,7 +17,7 @@
         <%= form.label :title, class: 'col-2 col-form-label' %>
         <div class="col-10">
           <%= form.text_field :title,
-            class: 'form-control text-dark',
+            class: 'form-control',
             data:  { 'events--form-target': 'titleField' }
           %>
         </div>
@@ -54,7 +54,7 @@
         <%= form.label :location, class: 'col-2 col-form-label' %>
         <div class="col-10">
           <%= form.text_field :location,
-            class: 'form-control text-dark',
+            class: 'form-control',
             data:  { 'events--form-target': 'locationField' }
           %>
         </div>
@@ -88,7 +88,7 @@
       <div class="form-group row mb-3">
         <%= form.label :description, class: 'mb-3' %>
         <%= form.rich_text_area :description,
-          class: 'form-control text-dark customized_min_height',
+          class: 'form-control customized_min_height',
           data:  { 'events--form-target': 'descriptionField' }
         %>
       </div>
