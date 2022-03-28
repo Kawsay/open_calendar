@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_27_114614) do
+ActiveRecord::Schema.define(version: 2022_03_28_120418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -73,6 +73,17 @@ ActiveRecord::Schema.define(version: 2022_03_27_114614) do
     t.bigint "team_id", default: 75, null: false
     t.index ["name"], name: "index_calendars_on_name"
     t.index ["team_id"], name: "index_calendars_on_team_id"
+  end
+
+  create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.string "commentable_type", null: false
+    t.bigint "commentable_id", null: false
+    t.integer "parent_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -184,6 +195,7 @@ ActiveRecord::Schema.define(version: 2022_03_27_114614) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "calendars", "teams"
+  add_foreign_key "comments", "users"
   add_foreign_key "events", "calendars"
   add_foreign_key "events", "organizations"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
