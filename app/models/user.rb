@@ -24,6 +24,7 @@ class User < ApplicationRecord
   has_many :teams, through: :adhesions
   has_many :calendars, through: :teams
   has_many :secret_links, dependent: :destroy
+  has_many :comments
 
   validates :email, presence: true
 
