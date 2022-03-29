@@ -1,4 +1,6 @@
-<%= form_with model: [commentable, comment], id: dom_id_for_records(commentable, comment) do |form| %>
+<% model = [local_assigns[:commentable], comment].compact %>
+
+<%= form_with model: model, id: dom_id_for_records(*model) do |form| %>
   <% if form.object.errors.any? %>
     <div class='alert alert-danger'>
       <% form.object.errors.full_messages.each do |message| %>
@@ -8,5 +10,9 @@
   <% end %>
 
   <%= form.rich_text_area :body %>
-  <%= form.submit class: 'btn btn-primary' %>
+
+  <div class="d-flex justify-content-between">
+    <span><%= link_to 'Cancel', comment, class: 'btn btn-sm btn-info' if form.object.persisted? %></span>
+    <span><%= form.submit class: 'btn btn-sm btn-primary' %></span>
+  </div>
 <% end %>
