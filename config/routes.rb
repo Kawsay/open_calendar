@@ -35,9 +35,6 @@ Rails.application.routes.draw do
   resources :organizations, only: %i[create]
   resources :secret_links, only: %i[create]
 
-  get '/events/:id/update_modal', to: 'events#update_modal'
-  post 'reset_teams',             to: 'teams#destroy_all', as: 'reset_team' # TODO: remove before v0
-
   #
   # Errors
   #

@@ -55,10 +55,7 @@ export default class extends Controller {
       },
 
       // Hooks
-      eventDidMount:   (data) => {
-        this.setEventModalLink(data)
-        this.setVisibilityAttributes(data)
-      },
+      eventDidMount:   (data) => { this.setEventLink(data) },
       dayCellDidMount: (data) => { this.addPlusIconToFutureDayCells(data) }
     });
 
@@ -69,30 +66,15 @@ export default class extends Controller {
     return document.getElementById('navbarDropdown').innerHTML
   }
 
-  //
-  // Functions to display modal showing information about an event
-  //
-  setEventModalLink(data) {
-    this.setEventModalHref(data)
-    this.setEventModalDataRemote(data)
+  setEventLink(data) {
+    data.el.href = this.getEventLinkLocation(data.event._def.extendedProps.eventId)
   }
 
-  setEventModalHref(data) {
-    data.el.href = this.getEventModalHref(data.event._def.extendedProps.eventId)
+  getEventLinkLocation(eventId) {
+    return `${window.location.origin}/events/${eventId}`
   }
 
-  getEventModalHref(eventId) {
-    return `${window.location.origin}/events/${eventId}/update_modal`
-  }
-
-  setEventModalDataRemote(data) {
-    data.el.setAttribute('data-remote', 'true')
-  }
-
-  //
-  // Function to add a "+" icon to future days
-  //
-  // Add a HTML fragment to inside day cells containing classes "fc-day-future" or "fc-day-today"
+  // Add a "+" button on today and future cells
   addPlusIconToFutureDayCells(data, createEl) {
     if(data.el.classList.contains("fc-day-future") || data.el.classList.contains("fc-day-today")) {
       var element = data.el.querySelectorAll(".fc-daygrid-day-frame > .fc-daygrid-day-bg")[0]

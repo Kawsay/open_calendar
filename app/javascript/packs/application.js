@@ -4,7 +4,7 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbo from "@hotwired/turbo"
+import Turbo from "@hotwired/turbo-rails"
 import { Application } from "@hotwired/stimulus"
 import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers"
 import * as ActiveStorage from "@rails/activestorage"

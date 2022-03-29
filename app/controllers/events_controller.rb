@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[show edit update destroy update_modal]
+  before_action :set_event, only: %i[edit update destroy]
   before_action :set_organizations, only: %i[new create edit update]
   before_action :set_current_team, only: %i[create]
   before_action :check_for_range_date!, only: %i[create update]
@@ -12,14 +12,12 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1 or /events/1.json
-  def show; end
+  def show
+    @event = Event.includes(comments: [:rich_text_body, :user]).find(params[:id])
+    authorize(@event)
 
-  # GET /events/1/update_modal
-  def update_modal
-    puts @event.inspect
-    authorize @event
     respond_to do |format|
-      format.js { render :update_modal }
+      format.html {}
     end
   end
 
