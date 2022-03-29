@@ -25,13 +25,14 @@ Rails.application.routes.draw do
   # Application
   #
   resources :teams do
-    resources :calendars do
-      resources :events, shallow: true do
-        resources :comments, module: :events
-      end
-    end
+    resources :calendars
   end
 
+  resources :events do
+    resources :comments, module: :events
+  end
+
+  resources :comments
   resources :organizations, only: %i[create]
   resources :secret_links, only: %i[create]
 
