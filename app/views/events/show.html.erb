@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-2 border-end">
+    <div>USERS</div>
+  </div>
+
+  <div class="col px-5">
+    <div class="d-flex justify-content-between">
+      <h2><%= @event.title %></h2>
+      <span>
+        <%= @event.start_date %>
+        <br>
+        <%= @event.end_date %>
+      </span>
+    </div>
+
+    <hr class="my-5">
+
+    <% if @event.location.present? %>
+      <div>
+        <h5>Location</h5>
+        <p><%= @event.location %></p>
+      </div>
+    <% end %>
+
+    <div class="my-5">
+      <h5>Description</h5>
+      <%= @event.description %>
+    </div>
+
+    <h5>Comments</h5>
+    <%= turbo_stream_from @event, :comments %>
+
+    <%= tag.div id: "#{dom_id(@event)}_comments" do %>
+      <%= render @event.comments %>
+    <% end %>
+
+    <%= render partial: 'comments/form', locals: { commentable: @event, comment: Comment.new } %>
+  </div>
+</div>
