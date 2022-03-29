@@ -32,8 +32,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :comments
-
   resources :organizations, only: %i[create]
   resources :secret_links, only: %i[create]
 
