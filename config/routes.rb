@@ -32,7 +32,10 @@ Rails.application.routes.draw do
     resources :comments, module: :events
   end
 
-  resources :comments
+  resources :comments do
+    resources :comments, module: :comments
+  end
+
   resources :organizations, only: %i[create]
   resources :secret_links, only: %i[create]
 

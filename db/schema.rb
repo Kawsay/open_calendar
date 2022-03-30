@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_120418) do
     t.uuid "user_id", null: false
     t.string "commentable_type", null: false
     t.uuid "commentable_id", null: false
-    t.integer "parent_id"
+    t.uuid "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-2 border-end">
+  <div class="col-md-2">
     <div>USERS</div>
   </div>
 
@@ -30,10 +30,10 @@
     <h5>Comments</h5>
     <%= turbo_stream_from @event, :comments %>
 
-    <%= tag.div id: "#{dom_id(@event)}_comments" do %>
-      <%= render @event.comments %>
-    <% end %>
-
     <%= render partial: 'comments/form', locals: { commentable: @event, comment: Comment.new } %>
+
+    <%= tag.div id: "#{dom_id(@event)}_comments" do %>
+      <%= render partial: 'comments/comment_with_replies', collection: @event.comments.where(parent_id: nil), as: :comment %>
+    <% end %>
   </div>
 </div>
