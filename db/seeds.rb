@@ -19,7 +19,8 @@ end
 Rails.logger.debug 'Creating a User'
 User.create!(
   email: 'foo@bar.com',
-  password: 'foobar'
+  password: 'foobar',
+  pseudonym: 'FooBarz'
 )
 
 # 5.times do
