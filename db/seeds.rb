@@ -4,7 +4,7 @@ require 'faker'
 
 Rails.logger.debug 'Destroying all records...'
 [
-  Document, Comment, Event, User, Organization, Calendar
+  Comment, Event, User, Organization, Team, Calendar
 ].map(&:destroy_all)
 
 Rails.logger.debug 'Creating a Doorkeeper::Application'
