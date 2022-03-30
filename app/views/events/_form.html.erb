@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(new_event) do %>
   <div class="container text-light">
-    <%= form_with(model: [current_team, calendars.first, new_event]) do |form| %>
+    <%= form_with(model: new_event) do |form| %>
       <% if new_event.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(new_event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -93,6 +93,8 @@
           data:  { 'events--form-target': 'descriptionField' }
         %>
       </div>
+
+      <%= form.hidden_field :team_id, value: current_team.id %>
 
       <div class="actions modal-footer">
         <%= form.submit class: 'btn btn-primary' %>

@@ -86,7 +86,7 @@ class EventsController < ApplicationController
   end
 
   def set_current_team
-    @current_team = Team.find(params[:team_id])
+    @current_team = Team.find(params.dig(:event, :team_id))
   end
 
   # In case user selects a range date, Flatpickr will send a String like
