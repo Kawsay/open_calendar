@@ -10,6 +10,8 @@ class Comment < ApplicationRecord
 
   validates :body, presence: true
 
+  self.implicit_order_column = 'created_at'
+
   after_create_commit do
     broadcast_append_to [commentable, :comments], target: "#{dom_id(parent || commentable)}_comments", partial: 'comments/comment_with_replies'
   end

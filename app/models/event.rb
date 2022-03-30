@@ -35,4 +35,6 @@ class Event < ApplicationRecord
   validates :title, presence: true
   validates :calendar_id, presence: true
   validates :start_date, presence: true
+
+  self.implicit_order_column = 'created_at'
 end
