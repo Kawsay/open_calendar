@@ -14,9 +14,6 @@ class EventsController < ApplicationController
   # GET /events/1 or /events/1.json
   def show
     # TODO: FIX N+1
-    # preloader = ActiveRecord::Associations::Preloader.new
-    # preloader.preload(@event.comments, [:user, :rich_text_body, {comments: [:comments, :user, :rich_text_body]}])
-
     @event = Event.includes([comments: [:rich_text_body, :user, :comments]]).find(params[:id])
 
     authorize(@event)
