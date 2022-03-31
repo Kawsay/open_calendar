@@ -28,6 +28,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true
 
+  after_create :set_gravatar_url
+
   self.implicit_order_column = 'created_at'
 
   def self.authenticate(email, password)
@@ -41,5 +43,9 @@ class User < ApplicationRecord
 
   def admin?
     false
+  end
+
+  def set_gravatar_url
+    update_attribute :gravatar_url, GravatarService.new(self.email).url
   end
 end

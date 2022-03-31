@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_30_170618) do
+ActiveRecord::Schema.define(version: 2022_03_31_123128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -188,6 +188,7 @@ ActiveRecord::Schema.define(version: 2022_03_30_170618) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "team_member_id"
     t.string "pseudonym", limit: 64
+    t.string "gravatar_url"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["pseudonym"], name: "index_users_on_pseudonym"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
