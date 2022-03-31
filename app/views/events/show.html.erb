@@ -20,6 +20,7 @@
         <h5>Location</h5>
         <p><%= @event.location %></p>
       </div>
+      <hr class="my-5">
     <% end %>
 
     <div class="my-5">
@@ -27,12 +28,14 @@
       <%= @event.description %>
     </div>
 
+    <hr class="my-5">
+
     <h5>Comments</h5>
     <%= turbo_stream_from @event, :comments %>
 
     <%= render partial: 'comments/form', locals: { commentable: @event, comment: Comment.new } %>
 
-    <%= tag.div id: "#{dom_id(@event)}_comments" do %>
+    <%= tag.div id: "#{dom_id(@event)}_comments", class: 'mb-5' do %>
       <%= render partial: 'comments/comment_with_replies', collection: @event.comments.where(parent_id: nil), as: :comment %>
     <% end %>
   </div>
