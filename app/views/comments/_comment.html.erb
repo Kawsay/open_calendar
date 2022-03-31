@@ -1,8 +1,9 @@
 <%= turbo_stream_from comment %>
 
 <%= turbo_frame_tag comment do %>
-  <div class="d-flex justify-content-between pt-3">
+  <div class="d-flex justify-content-between pt-2">
     <div>
+      <%= image_tag comment.user.gravatar_url, class: 'gravatar mb-2 me-2' %>
       <%= comment.user.pseudonym || comment.user.email %>
       ·
       <small class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</small>
