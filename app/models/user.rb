@@ -45,6 +45,8 @@ class User < ApplicationRecord
     false
   end
 
+  private
+
   def set_gravatar_url
     update_attribute :gravatar_url, GravatarService.new(self.email).url
   end
