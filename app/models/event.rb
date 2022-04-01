@@ -20,6 +20,8 @@ class Event < ApplicationRecord
   has_one :team, through: :calendar, source: :team
   belongs_to :organization, optional: true
   has_many :comments, as: :commentable
+  has_many :invitations, dependent: :destroy
+  has_many :attendees, through: :invitations, class_name: 'User', foreign_key: :user_id, source: :user
 
   accepts_nested_attributes_for :organization
 
