@@ -86,6 +86,31 @@
         </div>
       </div>
 
+      <div>
+        <div class="form-check form-switch">
+          <%= form.label 'Send invitations', class: 'col-form-label' %>
+          <%= form.check_box :send_invitations,
+            name: '',
+            class: 'form-check-input',
+            data: {
+              action: 'click->events--form#toggle_invitations_field',
+              'events--form-target': 'invitationsSwitch'
+            }
+          %>
+        </div>
+        <div class="form-group row mb-3" style="display:none" data-events--form-target="invitationsDiv">
+          <%= form.label :attendees_id, class: 'col-2 col-form-label' %>
+          <div class="col-10">
+            <%= form.collection_check_boxes :attendee_ids, attendees, :id, :pseudonym, {include_hidden: false}, data:  { 'events--form-target': 'attendeeIdField' } do |user_check_box| %>
+              <li class="list-unstyled form-check">
+                <%= user_check_box.check_box class: 'form-check-input' %>
+                <%= user_check_box.label class: 'form-check-label' %>
+              </li>
+            <% end %>
+          </div>
+        </div>
+
+
       <div class="form-group row mb-3">
         <%= form.label :description, class: 'mb-3' %>
         <%= form.rich_text_area :description,

@@ -9,6 +9,7 @@ class CalendarsController < ApplicationController
     @calendars     = Calendar.where(team: @current_team)
     @events        = Event.where(calendar: @calendars)
     @organizations = Organization.select(:id, :name)
+    @attendees     = @current_team.users.select(:id, :pseudonym)
     @new_event     = Event.new
 
     authorize Calendar.find_by(team: @current_team)

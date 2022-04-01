@@ -36,6 +36,7 @@ class EventsController < ApplicationController
     @event         = authorize Event.new(event_params)
     @organizations = Organization.select(:id, :name)
     @calendars     = Calendar.where(team: @current_team)
+    @attendees     = @current_team.users.select(:id, :pseudonym)
 
     respond_to do |format|
       if @event.save
@@ -88,7 +89,7 @@ class EventsController < ApplicationController
   end
 
   def set_current_team
-    @current_team = Team.find(params.dig(:event, :team_id))
+    @current_team = Team.includes(:users).find(params.dig(:event, :team_id))
   end
 
   # In case user selects a range date, Flatpickr will send a String like
@@ -114,6 +115,7 @@ class EventsController < ApplicationController
       :organization_id,
       :file,
       :calendar_id,
+      attendee_ids: [],
       organizations_attributes: [:id]
     )
   end

@@ -26,7 +26,7 @@ class User < ApplicationRecord
   has_many :secret_links, dependent: :destroy
   has_many :comments
   has_many :invitations, dependent: :destroy
-  has_many :appointments, through: :invitations, class_name: 'Event', foreign_key: :event_id, source: :event
+  has_many :appointments, through: :invitations, foreign_key: :event_id, source: :event
 
   validates :email, presence: true
 

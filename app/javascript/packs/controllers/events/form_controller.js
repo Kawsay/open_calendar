@@ -3,7 +3,8 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [
     "modal", "titleField", "dateField", "calendarIdField", "locationField",
-    "usersSwitch", "usersDiv", "userIdField", "descriptionField"
+    "usersSwitch", "usersDiv", "userIdField", "descriptionField",
+    "invitationsSwitch", "invitationsDiv"
   ]
 
   connect() {
@@ -28,6 +29,12 @@ export default class extends Controller {
       this.hide_users_field();
   }
 
+  toggle_invitations_field(event) {
+    this.invitationsSwitchTarget.checked ?
+      this.show_invitations_field() :
+      this.hide_invitations_field();
+  }
+
   configure_and_show_modal(event) {
     const date = event.target.dataset.date;
 
@@ -39,6 +46,7 @@ export default class extends Controller {
   reset_form_values() {
     this.fields.forEach((field) => { field.value = '' } );
     this.usersSwitchTarget.checked = false;
+    this.invitationsSwitchTarget.checked = false;
     this.hide_users_field();
   }
 
@@ -54,9 +62,19 @@ export default class extends Controller {
     this.usersDivTarget.style.display = 'flex';
   }
 
+  show_invitations_field() {
+    this.invitationsDivTarget.setAttribute('name', 'event[attendees_id]');
+    this.invitationsDivTarget.style.display = 'flex';
+  }
+
   hide_users_field() {
     this.usersDivTarget.removeAttribute('name', 'event[user_id]');
     this.usersDivTarget.style.display = 'none';
+  }
+
+  hide_invitations_field() {
+    this.invitationsDivTarget.removeAttribute('name', 'event[attendees_id]');
+    this.invitationsDivTarget.style.display = 'none';
   }
 
   configure_flatpickr(date) {
