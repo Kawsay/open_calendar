@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_31_123128) do
+ActiveRecord::Schema.define(version: 2022_04_01_093717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -110,6 +110,9 @@ ActiveRecord::Schema.define(version: 2022_03_31_123128) do
     t.index ["organization_id"], name: "index_events_on_organization_id"
   end
 
+# Could not dump table "invitations" because of following StandardError
+#   Unknown type 'invitation_status' for column 'status'
+
   create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
     t.bigint "application_id", null: false
@@ -201,6 +204,8 @@ ActiveRecord::Schema.define(version: 2022_03_31_123128) do
   add_foreign_key "comments", "users"
   add_foreign_key "events", "calendars"
   add_foreign_key "events", "organizations"
+  add_foreign_key "invitations", "events"
+  add_foreign_key "invitations", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "secret_links", "calendars"
