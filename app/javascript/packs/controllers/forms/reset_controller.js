@@ -1,12 +1,15 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["resetable"]
+  static targets = ["form", "resetable"]
+  static values = { type: String }
 
   connect() {
-    document.addEventListener('hide.bs.modal', (event) => {
-      this.reset();
-    });
+    if (this.hasTypeValue && this.typeValue === "modal") {
+      document.addEventListener('hide.bs.modal', (event) => {
+        this.reset();
+      });
+    }
   }
 
   reset() {

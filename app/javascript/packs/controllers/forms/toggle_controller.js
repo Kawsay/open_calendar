@@ -60,6 +60,10 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["div", "field"]
 
+  connect() {
+
+  }
+
   toggle(event) {
     var divId     = this.getDivId(event);
     var fieldName = this.getFieldName(event);

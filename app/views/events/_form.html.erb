@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(new_event) do %>
-  <div class="container text-light" data-controller="forms--toggle">
-    <%= form_with(model: new_event) do |form| %>
+  <div class="container text-light" data-controller="forms--toggle forms--reset" data-forms--reset-type-value="modal">
+    <%= form_with model: new_event do |form| %>
       <% if new_event.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(new_event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -18,7 +18,7 @@
         <div class="col-10">
           <%= form.text_field :title,
             class: 'form-control',
-            data:  { 'events--form-target': 'titleField' }
+            data:  { 'forms--reset-target': 'resetable' }
           %>
         </div>
       </div>
@@ -30,7 +30,7 @@
             class: 'form-control',
             data:  {
               behavior: 'flatpickr',
-              'events--form-target': 'dateField'
+              'forms--reset-target': 'resetable'
             }
           %>
         </div>
@@ -45,7 +45,7 @@
             :name,
             { include_blank: true },
             class: 'form-select',
-            data:  { 'events--form-target': 'calendarIdField' }
+            data:  { 'forms--reset-target': 'resetable' }
           %>
         </div>
       </div>
@@ -55,7 +55,7 @@
         <div class="col-10">
           <%= form.text_field :location,
             class: 'form-control',
-            data:  { 'events--form-target': 'locationField' }
+            data:  { 'forms--reset-target': 'resetable' }
           %>
         </div>
       </div>
@@ -70,7 +70,7 @@
               'action': 'click->forms--toggle#toggle',
               'forms--toggle-div-id': 'organization_id',
               'forms--toggle-field-name': 'event[organization_id]',
-              'events--form-target': 'usersSwitch'
+              'forms--reset-target': 'resetable'
             }
           %>
         </div>
@@ -84,7 +84,7 @@
               { include_blank: true },
               class: 'form-select',
               data:  {
-                'events--form-target': 'userIdField',
+                'forms--reset-target': 'resetable',
                 'forms--toggle-target': 'field',
                 'forms--toggle-field-name': 'event[organization_id]'
               } %>
@@ -100,7 +100,7 @@
             class: 'form-check-input',
             data: {
               action: 'click->forms--toggle#toggle',
-              'events--form-target': 'invitationsSwitch',
+              'forms--reset-target': 'resetable',
               'forms--toggle-div-id': 'attendees_id',
               'forms--toggle-field-name': 'event[attendee_ids][]'
             }
@@ -109,7 +109,7 @@
         <div class="form-group row mb-3" style="display:none" data-events--form-target="invitationsDiv" data-forms--toggle-target="div" data-forms--toggle-id="attendees_id">
           <%= form.label :attendees_id, class: 'col-2 col-form-label' %>
           <div class="col-10">
-            <%= form.collection_check_boxes :attendee_ids, attendees, :id, :pseudonym, {include_hidden: false}, data:  { 'events--form-target': 'attendeeIdField', 'forms--toggle-target': 'field', 'forms--toggle-field-name': 'event[attendee_ids][]' } do |user_check_box| %>
+            <%= form.collection_check_boxes :attendee_ids, attendees, :id, :pseudonym, {include_hidden: false}, data:  { 'forms--reset-target': 'resetable', 'forms--toggle-target': 'field', 'forms--toggle-field-name': 'event[attendee_ids][]' } do |user_check_box| %>
               <li class="list-unstyled form-check">
                 <%= user_check_box.check_box class: 'form-check-input' %>
                 <%= user_check_box.label class: 'form-check-label' %>
@@ -123,7 +123,7 @@
         <%= form.label :description, class: 'mb-3' %>
         <%= form.rich_text_area :description,
           class: 'form-control customized_min_height',
-          data:  { 'events--form-target': 'descriptionField' }
+          data:  { 'forms--reset-target': 'resetable' }
         %>
       </div>
 
