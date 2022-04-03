@@ -5,8 +5,6 @@ export default class extends Controller {
   static values = { type: String }
 
   connect() {
-    this.reset();
-
     if (this.scope.element.getAttribute('data-form-type') === 'modal') {
       document.addEventListener('hide.bs.modal', (event) => {
         this.reset();
