@@ -7,7 +7,7 @@ export default class extends Controller {
   connect() {
     this.reset();
 
-    if (this.hasTypeValue && this.typeValue === "modal") {
+    if (this.scope.element.getAttribute('data-form-type') === 'modal') {
       document.addEventListener('hide.bs.modal', (event) => {
         this.reset();
       });

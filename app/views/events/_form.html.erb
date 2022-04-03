@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(new_event) do %>
-  <div class="container text-light" data-controller="forms--toggle forms--reset" data-forms--reset-type-value="modal">
+  <div class="container text-light" data-controller="forms--toggle forms--reset" data-form-type="modal">
     <%= form_with model: new_event do |form| %>
       <% if new_event.errors.any? %>
         <div id="error_explanation">

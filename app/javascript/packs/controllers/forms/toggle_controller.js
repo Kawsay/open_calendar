@@ -61,7 +61,11 @@ export default class extends Controller {
   static targets = ["div", "field"]
 
   connect() {
-
+    if (this.scope.element.getAttribute('data-form-type') === 'modal') {
+      document.addEventListener('hide.bs.modal', (event) => {
+        this.hide();
+      });
+    }
   }
 
   toggle(event) {
@@ -74,22 +78,22 @@ export default class extends Controller {
   }
 
   show(divId, fieldName) {
-    this.showDiv(divId);
+    this.showDivs(divId);
     this.enableFields(fieldName);
   }
 
   hide(divId, fieldName) {
-    this.hideDiv(divId);
+    this.hideDivs(divId);
     this.disableFields(fieldName);
   }
 
-  showDiv(divId) {
+  showDivs(divId) {
     this.getDivs(divId).forEach((div) => {
       div.style.display = 'flex';
     })
   }
 
-  hideDiv(divId) {
+  hideDivs(divId) {
     this.getDivs(divId).forEach((div) => {
       div.style.display = 'none';
     })
@@ -108,15 +112,23 @@ export default class extends Controller {
   }
 
   getDivs(divId) {
-    return this.divTargets.filter((divTarget) => {
-      return divTarget.getAttribute('data-forms--toggle-id') == divId
-    })
+    if (divId) {
+      return this.divTargets.filter((divTarget) => {
+        return divTarget.getAttribute('data-forms--toggle-id') == divId
+      })
+    } else {
+      return this.divTargets
+    }
   }
 
   getFields(fieldName) {
-    return this.fieldTargets.filter((fieldTarget) => {
-      return fieldTarget.getAttribute('data-forms--toggle-field-name') == fieldName
-    })
+    if (fieldName) {
+      return this.fieldTargets.filter((fieldTarget) => {
+        return fieldTarget.getAttribute('data-forms--toggle-field-name') == fieldName
+      })
+    } else {
+      return this.fieldTargets
+    }
   }
 
   getDivId(e) {
