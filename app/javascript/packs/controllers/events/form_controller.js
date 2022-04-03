@@ -23,18 +23,6 @@ export default class extends Controller {
     });
   }
 
-  toggle_users_field(event) {
-    this.usersSwitchTarget.checked ?
-      this.show_users_field() :
-      this.hide_users_field();
-  }
-
-  toggle_invitations_field(event) {
-    this.invitationsSwitchTarget.checked ?
-      this.show_invitations_field() :
-      this.hide_invitations_field();
-  }
-
   configure_and_show_modal(event) {
     const date = event.target.dataset.date;
 
@@ -47,7 +35,6 @@ export default class extends Controller {
     this.fields.forEach((field) => { field.value = '' } );
     this.usersSwitchTarget.checked = false;
     this.invitationsSwitchTarget.checked = false;
-    this.hide_users_field();
   }
 
   reset_form_errors() {
@@ -55,26 +42,6 @@ export default class extends Controller {
     if (document.contains(error_explanation)) error_explanation.remove();
 
     this.fields.forEach((field) => { field.classList.remove('is-invalid') });
-  }
-
-  show_users_field() {
-    this.usersDivTarget.setAttribute('name', 'event[user_id]');
-    this.usersDivTarget.style.display = 'flex';
-  }
-
-  show_invitations_field() {
-    this.invitationsDivTarget.setAttribute('name', 'event[attendees_id]');
-    this.invitationsDivTarget.style.display = 'flex';
-  }
-
-  hide_users_field() {
-    this.usersDivTarget.removeAttribute('name', 'event[user_id]');
-    this.usersDivTarget.style.display = 'none';
-  }
-
-  hide_invitations_field() {
-    this.invitationsDivTarget.removeAttribute('name', 'event[attendees_id]');
-    this.invitationsDivTarget.style.display = 'none';
   }
 
   configure_flatpickr(date) {
@@ -97,9 +64,9 @@ export default class extends Controller {
     this.modal.show();
   }
 
- hide_modal() {
-   this.modal.hide();
- }
+  hide_modal() {
+    this.modal.hide();
+  }
 
   get modal() {
     if (this._modal == undefined) {
