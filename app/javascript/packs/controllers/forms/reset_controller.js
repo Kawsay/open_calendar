@@ -5,6 +5,8 @@ export default class extends Controller {
   static values = { type: String }
 
   connect() {
+    this.reset();
+
     if (this.hasTypeValue && this.typeValue === "modal") {
       document.addEventListener('hide.bs.modal', (event) => {
         this.reset();
