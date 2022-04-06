@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(new_event) do %>
-  <div class="container text-light" data-controller="forms--toggle forms--reset" data-form-type="modal">
+  <div class="container text-light">
     <%= form_with model: new_event, data: { controller: 'forms--toggle forms--reset', form_type: 'modal' } do |form| %>
       <% if new_event.errors.any? %>
         <div id="error_explanation">
@@ -30,8 +30,10 @@
             class: 'form-control',
             data:  {
               behavior: 'flatpickr',
-              'forms--reset-target': 'resetable'
-            }
+              'forms--reset-target': 'resetable',
+              'events--form-target': 'dateField'
+            },
+            value: new_event.start_date&.strftime('%d/%m/%Y %H:%M')
           %>
         </div>
       </div>

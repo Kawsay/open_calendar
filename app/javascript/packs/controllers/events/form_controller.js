@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["modal"]
+  static targets = ["dateField", "modal"]
 
   connect() {
     this.element.addEventListener('turbo:submit-end', (event) => {
@@ -11,13 +11,18 @@ export default class extends Controller {
     });
 
     this.element.addEventListener('turbo:before-render', (event) => {
-      this.reconfigure_flatpickr();
+      const date = event.target.dataset.date
+      this.configure_flatpickr(date);
     });
   }
 
-  configure_and_show_modal(event) {
-    const date = event.target.dataset.date;
+  dateFieldTargetConnected(element) {
+    const date = element.value
+    this.configure_flatpickr(date)
+  }
 
+  configure_and_show_modal(event) {
+    const date = event.target.dataset.date
     this.configure_flatpickr(date);
     this.show_modal();
   }
