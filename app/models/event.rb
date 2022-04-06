@@ -16,6 +16,8 @@
 #  calendar_id          :bigint           not null
 #
 class Event < ApplicationRecord
+  include Flatpickrable
+
   belongs_to :calendar, optional: true
   has_one :team, through: :calendar, source: :team
   belongs_to :organization, optional: true

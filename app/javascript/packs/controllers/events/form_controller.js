@@ -16,8 +16,7 @@ export default class extends Controller {
   }
 
   dateFieldTargetConnected(element) {
-    const date = element.value
-    this.configure_flatpickr(date)
+    this.configure_flatpickr(element.value)
   }
 
   configure_and_show_modal(event) {
