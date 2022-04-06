@@ -1,5 +1,7 @@
-<%= turbo_stream.update 'calendar' do %>
-  <%= render partial: 'calendars/calendar' %>
+<% if @event.persisted? %>
+  <%= turbo_stream.update 'calendar' do %>
+    <%= render partial: 'calendars/calendar' %>
+  <% end %>
 <% end %>
 
 <%= turbo_stream.replace 'new_event' do %>
