@@ -6,25 +6,25 @@ export default class extends Controller {
   connect() {
     this.element.addEventListener('turbo:submit-end', (event) => {
       if (event.detail.fetchResponse.response.status === 303 ) {
-        this.hide_modal();
+        this.hideModal();
       }
     });
 
     this.element.addEventListener('turbo:before-render', (event) => {
-      this.configure_flatpickr(this.getStartDateFromEvent(event));
+      this.configureFlatpickr(this.getStartDateFromEvent(event));
     });
   }
 
   dateFieldTargetConnected(element) {
-    this.configure_flatpickr(element.value)
+    this.configureFlatpickr(element.value)
   }
 
-  configure_and_show_modal(event) {
-    this.configure_flatpickr(this.getStartDateFromEvent(event));
-    this.show_modal();
+  configureAndShowModal(event) {
+    this.configureFlatpickr(this.getStartDateFromEvent(event));
+    this.showModal();
   }
 
-  configure_flatpickr(date) {
+  configureFlatpickr(date) {
     flatpickr("[data-behavior='flatpickr']", {
       altInput:      true,
       altFormat:     'd F Y',
@@ -39,11 +39,11 @@ export default class extends Controller {
     return event.target.dataset.date
   }
 
-  show_modal() {
+  showModal() {
     this.modal.show();
   }
 
-  hide_modal() {
+  hideModal() {
     this.modal.hide();
   }
 

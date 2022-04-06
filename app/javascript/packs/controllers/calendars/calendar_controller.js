@@ -81,7 +81,7 @@ export default class extends Controller {
       var plusIconElement =
         `<div class='add-event'>
            <img src=${PlusIcon} width="20" height="20"
-             data-action="click->events--form#configure_and_show_modal"
+             data-action="click->events--form#configureAndShowModal"
              data-date="${this.formatDate(data)}"
            >
          </div>`
