@@ -11,8 +11,7 @@ export default class extends Controller {
     });
 
     this.element.addEventListener('turbo:before-render', (event) => {
-      const date = event.target.dataset.date
-      this.configure_flatpickr(date);
+      this.configure_flatpickr(this.getStartDateFromEvent(event));
     });
   }
 
@@ -22,8 +21,7 @@ export default class extends Controller {
   }
 
   configure_and_show_modal(event) {
-    const date = event.target.dataset.date
-    this.configure_flatpickr(date);
+    this.configure_flatpickr(this.getStartDateFromEvent(event));
     this.show_modal();
   }
 
@@ -36,6 +34,10 @@ export default class extends Controller {
       defaultDate:   date,
       mode:          'range',
     });
+  }
+
+  getStartDateFromEvent(event) {
+    return event.target.dataset.date
   }
 
   show_modal() {
