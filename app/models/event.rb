@@ -43,5 +43,8 @@ class Event < ApplicationRecord
 
   self.implicit_order_column = 'created_at'
 
-  multisearchable against: [:title, :description, :location]
+  multisearchable(
+    against:   [:title, :description, :location],
+    update_if: :description_changed? || :title_changed? || :location_changed?
+  )
 end

@@ -35,7 +35,10 @@ class Calendar < ApplicationRecord
 
   scope :of_user, ->(user) { where(team: user.teams) }
 
-  multisearchable against: [:name]
+  multisearchable(
+    against:   [:name],
+    update_if: :name_changed?
+  )
 
   private
 

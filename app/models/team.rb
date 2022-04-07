@@ -23,5 +23,8 @@ class Team < ApplicationRecord
   scope :by_favorite, -> { order(visit_count: :desc) }
   scope :favorite, -> { order(visit_count: :desc).first }
 
-  multisearchable against: [:name]
+  multisearchable(
+    against:   [:name],
+    update_if: :name_changed?
+  )
 end
