@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'global-search-results' do %>
+<%= turbo_frame_tag 'global-search-results', data: { 'layout--visibility-target': 'hideable' } do %>
 
   <div class="position-absolute until-limit-width" style="z-index: 3">
     <% if results.present? %>

@@ -30,12 +30,12 @@
         <% end %>
 
         <% if user_signed_in? %>
-          <div>
+          <div data-controller="layout--visibility" data-action="click@window->layout--visibility#hideIfOutsideClick">
             <%= form_with url: '/search', method: :post, class: 'me-2', data: { controller: 'forms--submission', 'forms--submission-target': 'form' } do |form| %>
-              <%= form.text_field :query, class: 'form-control', data: { action: 'input->forms--submission#submit' }, oninput: 'console.log(this);' %>
+              <%= form.text_field :query, class: 'form-control', data: { action: 'input->forms--submission#submit' } %>
             <% end %>
 
-            <div id="global-search-results"></div>
+            <div id="global-search-results" data-layout--visibility-target="hideable"></div>
           </div>
         <% end %>
 
