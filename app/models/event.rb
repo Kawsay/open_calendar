@@ -30,16 +30,16 @@ class Event < ApplicationRecord
 
   has_rich_text :description
 
+  validates :title, presence: true
+  validates :calendar_id, presence: true
+  validates :start_date, presence: true
+
   scope :of_team, ->(team_name) { where(team: { name: team_name }) }
   scope :future, -> { where('start_date >= ?', DateTime.now) }
   scope :past, -> { where('start_date < ?', DateTime.now) }
   scope :after, ->(date) { where('start_date >= ?', date) }
   scope :before, ->(date) { where('start_date < ?', date) }
   scope :between_dates, ->(start_date, end_date) { after(start_date).before(end_date) }
-
-  validates :title, presence: true
-  validates :calendar_id, presence: true
-  validates :start_date, presence: true
 
   self.implicit_order_column = 'created_at'
 
