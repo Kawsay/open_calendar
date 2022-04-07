@@ -17,6 +17,7 @@
 #
 class Event < ApplicationRecord
   include Flatpickrable
+  include PgSearch::Model
 
   belongs_to :calendar, optional: true
   has_one :team, through: :calendar, source: :team
@@ -41,4 +42,6 @@ class Event < ApplicationRecord
   validates :start_date, presence: true
 
   self.implicit_order_column = 'created_at'
+
+  multisearchable against: [:title, :description, :location]
 end

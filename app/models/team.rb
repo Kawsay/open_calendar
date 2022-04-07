@@ -11,6 +11,8 @@
 #  visit_count :integer
 #
 class Team < ApplicationRecord
+  include PgSearch::Model
+
   has_many :adhesions, dependent: :destroy
   has_many :users, through: :adhesions
   has_many :calendars, dependent: :destroy
@@ -20,4 +22,6 @@ class Team < ApplicationRecord
   scope :of_user, ->(user) { where(adhesions: user.adhesions) }
   scope :by_favorite, -> { order(visit_count: :desc) }
   scope :favorite, -> { order(visit_count: :desc).first }
+
+  multisearchable against: [:name]
 end

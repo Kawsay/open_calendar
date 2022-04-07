@@ -14,6 +14,7 @@
 #
 class Calendar < ApplicationRecord
   include Colorable
+  include PgSearch::Model
 
   NAME_VALIDATOR_REGEX     = /\A[\w\s,.:?!'\-_]+\z/
   BG_COLOR_VALIDATOR_REGEX = /\A#[0-9a-fA-F]{6}\z/
@@ -33,6 +34,8 @@ class Calendar < ApplicationRecord
   before_validation :set_text_color
 
   scope :of_user, ->(user) { where(team: user.teams) }
+
+  multisearchable against: [:name]
 
   private
 
