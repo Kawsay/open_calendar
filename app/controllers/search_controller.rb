@@ -13,10 +13,6 @@ class SearchController < ApplicationController
       @results = nil
     end
 
-
-    puts "RESULTS:"
-    puts @results.inspect
-
     render turbo_stream: turbo_stream.replace(
       'global-search-results',
       partial: 'search/global_search_result',
