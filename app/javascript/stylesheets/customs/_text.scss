@@ -1,4 +1,10 @@
 .truncated-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vertical-fading-text {
     background: -webkit-linear-gradient(#333, #eee);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

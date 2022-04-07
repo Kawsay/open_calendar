@@ -1,0 +1,36 @@
+<%= turbo_frame_tag 'global-search-results' do %>
+
+  <div class="position-absolute until-limit-width" style="z-index: 3">
+    <% if results.present? %>
+      <ul class="list-group">
+
+        <% results.each do |result| %>
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+              <h4><%= result.first %></h4>
+              <span class="badge bg-primary rounded-pill"><%= result.last.size %></span>
+            </div>
+
+            <div>
+              <ul class="ps-1">
+                <% result.last.each do |record| %>
+                  <!-- TODO: link_to, requires UUID on both Team & Calendar -->
+                  <li class="truncated-text"><%= record.content %></li>
+                <% end %>
+              </ul>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+
+    <% else %>
+
+      <div class="bg-white rounded p-3 text-dark ">
+        <!-- TODO: I18n -->
+        <h4 class="m-0">No result found !</h4>
+      </div>
+
+    <% end %>
+  </div>
+
+<% end %>

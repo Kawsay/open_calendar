@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   resources :organizations, only: %i[create]
   resources :secret_links, only: %i[create]
 
+  post '/search', to: 'search#search'
+
   #
   # Errors
   #
