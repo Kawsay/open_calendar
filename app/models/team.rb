@@ -27,4 +27,6 @@ class Team < ApplicationRecord
     against:   [:name],
     update_if: :name_changed?
   )
+
+  pg_search_scope :search_by_name, against: :name
 end
