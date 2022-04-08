@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_07_122516) do
+ActiveRecord::Schema.define(version: 2022_04_08_101426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -66,13 +66,13 @@ ActiveRecord::Schema.define(version: 2022_04_07_122516) do
     t.index ["user_id"], name: "index_adhesions_on_user_id"
   end
 
-  create_table "calendars", force: :cascade do |t|
+  create_table "calendars", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "background_color", limit: 7
     t.string "text_color"
-    t.bigint "team_id", default: 75, null: false
+    t.uuid "team_id"
     t.index ["name"], name: "index_calendars_on_name"
     t.index ["team_id"], name: "index_calendars_on_team_id"
   end
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2022_04_07_122516) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
-    t.bigint "calendar_id", null: false
+    t.uuid "calendar_id"
     t.index ["calendar_id"], name: "index_events_on_calendar_id"
     t.index ["organization_id"], name: "index_events_on_organization_id"
   end
@@ -177,15 +177,15 @@ ActiveRecord::Schema.define(version: 2022_04_07_122516) do
     t.string "slug", limit: 16, null: false
     t.integer "validity_period", default: 1, null: false
     t.integer "visit_count", default: 0, null: false
-    t.bigint "calendar_id", null: false
     t.uuid "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "calendar_id"
     t.index ["calendar_id"], name: "index_secret_links_on_calendar_id"
     t.index ["user_id"], name: "index_secret_links_on_user_id"
   end
 
-  create_table "teams", force: :cascade do |t|
+  create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", default: "", null: false
