@@ -32,7 +32,7 @@
         <% if user_signed_in? %>
           <div data-controller="layout--visibility" data-action="click@window->layout--visibility#hideIfOutsideClick">
             <%= form_with url: '/search', method: :post, class: 'me-2', data: { controller: 'forms--submission', 'forms--submission-target': 'form' } do |form| %>
-              <%= form.text_field :query, class: 'form-control', data: { action: 'input->forms--submission#submit' } %>
+              <%= form.text_field :query, class: 'form-control', placeholder: 'Search...', data: { action: 'input->forms--submission#submit' } %>
             <% end %>
 
             <div id="global-search-results" data-layout--visibility-target="hideable"></div>
