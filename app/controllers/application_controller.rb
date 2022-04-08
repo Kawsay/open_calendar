@@ -27,9 +27,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_or_favorite_team
-    if controller_name == 'teams'
+    if user_signed_in? && controller_name == 'teams'
       @current_team ||= params&.key?(:id) ? Team.find(params[:id]) : current_user.favorite_team
-    else
+    elsif user_signed_in?
       @current_team ||= params&.key?(:team_id) ? Team.find(params[:team_id]) : current_user.favorite_team
     end
   end
