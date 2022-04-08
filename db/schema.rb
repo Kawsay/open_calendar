@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_08_103314) do
+ActiveRecord::Schema.define(version: 2022_04_08_111425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -165,10 +165,10 @@ ActiveRecord::Schema.define(version: 2022_04_08_103314) do
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text "content"
-    t.string "searchable_type"
-    t.bigint "searchable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "searchable_type"
+    t.uuid "searchable_id"
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
