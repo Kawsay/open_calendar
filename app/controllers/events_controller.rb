@@ -3,7 +3,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[edit update destroy]
   before_action :set_organizations, only: %i[new create edit update]
-  before_action :set_current_team, only: %i[create]
   before_action :check_for_range_date!, only: %i[create update]
 
   # GET /events or /events.json
@@ -86,10 +85,6 @@ class EventsController < ApplicationController
 
   def set_organizations
     @organizations = Organization.select(:id, :name)
-  end
-
-  def set_current_team
-    @current_team = Team.find(params.dig(:event, :team_id))
   end
 
   # In case user selects a range date, Flatpickr will send a String like

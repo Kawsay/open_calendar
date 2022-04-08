@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class CalendarsController < ApplicationController
-  before_action :set_teams, only: %i[index create]
-  before_action :set_current_or_favorite_team, only: %i[index new create]
   before_action :build_new_calendar, only: %i[index new]
 
   def index
@@ -40,14 +38,6 @@ class CalendarsController < ApplicationController
   end
 
   private
-
-  def set_teams
-    @teams = Team.of_user(current_user).by_favorite if user_signed_in?
-  end
-
-  def set_current_or_favorite_team
-    @current_team = params.key?(:team_id) ? Team.find(params[:team_id]) : current_user.favorite_team
-  end
 
   def build_new_calendar
     @new_calendar = @current_team.dup.calendars.build

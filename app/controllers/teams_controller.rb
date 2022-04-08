@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
-  before_action :set_teams, only: %i[show]
-  before_action :set_current_or_favorite_team, only: %i[show], if: :teams?
   before_action :set_organizations, only: %i[show], if: :teams?
   before_action :build_new_calendar, only: %i[show], if: :teams?
   before_action :build_current_user_team, only: %i[new]
@@ -51,16 +49,8 @@ class TeamsController < ApplicationController
 
   private
 
-  def set_teams
-    @teams = current_user.teams if current_user
-  end
-
   def build_current_user_team
     @team = current_user.dup.teams.build
-  end
-
-  def set_current_or_favorite_team
-    @current_team = params&.key?(:id) ? Team.includes(calendars: :events).find(params[:id]) : @teams.first
   end
 
   def build_new_calendar
