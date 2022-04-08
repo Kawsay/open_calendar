@@ -24,7 +24,7 @@ class User < ApplicationRecord
   has_many :teams, through: :adhesions
   has_many :calendars, through: :teams
   has_many :secret_links, dependent: :destroy
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :invitations, dependent: :destroy
   has_many :appointments, through: :invitations, foreign_key: :event_id, source: :event
 
