@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_08_101426) do
+ActiveRecord::Schema.define(version: 2022_04_08_103314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -60,9 +60,8 @@ ActiveRecord::Schema.define(version: 2022_04_08_101426) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "user_id"
-    t.bigint "team_id"
+    t.uuid "team_id"
     t.index ["team_id"], name: "index_adhesions_on_team_id"
-    t.index ["user_id", "team_id"], name: "index_adhesions_on_user_id_and_team_id"
     t.index ["user_id"], name: "index_adhesions_on_user_id"
   end
 
