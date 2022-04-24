@@ -55,7 +55,10 @@ export default class extends Controller {
       },
 
       // Hooks
-      eventDidMount:   (data) => { this.setEventLink(data) },
+      eventDidMount:   (data) => {
+        this.setEventLink(data);
+        this.setVisibilityAttributes(data);
+      },
       dayCellDidMount: (data) => { this.addPlusIconToFutureDayCells(data) }
     });
 
