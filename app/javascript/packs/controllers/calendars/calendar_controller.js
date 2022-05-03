@@ -87,17 +87,19 @@ export default class extends Controller {
 
   // Add a "+" button on today and future cells
   addPlusIconToFutureDayCells(data, createEl) {
-    if(data.el.classList.contains("fc-day-future") || data.el.classList.contains("fc-day-today")) {
-      var element = data.el.querySelectorAll(".fc-daygrid-day-frame > .fc-daygrid-day-bg")[0]
-      var plusIconElement =
-        `<div class='add-event'>
-           <img src=${PlusIcon} width="20" height="20"
-             data-action="click->events--form#configureAndShowModal"
-             data-date="${this.formatDate(data)}"
-           >
-         </div>`
+    if (!this.getCurrentTeam() === null) {
+      if(data.el.classList.contains("fc-day-future") || data.el.classList.contains("fc-day-today")) {
+        var element = data.el.querySelectorAll(".fc-daygrid-day-frame > .fc-daygrid-day-bg")[0]
+        var plusIconElement =
+          `<div class='add-event'>
+             <img src=${PlusIcon} width="20" height="20"
+               data-action="click->events--form#configureAndShowModal"
+               data-date="${this.formatDate(data)}"
+             >
+           </div>`
 
-      element.innerHTML = element.innerHTML + plusIconElement
+        element.innerHTML = element.innerHTML + plusIconElement
+      }
     }
   }
 
