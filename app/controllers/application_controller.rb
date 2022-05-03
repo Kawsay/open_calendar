@@ -8,20 +8,6 @@ class ApplicationController < ActionController::Base
   before_action :set_current_or_favorite_team, unless: :api?
   after_action :verify_authorized, unless: :devise_controller?
 
-  def page_unauthorized
-    if user_signed_in?
-      redirect_to login_redirect_path
-    else
-      render file: 'public/401.html', status: :unauthorized
-    end
-  end
-
-  private
-
-  def login_redirect_path
-    stored_location_for(:user) || root_path
-  end
-
   def set_teams
     @teams ||= current_user.teams.by_favorite if user_signed_in?
   end

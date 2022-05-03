@@ -22,9 +22,9 @@ export default class extends Controller {
 
       // Style and display config
       headerToolbar: {
-        left: 'prev,next today',
+        left: '',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,listWeek'
+        right: 'today prev,next'
       },
       initialView: 'dayGridMonth',
       themeSystem: 'bootstrap5',
@@ -50,7 +50,8 @@ export default class extends Controller {
         startParam:   'event[start_date]',
         endParam:     'event[end_date]',
         extraParams: {
-          'event[team_name]': this.getCurrentTeam()
+          'event[team_name]':   this.getCurrentTeam(),
+          'event[calendar_id]': this.getCalendarId()
         },
       },
 
@@ -66,7 +67,14 @@ export default class extends Controller {
   }
 
   getCurrentTeam() {
-    return document.getElementById('navbarDropdown').innerHTML
+    var navbarDropdown = document.getElementById('navbarDropdown')
+    return navbarDropdown ? navbarDropdown.innerHTML : null
+  }
+
+  getCalendarId() {
+    if (/calendars\/(?:[\w-]+)/.test(document.URL)) {
+      return document.URL.split('/').pop()
+    }
   }
 
   setEventLink(data) {

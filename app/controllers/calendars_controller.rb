@@ -2,6 +2,7 @@
 
 class CalendarsController < ApplicationController
   before_action :build_new_calendar, only: %i[index new]
+  skip_before_action :authenticate_user!, only: :show
 
   def index
     @calendars     = Calendar.where(team: @current_team)
@@ -11,6 +12,10 @@ class CalendarsController < ApplicationController
     @new_event     = Event.new
 
     authorize Calendar.find_by(team: @current_team)
+  end
+
+  def show
+    @calendar = authorize(Calendar.find(params[:id]))
   end
 
   def new

@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   root to: 'teams#show'
 
   #
-  # Authentication
+  # Authentication / Authorization
   #
   devise_for :users
+
 
   use_doorkeeper do
     skip_controllers :authorizations, :applications, :authorized_applications
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
   # Application
   #
   resources :teams do
-    resources :calendars
+    resources :calendars, shallow: true
   end
 
   resources :events do
@@ -37,12 +38,8 @@ Rails.application.routes.draw do
   end
 
   resources :organizations, only: %i[create]
-  resources :secret_links, only: %i[create]
+  resources :share_links, only: %i[create]
 
+  get '/calendars/shared/:token', to: 'share_links#authorize_request', constraints: { token: /[^\/]+/ }
   post '/search', to: 'search#search'
-
-  #
-  # Errors
-  #
-  get '/401', to: 'application#page_unauthorized', as: :page_unauthorized
 end

@@ -6,7 +6,7 @@ class CalendarPolicy < ApplicationPolicy
   end
 
   def show?
-    user && owner?
+    true
   end
 
   def create?

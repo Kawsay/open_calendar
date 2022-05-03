@@ -22,13 +22,15 @@
   </div>
 
   <div>
-    <%= image_tag 'share.svg',
-      size: '15x15',
-      data: {
-        bs_toggle: "calendar_#{calendar.id}_popover",
-        bs_content: render(partial: 'calendars/calendar_share_popover_content', locals: { calendar_id: calendar.id, user_id: current_user.id }).html_safe,
-        popover_target: 'htmlPopover'
-     }
-    %>
+    <% if current_user %>
+      <%= image_tag 'share.svg',
+        size: '15x15',
+        data: {
+          bs_toggle: "calendar_#{calendar.id}_popover",
+          bs_content: render(partial: 'calendars/calendar_share_popover_content', locals: { calendar_id: calendar.id, user_id: current_user.id }).html_safe,
+          popover_target: 'htmlPopover'
+       }
+      %>
+    <% end %>
   </div>
 </div>

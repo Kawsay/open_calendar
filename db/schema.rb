@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_08_111425) do
+ActiveRecord::Schema.define(version: 2022_04_24_121957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -172,18 +172,6 @@ ActiveRecord::Schema.define(version: 2022_04_08_111425) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
-  create_table "secret_links", force: :cascade do |t|
-    t.string "slug", limit: 16, null: false
-    t.integer "validity_period", default: 1, null: false
-    t.integer "visit_count", default: 0, null: false
-    t.uuid "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.uuid "calendar_id"
-    t.index ["calendar_id"], name: "index_secret_links_on_calendar_id"
-    t.index ["user_id"], name: "index_secret_links_on_user_id"
-  end
-
   create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -218,6 +206,4 @@ ActiveRecord::Schema.define(version: 2022_04_08_111425) do
   add_foreign_key "invitations", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
-  add_foreign_key "secret_links", "calendars"
-  add_foreign_key "secret_links", "users"
 end

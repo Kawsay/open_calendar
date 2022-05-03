@@ -1,11 +1,10 @@
 <div class='input-group'>
   <%= link_to(
     'Generate a secret link',
-     secret_links_path(
+     share_links_path(
        params: {
-         secret_link: {
+         share_link: {
            calendar_id: calendar_id,
-           user_id:     user_id
          }
        }
      ),

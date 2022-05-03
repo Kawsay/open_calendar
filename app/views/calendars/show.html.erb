@@ -1,0 +1,11 @@
+<div class="row" data-controller="calendars--visibility">
+  <div class="col-2" data-controller="popover">
+    <%= turbo_frame_tag "calendar-sidebar" do %>
+      <%= render partial: 'calendars/calendar_sidebar', locals: { calendar: @calendar } %>
+    <% end %>
+  </div>
+
+  <div class="col-10">
+    <%= render partial: 'calendars/calendar' %>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class='row'>
+  <div class='col-10'>
+    <div data-controller="events--form events--show">
+      <%= render partial: 'calendars/calendar' %>
+
+      <%= render partial: 'events/add_event_modal',
+        locals: { new_event:     new_event,
+                  current_team:  current_team,
+                  calendars:     calendars,
+                  organizations: organizations,
+                  attendees:     attendees } %>
+
+      <div id='show-event-modal'></div>
+    </div>
+  </div>
+</div>

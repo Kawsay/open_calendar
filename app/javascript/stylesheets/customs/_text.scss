@@ -4,6 +4,11 @@
   text-overflow: ellipsis;
 }
 
+.one-line-text {
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
 .vertical-fading-text {
     background: -webkit-linear-gradient(#333, #eee);
     -webkit-background-clip: text;
