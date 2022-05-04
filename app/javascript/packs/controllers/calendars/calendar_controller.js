@@ -82,7 +82,9 @@ export default class extends Controller {
   }
 
   getEventLinkLocation(eventId) {
-    return `${window.location.origin}/events/${eventId}`
+    var locale = window.location.pathname.split('/')[1]
+
+    return `${window.location.origin}/${locale}/events/${eventId}`
   }
 
   // Add a "+" button on today and future cells
@@ -128,7 +130,6 @@ export default class extends Controller {
   setDataVisibilityTarget(data) {
     data.el.setAttribute('data-calendars--visibility-target', 'event')
   }
-
 
   formatDate(data) {
     return data.date.toLocaleString('fr-FR', { dateStyle: 'short' })
