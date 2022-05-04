@@ -60,7 +60,11 @@ export default class extends Controller {
         this.setEventLink(data);
         this.setVisibilityAttributes(data);
       },
-      dayCellDidMount: (data) => { this.addPlusIconToFutureDayCells(data) }
+      dayCellDidMount: (data) => {
+        if (!(this.getCurrentTeam() === null)) {
+          this.addPlusIconToFutureDayCells(data)
+        }
+      }
     });
 
     calendar.render();
@@ -89,19 +93,17 @@ export default class extends Controller {
 
   // Add a "+" button on today and future cells
   addPlusIconToFutureDayCells(data, createEl) {
-    if (!this.getCurrentTeam() === null) {
-      if(data.el.classList.contains("fc-day-future") || data.el.classList.contains("fc-day-today")) {
-        var element = data.el.querySelectorAll(".fc-daygrid-day-frame > .fc-daygrid-day-bg")[0]
-        var plusIconElement =
-          `<div class='add-event'>
-             <img src=${PlusIcon} width="20" height="20"
-               data-action="click->events--form#configureAndShowModal"
-               data-date="${this.formatDate(data)}"
-             >
-           </div>`
+    if(data.el.classList.contains("fc-day-future") || data.el.classList.contains("fc-day-today")) {
+      var element = data.el.querySelectorAll(".fc-daygrid-day-frame > .fc-daygrid-day-bg")[0]
+      var plusIconElement =
+        `<div class='add-event'>
+           <img src=${PlusIcon} width="20" height="20"
+             data-action="click->events--form#configureAndShowModal"
+             data-date="${this.formatDate(data)}"
+           >
+         </div>`
 
-        element.innerHTML = element.innerHTML + plusIconElement
-      }
+      element.innerHTML = element.innerHTML + plusIconElement
     }
   }
 
