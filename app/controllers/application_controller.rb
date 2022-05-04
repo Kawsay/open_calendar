@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :set_teams, unless: :api?
   before_action :set_current_or_favorite_team, unless: :api?
   after_action :verify_authorized, unless: :devise_controller?
+  around_action :switch_locale
 
   def set_teams
     @teams ||= current_user.teams.by_favorite if user_signed_in?
@@ -22,6 +23,11 @@ class ApplicationController < ActionController::Base
 
   def api?
     controller_path.starts_with? 'api'
+  end
+
+  def switch_locale(&action)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &action)
   end
 
   def default_url_options
