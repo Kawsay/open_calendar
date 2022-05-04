@@ -14,7 +14,7 @@
       <% end %>
 
       <div class="form-group row mb-3">
-        <%= form.label :title, class: 'col-2 col-form-label' %>
+        <%= form.label t('event.name'), class: 'col-2 col-form-label' %>
         <div class="col-10">
           <%= form.text_field :title,
             class: 'form-control',
@@ -24,7 +24,7 @@
       </div>
 
       <div class="form-group row mb-3">
-        <%= form.label :date, class: 'col-2 col-form-label' %>
+        <%= form.label t('event.date'), class: 'col-2 col-form-label' %>
         <div class="col-10">
           <%= form.text_field :start_date,
             class: 'form-control',
@@ -39,7 +39,7 @@
       </div>
 
       <div class="form-group row mb-3">
-        <%= form.label :calendar_id, class: 'col-2 col-form-label' %>
+        <%= form.label t('event.calendar'), class: 'col-2 col-form-label' %>
         <div class="col-10">
           <%= form.collection_select :calendar_id,
             calendars,
@@ -53,7 +53,7 @@
       </div>
 
       <div class="form-group row mb-3">
-        <%= form.label :location, class: 'col-2 col-form-label' %>
+        <%= form.label t('event.location'), class: 'col-2 col-form-label' %>
         <div class="col-10">
           <%= form.text_field :location,
             class: 'form-control',
@@ -64,7 +64,7 @@
 
       <div>
         <div class="form-check form-switch">
-          <%= form.label 'Is related to an organization', class: 'col-form-label' %>
+          <%= form.label t('event.related_to_organization'), class: 'col-form-label' %>
           <%= form.check_box :is_related_to_an_organization,
             name: '',
             class: 'form-check-input',
@@ -77,7 +77,7 @@
           %>
         </div>
         <div class="form-group row mb-3" style="display:none" data-events--form-target="usersDiv" data-forms--toggle-target="div" data-forms--toggle-id="organization_id">
-          <%= form.label :organization_id, class: 'col-2 col-form-label' %>
+          <%= form.label t('event.organization') , class: 'col-2 col-form-label' %>
           <div class="col-10">
             <%= form.collection_select :organization_id,
               organizations,
@@ -96,7 +96,7 @@
 
       <div>
         <div class="form-check form-switch">
-          <%= form.label 'Send invitations', class: 'col-form-label' %>
+          <%= form.label t('event.send_invitations'), class: 'col-form-label' %>
           <%= form.check_box :send_invitations,
             name: '',
             class: 'form-check-input',
@@ -109,7 +109,7 @@
           %>
         </div>
         <div class="form-group row mb-3" style="display:none" data-events--form-target="invitationsDiv" data-forms--toggle-target="div" data-forms--toggle-id="attendees_id">
-          <%= form.label :attendees_id, class: 'col-2 col-form-label' %>
+          <%= form.label t('event.attendees'), class: 'col-2 col-form-label' %>
           <div class="col-10">
             <%= form.collection_check_boxes :attendee_ids, attendees, :id, :pseudonym, {include_hidden: false}, data:  { 'forms--reset-target': 'resetable', 'forms--toggle-target': 'field', 'forms--toggle-field-name': 'event[attendee_ids][]' } do |user_check_box| %>
               <li class="list-unstyled form-check">
@@ -122,7 +122,7 @@
 
 
       <div class="form-group row mb-3">
-        <%= form.label :description, class: 'mb-3' %>
+        <%= form.label t('event.description'), class: 'mb-3' %>
         <%= form.rich_text_area :description,
           class: 'form-control customized_min_height',
           data:  { 'forms--reset-target': 'resetable' }

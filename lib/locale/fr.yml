@@ -1,0 +1,68 @@
+fr:
+  calendar:
+    create: 'Créer un calendrier'
+    name_placeholder: 'Nom du calendrier...'
+    name_label: 'Choisi le nom de ton calendrier'
+    name: 'Nom'
+    start: 'Comment en ajoutant un calendrier'
+  event:
+    title: 'Ajouter un évennement'
+    name: 'Nom'
+    start_date: 'Date de début'
+    end_date: 'Date de fin'
+    location: 'Lieu'
+    related_to_organization: 'Concerne une organization ?'
+    organization: 'Organisation'
+    send_invitations: 'Envoyer des invitations ?'
+    attendees: 'Invité·es'
+    description: 'Description'
+    comments: 'Commentaires'
+  team:
+    create: 'Créer une équipe'
+    name_title: 'Créer ou rejoins une équipe pour commencer'
+    name_placeholder: "Nom de l'équipe..."
+    name_label: 'Choisi le nom de ton équipe'
+    name: 'Nom'
+  shared_link:
+    generate: 'Générer un lien de partage'
+  comment:
+    delete_confirmation: 'Tu veux vraiment supprimer ce commentaire ?'
+  user:
+    user: 'Utilisateur·euses'
+  search:
+    placeholder: 'Rechercher...'
+  administration:
+    administration: 'Administration'
+  session:
+    connect: 'Connection'
+    disconnect: 'Déconnection'
+    signup: 'Inscription'
+
+  helpers:
+    submit:
+      create: "Créer %{model}"
+      update: "Mettre à jour %{model}"
+
+  activerecord:
+    models:
+      calendar:
+        one: 'Calendrier'
+        other: 'Calendriers'
+      event:
+        one: 'Évennement'
+        other: 'Évennements'
+      team:
+        one: 'Équipe'
+        other: 'Équipes'
+      user:
+        one: 'Utilistateur·ice'
+        other: 'Utilisteur·euses'
+      shared_link:
+        one: 'Lien de partage'
+        other: 'Liens de partage'
+      comment:
+        one: 'Commentaire'
+        other: 'Commentaires'
+
+  cancel: 'Annuler'
+  close: 'Fermer'

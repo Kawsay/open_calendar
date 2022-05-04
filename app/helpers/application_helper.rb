@@ -18,10 +18,10 @@ module ApplicationHelper
 
   def login_or_disconnect_link(**opts)
     if current_user
-      link_to 'Déconnection', destroy_user_session_path,
+      link_to t('session.disconnect'), destroy_user_session_path,
               class: "#{opts.delete(:class)} btn btn-info btn-sm text-dark", method: :delete, **opts
     else
-      link_to 'Connection', new_user_session_path, class: "#{opts.delete(:class)} btn btn-info btn-sm text-dark", **opts
+      link_to t('session.connect'), new_user_session_path, class: "#{opts.delete(:class)} btn btn-info btn-sm text-dark", **opts
     end
   end
 end

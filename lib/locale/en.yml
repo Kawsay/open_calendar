@@ -1,0 +1,49 @@
+en:
+  calendar:
+    create: 'Create a calendar'
+    name_placeholder: 'Calendar name'
+    name_label: "Choose your calendar's name"
+    name: 'Name'
+    start: 'Start by adding a calendar'
+  event:
+    title: 'Add an event'
+    name: 'Name'
+    date: 'Date'
+    start_date: 'Start date'
+    end_date: 'End date'
+    calendar: 'Calendar'
+    location: 'Location'
+    related_to_organization: 'Is related to an organization ?'
+    organization: 'Organization'
+    send_invitations: 'Send invitations ?'
+    attendees: 'Attendees'
+    description: 'Description'
+    comments: 'Comments'
+  team:
+    create: 'Create a team'
+    name_title: 'Create or join a team to begin'
+    name_label: "Choose your team's name"
+    name_placeholder: 'Team name...'
+    name: 'Name'
+  shared_link:
+    generate: 'Generate a share link'
+  comment:
+    delete_confirmation: 'Do you really want to delete this comment ?'
+  user:
+    users: 'Users'
+  search:
+    placeholder: 'Search...'
+  administration:
+    administration: 'Administration'
+  session:
+    connect: 'Log in'
+    disconnect: 'Log out'
+    signup: 'Sign up'
+
+  helpers:
+    submit:
+      create: "Create %{model}"
+      update: "Update %{model}"
+
+  cancel: 'Cancel'
+  close: 'Close'

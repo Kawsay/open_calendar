@@ -16,23 +16,23 @@
                 <li><%= link_to team.name, team_path(team), class: 'dropdown-item' %></li>
               <% end %>
               <li><hr class='dropdown-divider'></li>
-              <li><%= link_to 'Create a team', new_team_path, class: 'dropdown-item' %></li>
+              <li><%= link_to t('calendar.create'), new_team_path, class: 'dropdown-item' %></li>
             </ul>
           </li>
         <% elsif user_signed_in? %>
-          <%= active_link_to 'Create a team', new_team_path, class: 'nav-link' %>
+          <%= active_link_to t('team.create'), new_team_path, class: 'nav-link' %>
         <% end %>
       </ul>
 
       <div class='navbar-nav ms-auto'>
         <% if current_user&.admin? %>
-          <%= active_link_to 'Administration', root_path, class: 'nav-link me-2', endpoint: '/admin' %>
+          <%= active_link_to t('administration.administration'), root_path, class: 'nav-link me-2', endpoint: '/admin' %>
         <% end %>
 
         <% if user_signed_in? %>
           <div data-controller="layout--visibility" data-action="click@window->layout--visibility#hideIfOutsideClick">
             <%= form_with url: '/search', method: :post, class: 'me-2', data: { controller: 'forms--submission', 'forms--submission-target': 'form' } do |form| %>
-              <%= form.text_field :query, class: 'form-control', placeholder: 'Search...', data: { action: 'input->forms--submission#submit' } %>
+              <%= form.text_field :query, class: 'form-control', placeholder: t('search.placeholder'), data: { action: 'input->forms--submission#submit' } %>
             <% end %>
 
             <div id="global-search-results" data-layout--visibility-target="hideable"></div>

@@ -10,7 +10,7 @@
     </div>
     <div class="d-flex">
       <%= link_to 'Edit', edit_comment_path(comment), class: 'me-2' %>
-      <%= button_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Do you really want to delete this comment?' } %>
+      <%= button_to 'Delete', comment_path(comment), method: :delete, data: { confirm: t('comment.delete_confirmation') } %>
     </div>
   </div>
 

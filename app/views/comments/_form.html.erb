@@ -16,7 +16,7 @@
   <%= form.rich_text_area :body, id: "#{dom_id_for_records(*model)}_body" %>
 
   <div class="d-flex justify-content-between">
-    <span><%= link_to 'Cancel', comment, class: 'btn btn-sm btn-info' if form.object.persisted? %></span>
+    <span><%= link_to t('cancel'), comment, class: 'btn btn-sm btn-info' if form.object.persisted? %></span>
     <span><%= form.submit class: 'btn btn-sm btn-primary' %></span>
   </div>
 <% end %>

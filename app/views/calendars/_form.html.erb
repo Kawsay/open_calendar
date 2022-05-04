@@ -11,8 +11,8 @@
 
   <div class='d-flex align-items-center'>
     <div class="pe-1 d-block">
-      <%= form.label 'Choose your calendar\'s name', class: 'form-label' %>
-      <%= form.text_field :name, placeholder: 'Calendar name...', class: 'form-control' %>
+      <%= form.label t('calendar.name_label'), class: 'form-label' %>
+      <%= form.text_field :name, placeholder: t('calendar.name_placeholder'), class: 'form-control' %>
     </div>
 
     <div class="ms-auto px-0 align-self-end">
