@@ -1,5 +1,5 @@
 <div class='row' data-controller="calendars--visibility">
-    <div class='col-2' data-controller='popover'>
+  <div class='col-2' data-controller='popover'>
       <%= turbo_frame_tag 'calendar-sidebar' do %>
         <%= render partial: 'calendars/calendar_sidebar',
                    collection: calendars,
