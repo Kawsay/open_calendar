@@ -25,21 +25,23 @@ Rails.application.routes.draw do
   #
   # Application
   #
-  resources :teams do
-    resources :calendars, shallow: true
+  scope '/:locale' do
+    resources :teams do
+      resources :calendars, shallow: true
+    end
+
+    resources :events do
+      resources :comments, module: :events
+    end
+
+    resources :comments do
+      resources :comments, module: :comments
+    end
+
+    resources :organizations, only: %i[create]
+    resources :share_links, only: %i[create]
+
+    get '/calendars/shared/:token', to: 'share_links#authorize_request', constraints: { token: /[^\/]+/ }
+    post '/search', to: 'search#search'
   end
-
-  resources :events do
-    resources :comments, module: :events
-  end
-
-  resources :comments do
-    resources :comments, module: :comments
-  end
-
-  resources :organizations, only: %i[create]
-  resources :share_links, only: %i[create]
-
-  get '/calendars/shared/:token', to: 'share_links#authorize_request', constraints: { token: /[^\/]+/ }
-  post '/search', to: 'search#search'
 end

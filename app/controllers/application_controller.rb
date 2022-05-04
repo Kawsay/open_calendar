@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
   def api?
     controller_path.starts_with? 'api'
   end
+
+  def default_url_options
+    { locale: I18n.locale }
+  end
 end
