@@ -8,6 +8,7 @@ fr:
   event:
     title: 'Ajouter un évennement'
     name: 'Nom'
+    date: 'Date'
     start_date: 'Date de début'
     end_date: 'Date de fin'
     location: 'Lieu'
@@ -17,6 +18,7 @@ fr:
     attendees: 'Invité·es'
     description: 'Description'
     comments: 'Commentaires'
+    calendar: 'Calendrier'
   team:
     create: 'Créer une équipe'
     name_title: 'Créer ou rejoins une équipe pour commencer'
