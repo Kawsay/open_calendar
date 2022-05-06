@@ -6,7 +6,11 @@ class CalendarPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    if session[:jwt].present?
+      record.id === JsonWebToken.decode(session[:jwt])[:sub]
+    else
+      false
+    end
   end
 
   def create?

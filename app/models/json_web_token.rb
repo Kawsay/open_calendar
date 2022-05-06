@@ -26,6 +26,6 @@ class JsonWebToken
     end
 
     def self.isnt_expired?(expiration_time, issued_at)
-      (expiration_time - issued_at) >= (expiration_time - Time.now.to_i)
+      (expiration_time.to_i - issued_at.to_i) >= (expiration_time.to_i - Time.now.to_i)
     end
 end

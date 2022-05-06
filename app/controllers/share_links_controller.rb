@@ -23,8 +23,11 @@ class ShareLinksController < ApplicationController
     token = JsonWebToken.decode(params[:token])
 
     if JsonWebToken.valid?(token)
+      session[:jwt] = params[:token]
+
       object     = ShareLink.identify_requested_object(token)
       controller = object.class.to_s.underscore.pluralize
+
       redirect_to controller: 'calendars', action: 'show', id: object.id
     end
   end
