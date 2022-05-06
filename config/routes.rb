@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     resources :share_links, only: %i[create]
 
     get '/calendars/shared/:token', to: 'share_links#authorize_request', constraints: { token: /[^\/]+/ }
-    post '/search', to: 'search#search'
   end
+
+  post '/search', to: 'search#search'
 end
