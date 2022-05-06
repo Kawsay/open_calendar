@@ -30,7 +30,8 @@ fr:
   comment:
     delete_confirmation: 'Tu veux vraiment supprimer ce commentaire ?'
   user:
-    user: 'Utilisateur·euses'
+    users: 'Utilisateur·euses'
+    attendees: 'Invité·es'
   search:
     placeholder: 'Rechercher...'
   administration:
